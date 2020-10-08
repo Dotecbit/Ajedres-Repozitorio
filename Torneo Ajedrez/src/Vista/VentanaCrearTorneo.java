@@ -5,18 +5,23 @@
  */
 package Vista;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author donramon
  */
-public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans.Customizer {
+public class VentanaCrearTorneo extends javax.swing.JFrame{
     
     private Object bean;
 
     /**
      * Creates new customizer VentanaCrearTorneo
      */
-    public VentanaCrearTorneo() {
+    private JFrame ventanaAnterior;
+    public VentanaCrearTorneo(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
     
@@ -71,6 +76,11 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
         });
 
         botAceptar.setText("Aceptar");
+        botAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,6 +134,10 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
     private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botAtrasActionPerformed
+
+    private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

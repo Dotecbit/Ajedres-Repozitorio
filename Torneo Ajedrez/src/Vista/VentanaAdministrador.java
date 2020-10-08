@@ -5,14 +5,15 @@
  */
 package Vista;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author donramon
  */
-public class VentanaAdministrador extends javax.swing.JPanel implements java.beans.Customizer {
-    
-    private Object bean;
-
+public class VentanaAdministrador extends javax.swing.JFrame
+{
     /**
      * Creates new customizer VentanaAdministrador
      */
@@ -20,10 +21,6 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,7 +144,14 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
     }//GEN-LAST:event_botCrearClubActionPerformed
 
     private void botCrearTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearTorneoActionPerformed
-        // TODO add your handling code here:
+
+        VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this);
+        this.setVisible(false); 
+        crearTorneo.setVisible(true);
+        crearTorneo.setLocationRelativeTo(null);
+        crearTorneo.setResizable(false);
+        crearTorneo.setTitle("Crear torneo");
+        
     }//GEN-LAST:event_botCrearTorneoActionPerformed
 
     private void botBajaClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botBajaClubActionPerformed
@@ -161,7 +165,49 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
     private void botCamGerClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCamGerClubActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botCamGerClubActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
 
+        /* Create and display the form */
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    VentanaAdministrador view = new VentanaAdministrador();
+                    view.setResizable(false);
+                    view.setTitle("Login");
+                    view.setVisible(true);
+                    view.setLocationRelativeTo(null);
+                } catch (Exception ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotDarBajaTorneo;
