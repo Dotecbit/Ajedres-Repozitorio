@@ -51,6 +51,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Contraeña");
 
         Registrar.setText("Registrarse");
+        Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +108,15 @@ public class Login extends javax.swing.JFrame {
         ventanaPrincipal.setTitle("Principal");
         
     }//GEN-LAST:event_iniciarSesiónActionPerformed
+
+    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
+         ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this);
+        this.setVisible(false); 
+        ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setLocationRelativeTo(null);
+        ventanaPrincipal.setResizable(false);
+        ventanaPrincipal.setTitle("Principal");
+    }//GEN-LAST:event_RegistrarActionPerformed
     /**
      * @param args the command line arguments
      */
