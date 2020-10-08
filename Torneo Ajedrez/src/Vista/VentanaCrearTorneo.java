@@ -41,6 +41,8 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
         listGer = new javax.swing.JList<>();
         listSed = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        botAtras = new javax.swing.JButton();
+        botAceptar = new javax.swing.JButton();
 
         labGer.setText("Gerente para el club");
 
@@ -68,6 +70,15 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
         });
         listSed.setViewportView(jList1);
 
+        botAtras.setText("Atrás");
+        botAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAtrasActionPerformed(evt);
+            }
+        });
+
+        botAceptar.setText("Aceptar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,6 +105,12 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
                         .addGap(101, 101, 101)
                         .addComponent(labSedClub)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(botAtras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botAceptar)
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +132,11 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(listSed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botAtras)
+                    .addComponent(botAceptar))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,8 +144,14 @@ public class VentanaCrearTorneo extends javax.swing.JPanel implements java.beans
         // TODO add your handling code here:
     }//GEN-LAST:event_textNomActionPerformed
 
+    private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botAtrasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botAceptar;
+    private javax.swing.JButton botAtras;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
