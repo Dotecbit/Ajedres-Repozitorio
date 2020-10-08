@@ -41,6 +41,7 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
         botSetSedeTorneo = new javax.swing.JButton();
         botDarBajJug = new javax.swing.JButton();
         botAsignTorneo = new javax.swing.JButton();
+        botCamGerClub = new javax.swing.JButton();
 
         BotDarBajaTorneo.setText("Dar de baja torneo");
 
@@ -80,14 +81,17 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
 
         botAsignTorneo.setText("Asignar jugador a torneo");
 
+        botCamGerClub.setText("Cambiar gerente club");
+        botCamGerClub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botCamGerClubActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(botCrearClub, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -103,15 +107,20 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
                                 .addComponent(botSetResPart, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
                             .addComponent(botSetSedeTorneo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                             .addComponent(botDarBajJug, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botAsignTorneo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(botAsignTorneo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botCamGerClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(76, 76, 76))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(botCrearClub, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(46, 46, 46)
                 .addComponent(botCrearTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(31, 31, 31)
                 .addComponent(botBajaClub)
                 .addGap(35, 35, 35)
                 .addComponent(botCrearClub, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,7 +136,9 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
                 .addComponent(botDarBajJug)
                 .addGap(34, 34, 34)
                 .addComponent(botAsignTorneo)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(botCamGerClub)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,12 +158,17 @@ public class VentanaAdministrador extends javax.swing.JPanel implements java.bea
         // TODO add your handling code here:
     }//GEN-LAST:event_botDarBajJugActionPerformed
 
+    private void botCamGerClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCamGerClubActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botCamGerClubActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotDarBajaTorneo;
     private javax.swing.JButton botAsigRespInf;
     private javax.swing.JButton botAsignTorneo;
     private javax.swing.JButton botBajaClub;
+    private javax.swing.JButton botCamGerClub;
     private javax.swing.JButton botCrearClub;
     private javax.swing.JButton botCrearTorneo;
     private javax.swing.JButton botDarBajJug;
