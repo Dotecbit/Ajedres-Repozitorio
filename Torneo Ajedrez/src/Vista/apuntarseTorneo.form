@@ -86,11 +86,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Atras"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atrasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="apuntarse">
       <Properties>
         <Property name="text" type="java.lang.String" value="Apuntarse"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apuntarseActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

@@ -11,13 +11,13 @@ import javax.swing.JFrame;
  *
  * @author Ayoub El Moussaoui
  */
-public class apuntarseTorneo extends javax.swing.JFrame {
+public class buscarEquipo extends javax.swing.JFrame {
 
     /**
-     * Creates new form apuntarseTorneo
+     * Creates new form buscarEquipo
      */
     private JFrame ventanaAnterior;
-    public apuntarseTorneo(JFrame ventanaAnterior) {
+    public buscarEquipo(JFrame ventanaAnterior) {
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
@@ -32,19 +32,19 @@ public class apuntarseTorneo extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        apuntarseTorneo = new javax.swing.JList<>();
+        listBuscarEquipo = new javax.swing.JList<>();
         atras = new javax.swing.JButton();
         apuntarse = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        apuntarseTorneo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Torneo 1", "Torneo 2" };
+        listBuscarEquipo.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "equipo 1", "equipo 2", "equipo 3" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(apuntarseTorneo);
+        jScrollPane1.setViewportView(listBuscarEquipo);
 
         atras.setText("Atras");
         atras.addActionListener(new java.awt.event.ActionListener() {
@@ -54,13 +54,8 @@ public class apuntarseTorneo extends javax.swing.JFrame {
         });
 
         apuntarse.setText("Apuntarse");
-        apuntarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apuntarseActionPerformed(evt);
-            }
-        });
 
-        jLabel1.setText("Torneos");
+        jLabel1.setText("Equipos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,18 +71,18 @@ public class apuntarseTorneo extends javax.swing.JFrame {
                         .addComponent(atras)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(193, 193, 193)
+                .addComponent(jLabel1)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(atras)
                     .addComponent(apuntarse))
@@ -97,10 +92,6 @@ public class apuntarseTorneo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void apuntarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuntarseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_apuntarseActionPerformed
-
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
         this.setVisible(false);
         ventanaAnterior.setVisible(true);
@@ -109,9 +100,9 @@ public class apuntarseTorneo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apuntarse;
-    private javax.swing.JList<String> apuntarseTorneo;
     private javax.swing.JButton atras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listBuscarEquipo;
     // End of variables declaration//GEN-END:variables
 }

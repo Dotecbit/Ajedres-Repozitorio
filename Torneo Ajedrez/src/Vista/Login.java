@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ayoub El Moussaoui
@@ -37,6 +40,11 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         iniciarSesión.setText("Iniciar sesión");
+        iniciarSesión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarSesiónActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Usuario");
 
@@ -85,6 +93,16 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void iniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesiónActionPerformed
+        
+        ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this);
+        this.setVisible(false); 
+        ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setLocationRelativeTo(null);
+        ventanaPrincipal.setResizable(false);
+        ventanaPrincipal.setTitle("Principal");
+        
+    }//GEN-LAST:event_iniciarSesiónActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -111,11 +129,20 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    Login view = new Login();
+                    view.setResizable(false);
+                    view.setTitle("Login");
+                    view.setVisible(true);
+                    view.setLocationRelativeTo(null);
+                } catch (Exception ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

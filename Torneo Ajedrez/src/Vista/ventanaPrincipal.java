@@ -5,16 +5,18 @@
  */
 package Vista;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ayoub El Moussaoui
  */
 public class ventanaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ventanaPrincipal
-     */
-    public ventanaPrincipal() {
+    private JFrame ventanaAnterior;
+    public ventanaPrincipal(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
 
@@ -39,20 +41,60 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         buscarEquipo.setText("Buscar equipo");
+        buscarEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarEquipoActionPerformed(evt);
+            }
+        });
 
         apuntarseTorneo.setText("Apuntarse a torneo");
+        apuntarseTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuntarseTorneoActionPerformed(evt);
+            }
+        });
 
         verTarjeta.setText("Ver tarjeta");
+        verTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verTarjetaActionPerformed(evt);
+            }
+        });
 
         darseDeBaja.setText("Darse de baja");
+        darseDeBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darseDeBajaActionPerformed(evt);
+            }
+        });
 
         reservarSede.setText("Reservar sede");
+        reservarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservarSedeActionPerformed(evt);
+            }
+        });
 
         introducirResultado.setText("Introducir resultado");
+        introducirResultado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                introducirResultadoActionPerformed(evt);
+            }
+        });
 
         responsableInfantil.setText("Responsable infantil");
+        responsableInfantil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                responsableInfantilActionPerformed(evt);
+            }
+        });
 
         cerrarSesión.setText("Cerrar sesión");
+        cerrarSesión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesiónActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,41 +140,72 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ventanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ventanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ventanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ventanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void cerrarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesiónActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ventanaPrincipal().setVisible(true);
-            }
-        });
-    }
+        this.setVisible(false); 
+        ventanaAnterior.setVisible(true);
 
+    }//GEN-LAST:event_cerrarSesiónActionPerformed
+
+    private void apuntarseTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuntarseTorneoActionPerformed
+        apuntarseTorneo apuntarseTorneo = new apuntarseTorneo(this);
+        this.setVisible(false); 
+        apuntarseTorneo.setVisible(true);
+        apuntarseTorneo.setLocationRelativeTo(null);
+        apuntarseTorneo.setResizable(false);
+        apuntarseTorneo.setTitle("Torneo");
+    }//GEN-LAST:event_apuntarseTorneoActionPerformed
+
+    private void verTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTarjetaActionPerformed
+        verTarjeta verTarjeta = new verTarjeta(this);
+        this.setVisible(false); 
+        verTarjeta.setVisible(true);
+        verTarjeta.setLocationRelativeTo(null);
+        verTarjeta.setResizable(false);
+        verTarjeta.setTitle("Tarjeta");
+    }//GEN-LAST:event_verTarjetaActionPerformed
+
+    private void darseDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darseDeBajaActionPerformed
+            JOptionPane.showMessageDialog(null,"¿Estas seguro?");
+    }//GEN-LAST:event_darseDeBajaActionPerformed
+
+    private void reservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservarSedeActionPerformed
+        reservaSede reservaSede = new reservaSede(this);
+        this.setVisible(false); 
+        reservaSede.setVisible(true);
+        reservaSede.setLocationRelativeTo(null);
+        reservaSede.setResizable(false);
+        reservaSede.setTitle("Reserva sede");
+    }//GEN-LAST:event_reservarSedeActionPerformed
+
+    private void introducirResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_introducirResultadoActionPerformed
+        resultadoPartida resultadoPartida = new resultadoPartida(this);
+        this.setVisible(false); 
+        resultadoPartida.setVisible(true);
+        resultadoPartida.setLocationRelativeTo(null);
+        resultadoPartida.setResizable(false);
+        resultadoPartida.setTitle("Resultado partida");
+    }//GEN-LAST:event_introducirResultadoActionPerformed
+
+    private void responsableInfantilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsableInfantilActionPerformed
+        asignarResponsableInfantil asignarResponsableInfantil = new asignarResponsableInfantil(this);
+        this.setVisible(false); 
+        asignarResponsableInfantil.setVisible(true);
+        asignarResponsableInfantil.setLocationRelativeTo(null);
+        asignarResponsableInfantil.setResizable(false);
+        asignarResponsableInfantil.setTitle("Responsable infantil");
+    }//GEN-LAST:event_responsableInfantilActionPerformed
+
+    private void buscarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEquipoActionPerformed
+        buscarEquipo buscarEquipo = new buscarEquipo(this);
+        this.setVisible(false); 
+        buscarEquipo.setVisible(true);
+        buscarEquipo.setLocationRelativeTo(null);
+        buscarEquipo.setResizable(false);
+        buscarEquipo.setTitle("Buscar equipo");
+    }//GEN-LAST:event_buscarEquipoActionPerformed
+
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apuntarseTorneo;
     private javax.swing.JButton buscarEquipo;
