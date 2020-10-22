@@ -37,6 +37,8 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         listSed = new javax.swing.JList<>();
         labNom = new javax.swing.JLabel();
@@ -47,6 +49,13 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
         listTorn = new javax.swing.JList<>();
         botAtras = new javax.swing.JButton();
         botAceptar = new javax.swing.JButton();
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jList1);
 
         listSed.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -82,8 +91,8 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -144,8 +153,10 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
     private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;
     private javax.swing.JTextField fieldNom;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labListJug;
     private javax.swing.JLabel labListSed;
     private javax.swing.JLabel labNom;

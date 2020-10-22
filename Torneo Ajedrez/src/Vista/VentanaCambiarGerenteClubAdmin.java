@@ -5,25 +5,23 @@
  */
 package Vista;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author donramon
  */
-public class VentanaCambiarGerenteClubAdmin extends javax.swing.JPanel implements java.beans.Customizer {
+public class VentanaCambiarGerenteClubAdmin extends javax.swing.JFrame {
     
-    private Object bean;
-
     /**
      * Creates new customizer VentanaCambiarGerenteClubAdmin
      */
-    public VentanaCambiarGerenteClubAdmin() {
+    private JFrame vetanaAnterior;
+    public VentanaCambiarGerenteClubAdmin(JFrame ventanaAnterior) {
+        this.vetanaAnterior = ventanaAnterior;
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +60,11 @@ public class VentanaCambiarGerenteClubAdmin extends javax.swing.JPanel implement
         butAtras.setText("Atrás");
 
         butAceptar.setText("Aceptar");
+        butAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,6 +105,11 @@ public class VentanaCambiarGerenteClubAdmin extends javax.swing.JPanel implement
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
+        this.setVisible(false);
+        vetanaAnterior.setVisible(true);
+    }//GEN-LAST:event_butAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

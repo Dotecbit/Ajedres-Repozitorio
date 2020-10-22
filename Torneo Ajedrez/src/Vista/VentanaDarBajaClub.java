@@ -5,25 +5,21 @@
  */
 package Vista;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author donramon
  */
-public class VentanaDarBajaClub extends javax.swing.JPanel implements java.beans.Customizer {
+public class VentanaDarBajaClub extends javax.swing.JFrame {
     
-    private Object bean;
-
-    /**
-     * Creates new customizer VentanaDarBajaClub
-     */
-    public VentanaDarBajaClub() {
+    
+    private JFrame ventanaAnterior;
+    public VentanaDarBajaClub(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,7 +90,8 @@ public class VentanaDarBajaClub extends javax.swing.JPanel implements java.beans
     }// </editor-fold>//GEN-END:initComponents
 
     private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_botAtrasActionPerformed
 
     private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed

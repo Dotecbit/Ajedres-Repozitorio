@@ -5,24 +5,24 @@
  */
 package Vista;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author donramon
  */
-public class VentanaAsignarJugadorATorneoAdmin extends javax.swing.JPanel implements java.beans.Customizer {
+public class VentanaAsignarJugadorATorneoAdmin extends javax.swing.JFrame {
     
-    private Object bean;
-
     /**
      * Creates new customizer VentanaAsignarJugadorATorneoAdmin
      */
-    public VentanaAsignarJugadorATorneoAdmin() {
+    private JFrame ventanaAnterior;
+    public VentanaAsignarJugadorATorneoAdmin(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,11 +60,21 @@ public class VentanaAsignarJugadorATorneoAdmin extends javax.swing.JPanel implem
         labTorneo.setText("Seleccionar torneo");
 
         butAtras.setText("Atrás");
+        butAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butAtrasActionPerformed(evt);
+            }
+        });
 
         butAceptar.setText("Aceptar");
+        butAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butAceptarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -102,6 +112,15 @@ public class VentanaAsignarJugadorATorneoAdmin extends javax.swing.JPanel implem
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_butAceptarActionPerformed
+
+    private void butAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtrasActionPerformed
+        this.setVisible(false);
+        ventanaAnterior.setVisible(true);
+    }//GEN-LAST:event_butAtrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,25 +5,22 @@
  */
 package Vista;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author donramon
  */
-public class VentanaDarDeBajaJugadorAdmin extends javax.swing.JPanel implements java.beans.Customizer {
+public class VentanaDarDeBajaJugadorAdmin extends javax.swing.JFrame {
     
-    private Object bean;
-
-    /**
-     * Creates new customizer VentanaDarDeBajaJugadorAdmin
-     */
-    public VentanaDarDeBajaJugadorAdmin() {
+    
+    private JFrame ventanaAnterior;
+    public VentanaDarDeBajaJugadorAdmin(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +45,11 @@ public class VentanaDarDeBajaJugadorAdmin extends javax.swing.JPanel implements 
         listJug.setViewportView(jList1);
 
         botAtras.setText("Atrás");
+        botAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAtrasActionPerformed(evt);
+            }
+        });
 
         botAceptar.setText("Aceptar");
 
@@ -84,6 +86,11 @@ public class VentanaDarDeBajaJugadorAdmin extends javax.swing.JPanel implements 
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
+        this.setVisible(false);
+        ventanaAnterior.setVisible(true);
+    }//GEN-LAST:event_botAtrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

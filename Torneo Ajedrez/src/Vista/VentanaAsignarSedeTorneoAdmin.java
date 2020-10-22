@@ -1,5 +1,7 @@
 package Vista;
 
+import javax.swing.JFrame;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,19 +12,12 @@ package Vista;
  *
  * @author donramon
  */
-public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JPanel implements java.beans.Customizer {
+public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JFrame {
     
-    private Object bean;
-
-    /**
-     * Creates new customizer VentanaAsignarSedeTorneoAdmin
-     */
-    public VentanaAsignarSedeTorneoAdmin() {
+    private JFrame ventanaAnterior;
+    public VentanaAsignarSedeTorneoAdmin(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
 
     /**
@@ -64,6 +59,11 @@ public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JPanel implements
         jScrollPane2.setViewportView(listTorneo);
 
         butAtras.setText("Atrás");
+        butAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butAtrasActionPerformed(evt);
+            }
+        });
 
         butAceptar.setText("Aceptar");
 
@@ -112,6 +112,11 @@ public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JPanel implements
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void butAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtrasActionPerformed
+        this.setVisible(false);
+        ventanaAnterior.setVisible(true);
+    }//GEN-LAST:event_butAtrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

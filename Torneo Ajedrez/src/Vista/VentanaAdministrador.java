@@ -41,6 +41,11 @@ public class VentanaAdministrador extends javax.swing.JFrame
         botCamGerClub = new javax.swing.JButton();
 
         BotDarBajaTorneo.setText("Dar de baja torneo");
+        BotDarBajaTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotDarBajaTorneoActionPerformed(evt);
+            }
+        });
 
         botCrearClub.setText("Crear club");
         botCrearClub.addActionListener(new java.awt.event.ActionListener() {
@@ -64,10 +69,25 @@ public class VentanaAdministrador extends javax.swing.JFrame
         });
 
         botAsigRespInf.setText("Asignar responsable infantiles");
+        botAsigRespInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAsigRespInfActionPerformed(evt);
+            }
+        });
 
         botSetResPart.setText("Introducir resultados última partida");
+        botSetResPart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botSetResPartActionPerformed(evt);
+            }
+        });
 
         botSetSedeTorneo.setText("Asignacion de sede de torneos");
+        botSetSedeTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botSetSedeTorneoActionPerformed(evt);
+            }
+        });
 
         botDarBajJug.setText("Dar baja jugador");
         botDarBajJug.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +97,11 @@ public class VentanaAdministrador extends javax.swing.JFrame
         });
 
         botAsignTorneo.setText("Asignar jugador a torneo");
+        botAsignTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAsignTorneoActionPerformed(evt);
+            }
+        });
 
         botCamGerClub.setText("Cambiar gerente club");
         botCamGerClub.addActionListener(new java.awt.event.ActionListener() {
@@ -85,8 +110,8 @@ public class VentanaAdministrador extends javax.swing.JFrame
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -98,10 +123,9 @@ public class VentanaAdministrador extends javax.swing.JFrame
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(botBajaClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(BotDarBajaTorneo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botAsigRespInf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botSetResPart, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                            .addComponent(BotDarBajaTorneo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botAsigRespInf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botSetResPart, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                             .addComponent(botSetSedeTorneo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                             .addComponent(botDarBajJug, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(botAsignTorneo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -140,12 +164,20 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void botCrearClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearClubActionPerformed
-        // TODO add your handling code here:
+       
+        VentanaCrearClub crearClub= new VentanaCrearClub(this);
+        this.setVisible(false); 
+        crearClub.setVisible(true);
+        crearClub.setSize(500, 900);
+        crearClub.setLocationRelativeTo(null);
+        crearClub.setResizable(false);
+        crearClub.setTitle("Crear club");
     }//GEN-LAST:event_botCrearClubActionPerformed
 
     private void botCrearTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearTorneoActionPerformed
 
         VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this);
+        crearTorneo.setSize(500, 900);
         this.setVisible(false); 
         crearTorneo.setVisible(true);
         crearTorneo.setLocationRelativeTo(null);
@@ -155,16 +187,71 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_botCrearTorneoActionPerformed
 
     private void botBajaClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botBajaClubActionPerformed
-        // TODO add your handling code here:
+        VentanaDarBajaClub bajaCLub = new VentanaDarBajaClub(this);
+        this.setVisible(false); 
+        bajaCLub.setVisible(true);
+        bajaCLub.setLocationRelativeTo(null);
+        bajaCLub.setResizable(false);
+        bajaCLub.setTitle("Baja club");
     }//GEN-LAST:event_botBajaClubActionPerformed
 
     private void botDarBajJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botDarBajJugActionPerformed
-        // TODO add your handling code here:
+        VentanaDarDeBajaJugadorAdmin darBajaJugador = new VentanaDarDeBajaJugadorAdmin(this);
+        this.setVisible(false); 
+        darBajaJugador.setVisible(true);
+        darBajaJugador.setLocationRelativeTo(null);
+        darBajaJugador.setResizable(false);
+        darBajaJugador.setTitle("Baja jugador");        
     }//GEN-LAST:event_botDarBajJugActionPerformed
 
     private void botCamGerClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCamGerClubActionPerformed
-        // TODO add your handling code here:
+        VentanaCambiarGerenteClubAdmin cambiarGerenteClub = new VentanaCambiarGerenteClubAdmin(this);
+        this.setVisible(false); 
+        cambiarGerenteClub.setVisible(true);
+        cambiarGerenteClub.setLocationRelativeTo(null);
+        cambiarGerenteClub.setResizable(false);
+        cambiarGerenteClub.setTitle("Cambiar de club");
     }//GEN-LAST:event_botCamGerClubActionPerformed
+
+    private void botAsignTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAsignTorneoActionPerformed
+        VentanaAsignarJugadorATorneoAdmin asignarJugadorTorneo = new VentanaAsignarJugadorATorneoAdmin(this);
+        this.setVisible(false); 
+        asignarJugadorTorneo.setVisible(true);
+        asignarJugadorTorneo.setLocationRelativeTo(null);
+        asignarJugadorTorneo.setResizable(false);
+        asignarJugadorTorneo.setTitle("Asignar a torneo");
+    }//GEN-LAST:event_botAsignTorneoActionPerformed
+
+    private void botSetSedeTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botSetSedeTorneoActionPerformed
+        VentanaAsignarSedeTorneoAdmin asignarJugadorTorneo = new VentanaAsignarSedeTorneoAdmin(this);
+        this.setVisible(false); 
+        asignarJugadorTorneo.setVisible(true);
+        asignarJugadorTorneo.setLocationRelativeTo(null);
+        asignarJugadorTorneo.setResizable(false);
+        asignarJugadorTorneo.setTitle("Asignar sede torneo");       
+    }//GEN-LAST:event_botSetSedeTorneoActionPerformed
+
+    private void botSetResPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botSetResPartActionPerformed
+        VentanaIntroducirResultadoUltimaPartidaAdmin introducirResultado = new VentanaIntroducirResultadoUltimaPartidaAdmin(this);
+        this.setVisible(false); 
+        introducirResultado.setVisible(true);
+        introducirResultado.setLocationRelativeTo(null);
+        introducirResultado.setResizable(false);
+        introducirResultado.setTitle("Introducir resultado");  
+    }//GEN-LAST:event_botSetResPartActionPerformed
+
+    private void botAsigRespInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAsigRespInfActionPerformed
+        VentanaAsignarResponsableInfantilAdmin asignarInfantil = new VentanaAsignarResponsableInfantilAdmin(this);
+        this.setVisible(false); 
+        asignarInfantil.setVisible(true);
+        asignarInfantil.setLocationRelativeTo(null);
+        asignarInfantil.setResizable(false);
+        asignarInfantil.setTitle("Introducir resultado"); 
+    }//GEN-LAST:event_botAsigRespInfActionPerformed
+
+    private void BotDarBajaTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotDarBajaTorneoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotDarBajaTorneoActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -198,7 +285,8 @@ public class VentanaAdministrador extends javax.swing.JFrame
             public void run() {
                 try {
                     VentanaAdministrador view = new VentanaAdministrador();
-                    view.setResizable(false);
+                    //view.setResizable(false);
+                    view.setSize(500, 1000);
                     view.setTitle("Login");
                     view.setVisible(true);
                     view.setLocationRelativeTo(null);
