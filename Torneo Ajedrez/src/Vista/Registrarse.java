@@ -5,7 +5,14 @@
  */
 package Vista;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,7 +40,7 @@ public class Registrarse extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        fechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
@@ -55,6 +62,12 @@ public class Registrarse extends javax.swing.JFrame {
         jLabel3.setText("Fecha de nacimiento");
 
         jLabel4.setText("Contraseña");
+
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Correo electrónico");
 
@@ -86,7 +99,7 @@ public class Registrarse extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                    .addComponent(fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                     .addComponent(apellido)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -129,7 +142,7 @@ public class Registrarse extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -144,14 +157,29 @@ public class Registrarse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
-       this.setVisible(false);
-       ventanaAnterior.setVisible(true);
+           
+        if(nombre.getText().equals("") || apellido.getText().equals("") || usuario.getText().equals("") || 
+           correoElectrónico.getText().equals("") || contraseña.getText().equals("") || fechaNacimiento.getDate() == null)
+        {
+            JOptionPane.showMessageDialog(null,"Rellene todos los campos");
+        }
+        //Date date = fechaNacimiento.getDate();
+
+            
+        //this.setVisible(false);
+        //ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_registrarseActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-       this.setVisible(false);
+
+        
+        this.setVisible(false);
        ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_atrasActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        
+    }//GEN-LAST:event_nombreActionPerformed
 
 
 
@@ -160,7 +188,7 @@ public class Registrarse extends javax.swing.JFrame {
     private javax.swing.JButton atras;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JTextField correoElectrónico;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser fechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
