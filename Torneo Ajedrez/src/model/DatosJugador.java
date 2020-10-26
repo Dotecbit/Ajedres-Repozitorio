@@ -8,6 +8,7 @@ package model;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ import java.util.Date;
  */
 public class DatosJugador {
     
+    private ArrayList<Jugador> jugador = new ArrayList<>();
     public DatosJugador()
     {}
     
@@ -51,7 +53,7 @@ public class DatosJugador {
         PrintWriter p = null;
         try
         {   
-            fichero = new FileWriter(".src/ficheros/Jugadores.txt",true);
+            fichero = new FileWriter("",true);
             p = new PrintWriter(fichero);
 
                 p.println(nombre);
@@ -81,7 +83,7 @@ public class DatosJugador {
         PrintWriter p = null;
         try
         {   
-            fichero = new FileWriter("/ficheros/responsablesInfantiles.txt",true);
+            fichero = new FileWriter("",true);
             p = new PrintWriter(fichero);
 
                 p.println(usuario);
