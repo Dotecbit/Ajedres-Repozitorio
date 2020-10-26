@@ -32,11 +32,9 @@
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="iniciarSesión" pref="114" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="Usuario" pref="114" max="32767" attributes="0"/>
-                      <Component id="Contraseña" pref="114" max="32767" attributes="0"/>
-                      <Component id="Registrar" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="Usuario" pref="114" max="32767" attributes="0"/>
+                  <Component id="Contraseña" pref="114" max="32767" attributes="0"/>
+                  <Component id="Registrar" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="146" max="32767" attributes="0"/>
           </Group>

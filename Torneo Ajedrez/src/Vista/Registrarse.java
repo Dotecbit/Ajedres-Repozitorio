@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import controlador.Jugador;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -24,7 +25,9 @@ public class Registrarse extends javax.swing.JFrame {
      * Creates new form Registrarse
      */
     private JFrame ventanaAnterior;
-    public Registrarse(JFrame ventanaAnterior) {
+    private Jugador jugador;
+    public Registrarse(JFrame ventanaAnterior, Jugador jugador) {
+        this.jugador = jugador;
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
@@ -157,13 +160,19 @@ public class Registrarse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
-           
+        boolean ok;  
         if(nombre.getText().equals("") || apellido.getText().equals("") || usuario.getText().equals("") || 
            correoElectrónico.getText().equals("") || contraseña.getText().equals("") || fechaNacimiento.getDate() == null)
         {
-            JOptionPane.showMessageDialog(null,"Rellene todos los campos");
+            
         }
-        //Date date = fechaNacimiento.getDate();
+        else
+        {
+            if(!jugador.edadJugador(fechaNacimiento.getDate()))
+                JOptionPane.showMessageDialog(null,"ERES MENOR DE EDAD");
+                
+        }
+            
 
             
         //this.setVisible(false);

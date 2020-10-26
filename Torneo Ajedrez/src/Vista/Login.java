@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import controlador.Jugador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +18,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private Jugador jugador;
     public Login() {
+        jugador = new Jugador();
         initComponents();
     }
 
@@ -108,7 +111,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarSesiónActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-        Registrarse registrarse = new Registrarse(this);
+        Registrarse registrarse = new Registrarse(this, jugador);
         this.setVisible(false); 
         registrarse.setVisible(true);
         registrarse.setLocationRelativeTo(null);
