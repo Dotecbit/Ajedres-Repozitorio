@@ -14,9 +14,7 @@ import java.util.logging.Logger;
  */
 public class VentanaAdministrador extends javax.swing.JFrame
 {
-    /**
-     * Creates new customizer VentanaAdministrador
-     */
+    
     public VentanaAdministrador() {
         initComponents();
     }
