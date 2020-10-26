@@ -164,13 +164,32 @@ public class Registrarse extends javax.swing.JFrame {
         if(nombre.getText().equals("") || apellido.getText().equals("") || usuario.getText().equals("") || 
            correoElectrónico.getText().equals("") || contraseña.getText().equals("") || fechaNacimiento.getDate() == null)
         {
-            
+            JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
         }
         else
         {
             if(!jugador.edadJugador(fechaNacimiento.getDate()))
-                JOptionPane.showMessageDialog(null,"ERES MENOR DE EDAD");
-                
+            {
+                ResponsableInfantil responsableInfatil = new ResponsableInfantil(this, ventanaAnterior, jugador,
+                nombre.getText(), apellido.getText(), usuario.getText(), correoElectrónico.getText(),contraseña.getText(),
+                fechaNacimiento.getDate());
+                this.setVisible(false);
+                responsableInfatil.setVisible(true);
+                responsableInfatil.setLocationRelativeTo(null);
+                responsableInfatil.setResizable(false);
+                responsableInfatil.setTitle("Responsable infantil");
+            }
+            else
+            {
+                jugador.guardarDatosJugador(nombre.getText(), apellido.getText(), usuario.getText(), 
+                        correoElectrónico.getText(), fechaNacimiento.getDate(), contraseña.getText());
+                this.setVisible(false);
+                ventanaAnterior.setVisible(true);
+                JOptionPane.showMessageDialog(null,"Bienvenido a nuestra plataforma.");
+            }
+
+            
+
         }
             
 

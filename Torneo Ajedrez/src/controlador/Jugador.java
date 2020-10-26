@@ -6,7 +6,7 @@
 package controlador;
 
 import java.util.Date;
-import model.DatosJugador;
+import model.*;
 
 /**
  *
@@ -23,6 +23,13 @@ public class Jugador
     {
         return datosJugador.edadJugador(fecha);
     }
-    public void guardarDatosJugador()
+    public void guardarDatosJugador(String nombre, String apellido, String usuario,
+                String correo, Date fecha, String contraseña)
+    {
+        datosJugador.guardarDatosJugador(nombre, apellido, usuario, correo, fecha, contraseña);
+    }
+    public void guardarDatosResponsable(String usuario, String nombre, String Apellido,
+                String correo, Date fecha)
+    
     {}
 }
