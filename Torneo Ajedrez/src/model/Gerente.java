@@ -12,14 +12,20 @@ import java.util.ArrayList;
  * @author areba
  */
 public class Gerente {
-    private String nombre, apellidos, edad, sexo;
+    private String nombre, apellidos, sexo, nCompleto;
+    private int  edad;
     private Float nomina;
     private Float IRPF;
     private ArrayList<Club> histClub;
     private ArrayList<Float> histNom, histIRPF;
-    private Club clubActual;
+    private Club clubActual = null;
 
-    public Gerente(String nombre, String apellidos, String edad, String sexo, Float nomina, Float IRPF, ArrayList<Club> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF, Club clubActual) {
+    @Override
+    public String toString() {
+        return nCompleto;
+    }
+
+    public Gerente(String nombre, String apellidos, int edad, String sexo, Float nomina, Float IRPF, ArrayList<Club> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -29,7 +35,15 @@ public class Gerente {
         this.histClub = histClub;
         this.histNom = histNom;
         this.histIRPF = histIRPF;
-        this.clubActual = clubActual;
+        nCompleto= nombre + " " + apellidos;
+    }
+
+    public String getnCompleto() {
+        return nCompleto;
+    }
+
+    public void setnCompleto(String nCompleto) {
+        this.nCompleto = nCompleto;
     }
 
     public String getNombre() {
@@ -48,11 +62,11 @@ public class Gerente {
         this.apellidos = apellidos;
     }
 
-    public String getEdad() {
+    public int getEdad() {
         return edad;
     }
 
-    public void setEdad(String edad) {
+    public void setEdad(int edad) {
         this.edad = edad;
     }
 
@@ -84,8 +98,8 @@ public class Gerente {
         return histClub;
     }
 
-    public void setHistClub(ArrayList<Club> histClub) {
-        this.histClub = histClub;
+    public void actHistClub(Club newClub) {
+        this.histClub.add(newClub);
     }
 
     public ArrayList<Float> getHistNom() {

@@ -14,15 +14,30 @@ import java.util.ArrayList;
 public class Club {
     
     //Declaracion de datos
+    private String nombre;
     private ArrayList<Jugador> jugadores;
     private ArrayList<String> sedes;
     private Gerente gerente;
     private Entrenador entrenador;
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
     private String federación;
 
-    public Club(ArrayList<Jugador> jugadores, ArrayList<String> sedes, Gerente gerente, Entrenador entrenador, String federación) {
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Club(String nombre, ArrayList<Jugador> jugadores, String sede,Gerente gerente, Entrenador entrenador, String federación) {
+        this.nombre = nombre;
         this.jugadores = jugadores;
-        this.sedes = sedes;
+        this.sedes.add(sede);
         this.gerente = gerente;
         this.entrenador = entrenador;
         this.federación = federación;

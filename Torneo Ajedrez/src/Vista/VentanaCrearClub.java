@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import controlador.Administrador;
+import java.awt.Component;
+import java.awt.PopupMenu;
 import javax.swing.JFrame;
 
 /**
@@ -13,15 +16,22 @@ import javax.swing.JFrame;
  */
 public class VentanaCrearClub extends javax.swing.JFrame
 { 
-    
+    Administrador administrador;
 
     /**
      * Creates new customizer VentanaCrearTorneo
      */
     private JFrame ventanaAnterior;
-    public VentanaCrearClub(JFrame ventanaAnterior) 
+    public VentanaCrearClub(JFrame ventanaAnterior, Administrador administrador) 
     {
+        this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
+        
+        for(Object gerente:administrador.getGerentesLibres())
+        {
+            listGer.add((PopupMenu) gerente);
+        }
+        
         initComponents();
     }
     
@@ -41,10 +51,9 @@ public class VentanaCrearClub extends javax.swing.JFrame
         textNom = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listGer = new javax.swing.JList<>();
-        listSed = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         botAtras = new javax.swing.JButton();
         botAceptar = new javax.swing.JButton();
+        jtextSedeClub = new javax.swing.JTextField();
 
         labGer.setText("Gerente para el club");
 
@@ -65,13 +74,6 @@ public class VentanaCrearClub extends javax.swing.JFrame
         });
         jScrollPane1.setViewportView(listGer);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listSed.setViewportView(jList1);
-
         botAtras.setText("Atrás");
         botAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,64 +88,62 @@ public class VentanaCrearClub extends javax.swing.JFrame
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        jtextSedeClub.setToolTipText("");
+        jtextSedeClub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtextSedeClubActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labGer)
-                    .addComponent(labNom))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(83, 83, 83)
-                                .addComponent(listSed, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 44, Short.MAX_VALUE)
-                                .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79))))
+                        .addComponent(labNom)
+                        .addGap(32, 32, 32)
+                        .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
                         .addComponent(labSedClub)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(botAtras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botAceptar)
-                .addGap(97, 97, 97))
+                        .addGap(18, 18, 18)
+                        .addComponent(jtextSedeClub, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labGer)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botAtras)
+                        .addGap(133, 133, 133)
+                        .addComponent(botAceptar))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labNom)
-                            .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel2))
+                        .addGap(4, 4, 4)
+                        .addComponent(labNom))
+                    .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labGer)
-                            .addComponent(labSedClub))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listSed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(3, 3, 3)
+                        .addComponent(labSedClub))
+                    .addComponent(jtextSedeClub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(labGer))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botAtras)
-                    .addComponent(botAceptar))
-                .addContainerGap())
+                    .addComponent(botAceptar)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,21 +157,24 @@ public class VentanaCrearClub extends javax.swing.JFrame
     }//GEN-LAST:event_botAtrasActionPerformed
 
     private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
-        // TODO add your handling code here:
+        administrador.crearClub(textNom.getText(), labSedClub.getText(), listGer.getSelectedValue());
     }//GEN-LAST:event_botAceptarActionPerformed
+
+    private void jtextSedeClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtextSedeClubActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtextSedeClubActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jtextSedeClub;
     private javax.swing.JLabel labGer;
     private javax.swing.JLabel labNom;
     private javax.swing.JLabel labSedClub;
     private javax.swing.JList<String> listGer;
-    private javax.swing.JScrollPane listSed;
     private javax.swing.JTextField textNom;
     // End of variables declaration//GEN-END:variables
 }
