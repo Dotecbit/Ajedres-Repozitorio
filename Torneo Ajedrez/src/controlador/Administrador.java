@@ -10,6 +10,7 @@ import model.DatosClub;
 import model.DatosJugador;
 import model.DatosEntrenador;
 import model.DatosGerente;
+import model.DatosTorneo;
 
 /**
  *
@@ -21,16 +22,15 @@ public class Administrador {
     private DatosJugador jugador;
     private DatosClub club;
     private DatosEntrenador entrenador;
-
+    private DatosTorneo datosTorneo;
     public Administrador(DatosGerente gerente, DatosJugador jugador, DatosClub club, DatosEntrenador entrenador) {
         this.gerente = gerente;
         this.jugador = jugador;
         this.club = club;
         this.entrenador = entrenador;
+        datosTorneo = new DatosTorneo();
     }
-    
-
-    
+   
     public ArrayList<DatosGerente> getGerentes()
     {
         return gerente.getGerentes();
@@ -60,5 +60,23 @@ public class Administrador {
         ((DatosGerente) gerente).setClubActual((DatosClub) club);
         //Asignamos al club el nuevo gerente
         ((DatosClub) club).setGerente((DatosGerente) gerente);
+    }
+    public void cargarSedes()
+    {
+        datosTorneo.CargarSedes();
+    }
+    public ArrayList<String> getSedes()
+    {
+        return datosTorneo.getSedes();
+    }
+    public void jugadores()
+    {
+        System.out.println("jugadores");
+        datosTorneo.jugadores(jugador.getDatosJugador());
+    }
+    public ArrayList<String> getJugadores()
+    {
+        System.out.println("getJugadores");
+        return datosTorneo.getJugadores();
     }
 }

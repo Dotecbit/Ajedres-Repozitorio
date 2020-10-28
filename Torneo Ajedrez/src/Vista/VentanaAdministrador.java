@@ -8,6 +8,7 @@ package Vista;
 import controlador.Administrador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,9 +17,11 @@ import java.util.logging.Logger;
 public class VentanaAdministrador extends javax.swing.JFrame
 {
     private static Administrador administrador;
-    
-    public VentanaAdministrador(Administrador administrador) {
+    private JFrame ventanaAnterior;
+    public VentanaAdministrador(Administrador administrador, JFrame ventanaAnterior) {
         this.administrador = administrador;
+        this.ventanaAnterior = ventanaAnterior;
+        initComponents();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -161,7 +164,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
         VentanaCrearClub crearClub= new VentanaCrearClub(this,administrador);
         this.setVisible(false); 
         crearClub.setVisible(true);
-        crearClub.setSize(500, 900);
+        crearClub.setSize(500, 700);
         crearClub.setLocationRelativeTo(null);
         crearClub.setResizable(false);
         crearClub.setTitle("Crear club");
@@ -169,8 +172,8 @@ public class VentanaAdministrador extends javax.swing.JFrame
 
     private void botCrearTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearTorneoActionPerformed
 
-        VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this);
-        crearTorneo.setSize(500, 900);
+        VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this, administrador);
+        crearTorneo.setSize(500, 700);
         this.setVisible(false); 
         crearTorneo.setVisible(true);
         crearTorneo.setLocationRelativeTo(null);
@@ -245,51 +248,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     private void BotDarBajaTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotDarBajaTorneoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotDarBajaTorneoActionPerformed
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    VentanaAdministrador view = new VentanaAdministrador(administrador);
-                    //view.setResizable(false);
-                    view.setSize(500, 1000);
-                    view.setTitle("Login");
-                    view.setVisible(true);
-                    view.setLocationRelativeTo(null);
-                } catch (Exception ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotDarBajaTorneo;

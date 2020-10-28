@@ -5,10 +5,13 @@
  */
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +22,19 @@ import java.util.Date;
  */
 public class DatosJugador{
     private ArrayList<DatosJugador> jugador = new ArrayList<>();
-
+    private String nombre, apellido, usuario, correo, contraseña;
+    private String fechaNacimiento;
+    
+    public DatosJugador(String nombre, String apellido, String usuario, String correo, String contraseña, String fechaNacimiento) 
+    {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+ 
     public DatosJugador()
     {}
     public String getNombre() {
@@ -62,16 +77,14 @@ public class DatosJugador{
         this.contraseña = contraseña;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     
-    private String nombre, apellido, usuario, correo, contraseña;
-    private Date fechaNacimiento;
 
     public boolean edadJugador(Date fecha)
     {
@@ -92,13 +105,13 @@ public class DatosJugador{
         if(difAño < 18)
             ok = false;
         
-        System.err.println(ok);
+        System.out.println(ok);
         
         return ok;
     }
     
    public void guardarDatosJugador(String nombre, String apellido, String usuario,
-                String correo, Date fecha, String contraseña)
+                String correo, String fecha, String contraseña)
    {
         FileWriter fichero = null;
         PrintWriter p = null;
@@ -128,7 +141,7 @@ public class DatosJugador{
         }
    }
     public void guardarDatosResponsable(String usuario, String nombre, String apellido,
-                String correo, Date fecha)
+                String correo, String fecha)
    {
         FileWriter fichero = null;
         PrintWriter p = null;
@@ -156,4 +169,72 @@ public class DatosJugador{
            }
         }
    }
+    public void CargarDatosJugador()
+    {
+        try {
+            FileReader leer = new FileReader("ficheros/Jugadores.txt");
+            BufferedReader datosJug = new BufferedReader(leer);
+            String dato;
+            
+            while((dato = datosJug.readLine()) != null)
+            {
+                setNombre(dato);
+                dato = datosJug.readLine();
+                setApellido(dato);
+                dato = datosJug.readLine();
+                setUsuario(dato);
+                dato = datosJug.readLine();
+                setCorreo(dato);
+                dato = datosJug.readLine();
+                setFechaNacimiento(dato);
+                dato = datosJug.readLine();
+                setContraseña(dato);
+                //System.out.println("Hola");
+                jugador.add(this);
+            }
+        } catch (IOException ex) {
+            System.err.println("No se ha encontrado el fichero Jugador.txt");
+        }
+
+    }
+    public boolean validarUsuario(String usuario)
+    {
+        boolean ok = false;
+        int i = 0;
+        
+        while(i < jugador.size() && !ok)
+        {
+            if(jugador.get(i).getUsuario().equals(usuario))
+                ok = true;
+            i++;
+        }
+        
+        return ok;
+    }
+    
+    public void añadirUsuario(String nombre, String apellido, String usuario, String correo, String contraseña, String fechaNacimiento)
+    {
+        DatosJugador datosJugador = null;
+        
+        jugador.add(datosJugador = new DatosJugador(nombre, apellido, usuario, correo, contraseña, fechaNacimiento));
+        
+    }
+    
+    public boolean validarCuenta(String usuario, String contraseña)
+    {
+        boolean ok = false;
+        int i = 0;
+        
+        while(i < jugador.size() && !ok)
+        {
+            if(jugador.get(i).getUsuario().equals(usuario) && jugador.get(i).getContraseña().equals(contraseña))
+                ok = true;
+            i++;
+        }        
+        return ok;
+    }
+    public ArrayList<DatosJugador> getDatosJugador()
+    {
+        return jugador;
+    }
 }

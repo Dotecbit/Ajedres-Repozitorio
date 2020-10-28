@@ -6,6 +6,7 @@
 package Vista;
 
 import controlador.Jugador;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -151,8 +152,12 @@ public class ResponsableInfantil extends javax.swing.JFrame {
      {
          if(jugador.edadJugador(fechaNacimiento.getDate()))
          {
-            jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechaN, contraseñaJ);
-            jugador.guardarDatosResponsable(usuarioJ, nombre.getText(), apellido.getText(), correo.getText(), fechaNacimiento.getDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+            String fechJugador = sdf.format(fechaN.getDate());
+            String fechResponsable = sdf.format(fechaNacimiento.getDate());
+            
+            jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechJugador, contraseñaJ);
+            jugador.guardarDatosResponsable(usuarioJ, nombre.getText(), apellido.getText(), correo.getText(), fechResponsable);
             this.setVisible(false);
             ventanaInicio.setVisible(true);
             JOptionPane.showMessageDialog(null,"Bienvenido a nuestra plataforma.");

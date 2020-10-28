@@ -166,7 +166,7 @@ public class Registrarse extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
         }
-        else
+        else if(!jugador.validarUsuario(usuario.getText()))
         {
             if(!jugador.edadJugador(fechaNacimiento.getDate()))
             {
@@ -181,19 +181,19 @@ public class Registrarse extends javax.swing.JFrame {
             }
             else
             {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+                String fechaComoCadena = sdf.format(fechaNacimiento.getDate());
+                jugador.añadirUsuario(nombre.getText(), apellido.getText(), usuario.getText(), correoElectrónico.getText()
+                        , contraseña.getText(), fechaComoCadena);
                 jugador.guardarDatosJugador(nombre.getText(), apellido.getText(), usuario.getText(), 
-                        correoElectrónico.getText(), fechaNacimiento.getDate(), contraseña.getText());
+                        correoElectrónico.getText(),fechaComoCadena, contraseña.getText());
                 this.setVisible(false);
                 ventanaAnterior.setVisible(true);
                 JOptionPane.showMessageDialog(null,"Bienvenido a nuestra plataforma.");
             }
-
-            
-
         }
-            
-
-            
+        else if(jugador.validarUsuario(usuario.getText()))
+            JOptionPane.showMessageDialog(null,"El usuario ya existe. Prueba con otro.");
         //this.setVisible(false);
         //ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_registrarseActionPerformed

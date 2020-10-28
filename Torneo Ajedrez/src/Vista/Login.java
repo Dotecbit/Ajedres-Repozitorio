@@ -19,8 +19,8 @@ import model.DatosGerente;
  *
  * @author Ayoub El Moussaoui
  */
-public class Login extends javax.swing.JFrame {
-
+public class Login extends javax.swing.JFrame 
+{
     /**
      * Creates new form Login
      */
@@ -31,9 +31,9 @@ public class Login extends javax.swing.JFrame {
     private DatosClub club;
     private DatosEntrenador entrenador;
  
-    
     public Login() {
         jugador = new Jugador();
+        jugador.cargarDatosJugador();
         administrador = new Administrador(gerente,datJug,club,entrenador);
         initComponents();
     }
@@ -84,30 +84,30 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(iniciarSesión, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iniciarSesión, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(Contraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(Registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addComponent(Contraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                    .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(113, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel2)
+                    .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(iniciarSesión)
                 .addGap(18, 18, 18)
                 .addComponent(Registrar)
-                .addGap(108, 108, 108))
+                .addGap(135, 135, 135))
         );
 
         pack();
@@ -116,8 +116,20 @@ public class Login extends javax.swing.JFrame {
     private void iniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesiónActionPerformed
         
         if(Usuario.getText().equals("") || Contraseña.getText().equals(""))
-            JOptionPane.showMessageDialog(null,"Ingresa su cuenta.");
+        {
+            VentanaAdministrador ventanaAdministrador= new VentanaAdministrador(administrador, this);
+            ventanaAdministrador.setVisible(true);
+            this.setVisible(false);
+            ventanaAdministrador.setSize(600, 700);
+            ventanaAdministrador.setLocationRelativeTo(null);
+            ventanaAdministrador.setResizable(false);
+            ventanaAdministrador.setTitle("Administrador"); 
+            //JOptionPane.showMessageDialog(null,"Ingresa su cuenta.");
+        }
+            
         
+        else if(!jugador.validarCuenta(Usuario.getText(), Contraseña.getText()))
+            JOptionPane.showMessageDialog(null,"El usuario o la contraseña son incorrectas");
         //Aqui iría la verificación de la cuenta.
         else 
         {
@@ -139,6 +151,7 @@ public class Login extends javax.swing.JFrame {
         registrarse.setLocationRelativeTo(null);
         registrarse.setResizable(false);
         registrarse.setTitle("Registrarse");
+        
     }//GEN-LAST:event_RegistrarActionPerformed
     /**
      * @param args the command line arguments
