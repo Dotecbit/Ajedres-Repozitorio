@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,6 +18,7 @@ import java.util.Date;
  */
 public class DatosJugador {
     
+    private ArrayList<Jugador> jugador = new ArrayList<>();
     public DatosJugador()
     {}
     
@@ -36,6 +41,68 @@ public class DatosJugador {
         if(difAño < 18)
             ok = false;
         
+        System.err.println(ok);
+        
         return ok;
     }
+    
+   public void guardarDatosJugador(String nombre, String apellido, String usuario,
+                String correo, Date fecha, String contraseña)
+   {
+        FileWriter fichero = null;
+        PrintWriter p = null;
+        try
+        {   
+            fichero = new FileWriter("",true);
+            p = new PrintWriter(fichero);
+
+                p.println(nombre);
+                p.println(apellido); 
+                p.println(usuario); 
+                p.println(correo); 
+                p.println(fecha);
+                p.println(contraseña);  
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+   }
+    public void guardarDatosResponsable(String usuario, String nombre, String apellido,
+                String correo, Date fecha)
+   {
+        FileWriter fichero = null;
+        PrintWriter p = null;
+        try
+        {   
+            fichero = new FileWriter("",true);
+            p = new PrintWriter(fichero);
+
+                p.println(usuario);
+                p.println(nombre); 
+                p.println(apellido); 
+                p.println(correo); 
+                p.println(fecha);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+   }
 }

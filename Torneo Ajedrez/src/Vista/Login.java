@@ -8,6 +8,7 @@ package Vista;
 import controlador.Jugador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -101,12 +102,20 @@ public class Login extends javax.swing.JFrame {
 
     private void iniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesiónActionPerformed
         
-        ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this);
-        this.setVisible(false); 
-        ventanaPrincipal.setVisible(true);
-        ventanaPrincipal.setLocationRelativeTo(null);
-        ventanaPrincipal.setResizable(false);
-        ventanaPrincipal.setTitle("Principal");
+        if(Usuario.getText().equals("") || Contraseña.getText().equals(""))
+            JOptionPane.showMessageDialog(null,"Ingresa su cuenta.");
+        
+        //Aqui iría la verificación de la cuenta.
+        else 
+        {
+            ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this);
+            this.setVisible(false); 
+            ventanaPrincipal.setVisible(true);
+            ventanaPrincipal.setLocationRelativeTo(null);
+            ventanaPrincipal.setResizable(false);
+            ventanaPrincipal.setTitle("Principal");           
+        }
+
         
     }//GEN-LAST:event_iniciarSesiónActionPerformed
 
