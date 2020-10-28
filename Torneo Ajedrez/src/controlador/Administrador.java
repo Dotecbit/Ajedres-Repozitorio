@@ -6,50 +6,59 @@
 package controlador;
 
 import java.util.ArrayList;
-import model.AppAjedrez;
-import model.Club;
-import model.Gerente;
+import model.DatosClub;
+import model.DatosJugador;
+import model.DatosEntrenador;
+import model.DatosGerente;
 
 /**
  *
  * @author areba
  */
 public class Administrador {
-    AppAjedrez appAjedrez;
 
-    public Administrador(AppAjedrez appAjedrez) {
-        this.appAjedrez = appAjedrez;
-        appAjedrez.crearGerentePrueba();
+    private  DatosGerente gerente; 
+    private DatosJugador jugador;
+    private DatosClub club;
+    private DatosEntrenador entrenador;
+
+    public Administrador(DatosGerente gerente, DatosJugador jugador, DatosClub club, DatosEntrenador entrenador) {
+        this.gerente = gerente;
+        this.jugador = jugador;
+        this.club = club;
+        this.entrenador = entrenador;
     }
     
-    public ArrayList<Gerente> getGerentes()
+
+    
+    public ArrayList<DatosGerente> getGerentes()
     {
-        return appAjedrez.getGerentes();
+        return gerente.getGerentes();
     }
     
     public ArrayList<String> getGerentesLibres()
     {
-        return appAjedrez.getGerentesLibres();
+        return gerente.getGerentesLibres();
     }
     
-    public void crearClub(String nombre, String sede, String gerente) {
-        appAjedrez.crearClub(nombre, sede, gerente);
+    public void crearClub(String nombre, String sede, Object gerente) {
+        club.crearClub(nombre, sede,(DatosGerente) gerente);
     }
     
-    public ArrayList<Club> getClubs()
+    public ArrayList<DatosClub> getClubs()
     {
-        return appAjedrez.getClubs();
+        return club.getClubs();
     }
 
-    public void gerCambiaClub(Object gerente, Object club) 
+    public void getCambiaClub(Object gerente, Object club) 
     {
         //Actualizamos el club que se ha cambiado el gerente
-        ((Gerente) gerente).getClubActual().setGerente(null);
+        ((DatosGerente) gerente).getClubActual().setGerente(null);
         //Añadimso el nuevo club al historial
-        ((Gerente) gerente).actHistClub((Club) club);
+        ((DatosGerente) gerente).actHistClub((DatosClub) club);
         //Asignamos al gerente el club al que se ha cambiado
-        ((Gerente) gerente).setClubActual((Club) club);
+        ((DatosGerente) gerente).setClubActual((DatosClub) club);
         //Asignamos al club el nuevo gerente
-        ((Club) club).setGerente((Gerente) gerente);
+        ((DatosClub) club).setGerente((DatosGerente) gerente);
     }
 }

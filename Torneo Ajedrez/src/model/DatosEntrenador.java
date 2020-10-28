@@ -9,6 +9,6 @@ package model;
  *
  * @author areba
  */
-public class Entrenador {
+public class DatosEntrenador {
     
 }

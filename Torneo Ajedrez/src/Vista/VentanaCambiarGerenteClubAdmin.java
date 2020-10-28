@@ -9,7 +9,7 @@ import controlador.Administrador;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 //¿Este import se puede hacer?
-import model.Gerente;
+import model.DatosGerente;
 
 /**
  *
@@ -130,7 +130,7 @@ public class VentanaCambiarGerenteClubAdmin extends javax.swing.JFrame {
     private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
         this.setVisible(false);
         vetanaAnterior.setVisible(true);
-        administrador.gerCambiaClub((Object)lisGerente.getSelectedValue(),(Object) lisClub.getSelectedValue());
+        administrador.getCambiaClub((Object)lisGerente.getSelectedValue(),(Object) lisClub.getSelectedValue());
     }//GEN-LAST:event_butAceptarActionPerformed
 
 

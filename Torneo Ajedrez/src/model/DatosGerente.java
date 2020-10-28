@@ -11,21 +11,22 @@ import java.util.ArrayList;
  *
  * @author areba
  */
-public class Gerente {
+public class DatosGerente {
+    ArrayList<DatosGerente> gerentes;
     private String nombre, apellidos, sexo, nCompleto;
     private int  edad;
     private Float nomina;
     private Float IRPF;
-    private ArrayList<Club> histClub;
+    private ArrayList<DatosClub> histClub;
     private ArrayList<Float> histNom, histIRPF;
-    private Club clubActual = null;
+    private DatosClub clubActual = null;
 
     @Override
     public String toString() {
         return nCompleto;
     }
 
-    public Gerente(String nombre, String apellidos, int edad, String sexo, Float nomina, Float IRPF, ArrayList<Club> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF) {
+    public DatosGerente(String nombre, String apellidos, int edad, String sexo, Float nomina, Float IRPF, ArrayList<DatosClub> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -37,6 +38,15 @@ public class Gerente {
         this.histIRPF = histIRPF;
         nCompleto= nombre + " " + apellidos;
     }
+
+    public void setGerentes(DatosGerente gerente) {
+        gerentes.add(gerente);
+    }
+    
+    public ArrayList<DatosGerente> getGerentes() {
+        return gerentes;
+    }
+    
 
     public String getnCompleto() {
         return nCompleto;
@@ -94,11 +104,11 @@ public class Gerente {
         this.IRPF = IRPF;
     }
 
-    public ArrayList<Club> getHistClub() {
+    public ArrayList<DatosClub> getHistClub() {
         return histClub;
     }
 
-    public void actHistClub(Club newClub) {
+    public void actHistClub(DatosClub newClub) {
         this.histClub.add(newClub);
     }
 
@@ -118,13 +128,26 @@ public class Gerente {
         this.histIRPF = histIRPF;
     }
 
-    public Club getClubActual() {
+    public DatosClub getClubActual() {
         return clubActual;
     }
 
-    public void setClubActual(Club clubActual) {
+    public void setClubActual(DatosClub clubActual) {
         this.clubActual = clubActual;
     }
     
+        public ArrayList<String> getGerentesLibres()
+    {
+        ArrayList<String> gerentesLibres = null;
+        for(int i = 0; i < gerentes.size(); i++)
+            if(gerentes.get(i).getClubActual() == null)
+                gerentesLibres.add(gerentes.get(i).getnCompleto());
+        return gerentesLibres;
+    }
+    
+    public void crearGerentePrueba()
+    {
+        gerentes.add(new DatosGerente("Pepe","Media Villa",55,"H", Float.parseFloat("2500.0"), Float.parseFloat("0.5"), null, null, null));
+    }
     
 }

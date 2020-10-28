@@ -11,14 +11,17 @@ import java.util.ArrayList;
  *
  * @author areba
  */
-public class Club {
+public class DatosClub {
+    
+    
+    ArrayList<DatosClub> clubes;
     
     //Declaracion de datos
     private String nombre;
-    private ArrayList<Jugador> jugadores;
+    private ArrayList<DatosJugador> jugadores;
     private ArrayList<String> sedes;
-    private Gerente gerente;
-    private Entrenador entrenador;
+    private DatosGerente gerente;
+    private DatosEntrenador entrenador;
 
     @Override
     public String toString() {
@@ -34,7 +37,7 @@ public class Club {
         this.nombre = nombre;
     }
 
-    public Club(String nombre, ArrayList<Jugador> jugadores, String sede,Gerente gerente, Entrenador entrenador, String federación) {
+    public DatosClub(String nombre, ArrayList<DatosJugador> jugadores, String sede,DatosGerente gerente, DatosEntrenador entrenador, String federación) {
         this.nombre = nombre;
         this.jugadores = jugadores;
         this.sedes.add(sede);
@@ -43,11 +46,11 @@ public class Club {
         this.federación = federación;
     }
 
-    public ArrayList<Jugador> getJugadores() {
+    public ArrayList<DatosJugador> getJugadores() {
         return jugadores;
     }
 
-    public void setJugadores(ArrayList<Jugador> jugadores) {
+    public void setJugadores(ArrayList<DatosJugador> jugadores) {
         this.jugadores = jugadores;
     }
 
@@ -59,19 +62,19 @@ public class Club {
         this.sedes = sedes;
     }
 
-    public Gerente getGerente() {
+    public DatosGerente getGerente() {
         return gerente;
     }
 
-    public void setGerente(Gerente gerente) {
+    public void setGerente(DatosGerente gerente) {
         this.gerente = gerente;
     }
 
-    public Entrenador getEntrenador() {
+    public DatosEntrenador getEntrenador() {
         return entrenador;
     }
 
-    public void setEntrenador(Entrenador entrenador) {
+    public void setEntrenador(DatosEntrenador entrenador) {
         this.entrenador = entrenador;
     }
 
@@ -83,6 +86,23 @@ public class Club {
         this.federación = federación;
     }
     
+    
+    public ArrayList<DatosClub> getClubs()
+    {
+        return clubes;
+    }
+    
+
+    public void crearClub(String nombre, String sede, DatosGerente gerente) 
+    {
+        DatosClub newClub = null;
+       
+        clubes.add(newClub = new DatosClub(nombre,null,sede,gerente,null,null));
+        gerente.setClubActual(newClub);
+       
+        System.out.println("Club creado: " + newClub.toString());
+    }
+
     
     
 }

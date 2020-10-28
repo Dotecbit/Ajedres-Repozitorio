@@ -8,6 +8,7 @@ package Vista;
 import controlador.Administrador;
 import java.awt.Component;
 import java.awt.PopupMenu;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -17,6 +18,7 @@ import javax.swing.JFrame;
 public class VentanaCrearClub extends javax.swing.JFrame
 { 
     Administrador administrador;
+    DefaultListModel modeloListaGerente;
 
     /**
      * Creates new customizer VentanaCrearTorneo
@@ -26,11 +28,13 @@ public class VentanaCrearClub extends javax.swing.JFrame
     {
         this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
+        modeloListaGerente = new DefaultListModel();
+        listGer.setModel(modeloListaGerente);
+        initComponents();
         
-        for(Object gerente:administrador.getGerentesLibres())
-        {
-            listGer.add((PopupMenu) gerente);
-        }
+        
+        for(Object item:administrador.getClubs())
+            modeloListaGerente.addElement(item);
         
         initComponents();
     }

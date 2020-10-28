@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,12 +17,62 @@ import java.util.Date;
  *
  * @author Ayoub El Moussaoui
  */
-public class DatosJugador {
-    
-    private ArrayList<Jugador> jugador = new ArrayList<>();
+public class DatosJugador{
+    private ArrayList<DatosJugador> jugador = new ArrayList<>();
+
     public DatosJugador()
     {}
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
     
+    private String nombre, apellido, usuario, correo, contraseña;
+    private Date fechaNacimiento;
+
     public boolean edadJugador(Date fecha)
     {
         boolean ok = true;
@@ -53,7 +104,7 @@ public class DatosJugador {
         PrintWriter p = null;
         try
         {   
-            fichero = new FileWriter("",true);
+            fichero = new FileWriter(new File("ficheros/Jugadores.txt"), true);
             p = new PrintWriter(fichero);
 
                 p.println(nombre);
@@ -83,7 +134,7 @@ public class DatosJugador {
         PrintWriter p = null;
         try
         {   
-            fichero = new FileWriter("",true);
+            fichero = new FileWriter("ficheros/responsablesInfantiles.txt",true);
             p = new PrintWriter(fichero);
 
                 p.println(usuario);

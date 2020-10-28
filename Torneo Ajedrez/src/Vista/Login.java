@@ -5,10 +5,15 @@
  */
 package Vista;
 
+import controlador.Administrador;
 import controlador.Jugador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.DatosClub;
+import model.DatosJugador;
+import model.DatosEntrenador;
+import model.DatosGerente;
 
 /**
  *
@@ -20,8 +25,16 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private Jugador jugador;
+    private Administrador administrador;
+    private DatosGerente gerente; 
+    private DatosJugador datJug;
+    private DatosClub club;
+    private DatosEntrenador entrenador;
+ 
+    
     public Login() {
         jugador = new Jugador();
+        administrador = new Administrador(gerente,datJug,club,entrenador);
         initComponents();
     }
 
