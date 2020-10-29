@@ -32,8 +32,8 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         
-        //administrador.cargarSedes();
-        //sedes = administrador.getSedes();
+//        administrador.cargarSedes();
+//        sedes = administrador.getSedes();
         
         //administrador.jugadores();
         //jugadores = administrador.getJugadores();
@@ -42,8 +42,8 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
         
 //        modeloLista = new DefaultListModel();
 //        modeloListaJugador = new DefaultListModel();
-//        listaSede.setModel(modeloLista);
-        //listaJugadores.setModel(modeloListaJugador);
+       listaSede.setModel(modeloLista);
+//        listaJugadores.setModel(modeloListaJugador);
 //        
 //        for (Object item : sedes) 
 //            modeloLista.addElement(item);
