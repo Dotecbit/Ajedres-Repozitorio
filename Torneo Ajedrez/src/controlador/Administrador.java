@@ -18,18 +18,16 @@ import model.DatosTorneo;
  */
 public class Administrador {
 
-    private  DatosGerente gerente; 
+    private DatosGerente gerente; 
     private DatosJugador jugador;
     private DatosClub club;
     private DatosEntrenador entrenador;
     private DatosTorneo datosTorneo;
-    public Administrador(DatosGerente gerente, DatosJugador jugador, DatosClub club, DatosEntrenador entrenador) {
-        this.gerente = gerente;
-        this.jugador = jugador;
-        this.club = club;
-        this.entrenador = entrenador;
+    public Administrador() 
+    {
         datosTorneo = new DatosTorneo();
         jugador = new DatosJugador();
+        jugador.CargarDatosJugador();
     }
    
     public ArrayList<DatosGerente> getGerentes()
@@ -72,8 +70,7 @@ public class Administrador {
     }
     public void jugadores()
     {
-        //jugador.CargarDatosJugador();
-        //datosTorneo.jugadores(jugador.getDatosJugador());
+        datosTorneo.jugadores(jugador.getDatosJugador());
     }
     public ArrayList<String> getJugadores()
     {

@@ -172,8 +172,15 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_botCrearClubActionPerformed
 
     private void botCrearTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearTorneoActionPerformed
-
-        VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this, administrador);
+        añadirJugadoresSedes añadirJugador = new añadirJugadoresSedes(administrador);
+        VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this, administrador, añadirJugador);
+        
+        
+        añadirJugador.setVisible(true);
+        añadirJugador.setLocationRelativeTo(null);
+        añadirJugador.setResizable(false);
+        añadirJugador.setTitle("Añadir jugador");
+        
         crearTorneo.setSize(500, 700);
         this.setVisible(false); 
         crearTorneo.setVisible(true);
