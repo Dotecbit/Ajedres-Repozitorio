@@ -25,31 +25,31 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
     private JFrame ventanaAnterior;
     private Administrador administrador;
     private DefaultListModel modeloLista, modeloListaJugador;
-    private ArrayList sedes;
-    private ArrayList jugadores;
+    private ArrayList<String> sedes;
+    private ArrayList<String> jugadores;
     
     public VentanaCrearTorneo(JFrame ventanaAnterior, Administrador administrador) {
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         
-        administrador.cargarSedes();
-        sedes = administrador.getSedes();
+        //administrador.cargarSedes();
+        //sedes = administrador.getSedes();
         
-        administrador.jugadores();
-        jugadores = administrador.getJugadores();
+        //administrador.jugadores();
+        //jugadores = administrador.getJugadores();
         
         initComponents();
         
-        modeloLista = new DefaultListModel();
-        modeloListaJugador = new DefaultListModel();
-        listaSede.setModel(modeloLista);
-        listaJugadores.setModel(modeloListaJugador);
-        
-        for (Object item : sedes) 
-            modeloLista.addElement(item);
-        
-        for (Object item : jugadores) 
-            modeloLista.addElement(item);
+//        modeloLista = new DefaultListModel();
+//        modeloListaJugador = new DefaultListModel();
+//        listaSede.setModel(modeloLista);
+        //listaJugadores.setModel(modeloListaJugador);
+//        
+//        for (Object item : sedes) 
+//            modeloLista.addElement(item);
+//        
+//        for (Object item : jugadores) 
+//            modeloLista.addElement(item);
     }
 
     /**

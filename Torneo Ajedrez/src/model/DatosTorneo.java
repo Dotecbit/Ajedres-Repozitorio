@@ -44,10 +44,10 @@ public class DatosTorneo
     {
         for(int i = 0; i < datosJugadores.size(); i++)
             jugadores.add(datosJugadores.get(i).getUsuario());
+        System.err.println(jugadores.size());
     }
     public ArrayList<String> getJugadores()
     {
-        System.out.println("hghg");
         return jugadores;
     }
 }

@@ -36,6 +36,7 @@ public class Login extends javax.swing.JFrame
         jugador.cargarDatosJugador();
         administrador = new Administrador(gerente,datJug,club,entrenador);
         initComponents();
+        
     }
 
     /**

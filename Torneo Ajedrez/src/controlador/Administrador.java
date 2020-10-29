@@ -29,6 +29,7 @@ public class Administrador {
         this.club = club;
         this.entrenador = entrenador;
         datosTorneo = new DatosTorneo();
+        jugador = new DatosJugador();
     }
    
     public ArrayList<DatosGerente> getGerentes()
@@ -71,12 +72,11 @@ public class Administrador {
     }
     public void jugadores()
     {
-        System.out.println("jugadores");
-        datosTorneo.jugadores(jugador.getDatosJugador());
+        //jugador.CargarDatosJugador();
+        //datosTorneo.jugadores(jugador.getDatosJugador());
     }
     public ArrayList<String> getJugadores()
     {
-        System.out.println("getJugadores");
         return datosTorneo.getJugadores();
     }
 }

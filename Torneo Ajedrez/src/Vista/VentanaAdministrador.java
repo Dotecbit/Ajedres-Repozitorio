@@ -22,6 +22,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
         this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
