@@ -80,7 +80,7 @@ public class Login extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -108,7 +108,7 @@ public class Login extends javax.swing.JFrame
                 .addComponent(iniciarSesión)
                 .addGap(18, 18, 18)
                 .addComponent(Registrar)
-                .addGap(135, 135, 135))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         pack();

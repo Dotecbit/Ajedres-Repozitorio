@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.2" maxVersion="1.2" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+      <Color id="Default Cursor"/>
+    </Property>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="null"/>
+    </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="null"/>
+    </Property>
+  </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="2"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -19,140 +32,158 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
-                      <Component id="botCrearTorneo" min="-2" pref="332" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="botCrearClub" min="-2" pref="332" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="botBajaClub" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BotDarBajaTorneo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="botAsigRespInf" alignment="0" max="32767" attributes="0"/>
-                              <Component id="botSetResPart" alignment="0" pref="332" max="32767" attributes="0"/>
-                              <Component id="botSetSedeTorneo" alignment="0" pref="332" max="32767" attributes="0"/>
-                              <Component id="botDarBajJug" alignment="0" max="32767" attributes="0"/>
-                              <Component id="botAsignTorneo" max="32767" attributes="0"/>
-                              <Component id="botCamGerClub" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="bCrearTorneo" max="32767" attributes="0"/>
+                  <Component id="bDarDeBaja" max="32767" attributes="0"/>
+                  <Component id="bCrearClub" max="32767" attributes="0"/>
+                  <Component id="bBajaTorneo" max="32767" attributes="0"/>
+                  <Component id="bRespInf" max="32767" attributes="0"/>
+                  <Component id="bResUlt" max="32767" attributes="0"/>
+                  <Component id="bBajaJugador" max="32767" attributes="0"/>
+                  <Component id="bAsigJugTor" max="32767" attributes="0"/>
+                  <Component id="bAsigSedTor" max="32767" attributes="0"/>
+                  <Component id="bCambGerClub" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="botCrearTorneo" min="-2" pref="23" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <Component id="bCrearTorneo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botBajaClub" min="-2" max="-2" attributes="0"/>
+              <Component id="bDarDeBaja" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botCrearClub" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Component id="BotDarBajaTorneo" min="-2" max="-2" attributes="0"/>
+              <Component id="bCrearClub" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botAsigRespInf" min="-2" max="-2" attributes="0"/>
+              <Component id="bBajaTorneo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botSetResPart" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Component id="botSetSedeTorneo" min="-2" max="-2" attributes="0"/>
+              <Component id="bRespInf" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botDarBajJug" min="-2" max="-2" attributes="0"/>
+              <Component id="bResUlt" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botAsignTorneo" min="-2" max="-2" attributes="0"/>
+              <Component id="bBajaJugador" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botCamGerClub" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <Component id="bAsigJugTor" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="bAsigSedTor" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="bCambGerClub" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="BotDarBajaTorneo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Dar de baja torneo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotDarBajaTorneoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="botCrearClub">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Crear club"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botCrearClubActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="botCrearTorneo">
+    <Component class="javax.swing.JButton" name="bCrearTorneo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear torneo"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botCrearTorneoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCrearTorneoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botBajaClub">
+    <Component class="javax.swing.JButton" name="bDarDeBaja">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar de baja club"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botBajaClubActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bDarDeBajaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botAsigRespInf">
+    <Component class="javax.swing.JButton" name="bCrearClub">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Asignar responsable infantiles"/>
+        <Property name="text" type="java.lang.String" value="Crear Club"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botAsigRespInfActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCrearClubActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botSetResPart">
+    <Component class="javax.swing.JButton" name="bBajaTorneo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introducir resultados &#xfa;ltima partida"/>
+        <Property name="text" type="java.lang.String" value="Dar de baja torneo"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botSetResPartActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bBajaTorneoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botSetSedeTorneo">
+    <Component class="javax.swing.JButton" name="bRespInf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Asignar responsables infantiles"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRespInfActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bResUlt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Instroducir resultados &#xfa;ltima partida"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bResUltActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bBajaJugador">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dar de baja jugador"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bBajaJugadorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bAsigJugTor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Asignar jugadores a torneo"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAsigJugTorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bAsigSedTor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignacion de sede de torneos"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botSetSedeTorneoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAsigSedTorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botDarBajJug">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Dar baja jugador"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botDarBajJugActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="botAsignTorneo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Asignar jugador a torneo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botAsignTorneoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="botCamGerClub">
+    <Component class="javax.swing.JButton" name="bCambGerClub">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar gerente club"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botCamGerClubActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCambGerClubActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
