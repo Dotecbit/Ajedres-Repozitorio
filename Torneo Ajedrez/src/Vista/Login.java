@@ -33,8 +33,7 @@ public class Login extends javax.swing.JFrame
  
     public Login() {
         jugador = new Jugador();
-        jugador.cargarDatosJugador();
-        administrador = new Administrador();
+        administrador = new Administrador(jugador);
         initComponents();
         
     }
@@ -121,7 +120,7 @@ public class Login extends javax.swing.JFrame
             VAdministrador ventanaAdministrador= new VAdministrador(administrador, this);
             ventanaAdministrador.setVisible(true);
             this.setVisible(false);
-            ventanaAdministrador.setSize(600, 700);
+            ventanaAdministrador.setSize(400, 580);
             ventanaAdministrador.setLocationRelativeTo(null);
             ventanaAdministrador.setResizable(false);
             ventanaAdministrador.setTitle("Administrador"); 
@@ -130,16 +129,17 @@ public class Login extends javax.swing.JFrame
             
         
         else if(!jugador.validarCuenta(Usuario.getText(), Contraseña.getText()))
-            JOptionPane.showMessageDialog(null,"El usuario o la contraseña son incorrectas");
+            JOptionPane.showMessageDialog(null, "El usuario o la contraseña que has introducido no coinciden con ninguna cuenta. Regístrate para crear una cuenta.", "¡Cuenta incorrecta!", JOptionPane.WARNING_MESSAGE);
         //Aqui iría la verificación de la cuenta.
         else 
         {
-            ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this);
+            ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this, Usuario.getText(), jugador);
             this.setVisible(false); 
             ventanaPrincipal.setVisible(true);
             ventanaPrincipal.setLocationRelativeTo(null);
             ventanaPrincipal.setResizable(false);
-            ventanaPrincipal.setTitle("Principal");           
+            ventanaPrincipal.setTitle("Principal");
+            
         }
 
         
