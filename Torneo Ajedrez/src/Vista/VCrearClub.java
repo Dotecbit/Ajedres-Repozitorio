@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  *
  * @author donramon
  */
-public class VentanaCrearClub extends javax.swing.JFrame
+public class VCrearClub extends javax.swing.JFrame
 { 
     Administrador administrador;
     DefaultListModel modeloListaGerente;
@@ -24,7 +24,7 @@ public class VentanaCrearClub extends javax.swing.JFrame
      * Creates new customizer VentanaCrearTorneo
      */
     private JFrame ventanaAnterior;
-    public VentanaCrearClub(JFrame ventanaAnterior, Administrador administrador) 
+    public VCrearClub(JFrame ventanaAnterior, Administrador administrador) 
     {
         this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
@@ -161,7 +161,7 @@ public class VentanaCrearClub extends javax.swing.JFrame
     }//GEN-LAST:event_botAtrasActionPerformed
 
     private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
-        administrador.crearClub(textNom.getText(), labSedClub.getText(), listGer.getSelectedValue());
+//        administrador.crearClub(textNom.getText(), labSedClub.getText(), listGer.getSelectedValue());
     }//GEN-LAST:event_botAceptarActionPerformed
 
     private void jtextSedeClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtextSedeClubActionPerformed

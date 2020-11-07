@@ -118,7 +118,7 @@ public class Login extends javax.swing.JFrame
         
         if(Usuario.getText().equals("") || Contraseña.getText().equals(""))
         {
-            VentanaAdministrador ventanaAdministrador= new VentanaAdministrador(administrador, this);
+            VAdministrador ventanaAdministrador= new VAdministrador(administrador, this);
             ventanaAdministrador.setVisible(true);
             this.setVisible(false);
             ventanaAdministrador.setSize(600, 700);

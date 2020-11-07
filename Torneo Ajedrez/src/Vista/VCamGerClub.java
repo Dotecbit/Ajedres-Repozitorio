@@ -15,7 +15,7 @@ import model.DatosGerente;
  *
  * @author donramon
  */
-public class VentanaCambiarGerenteClubAdmin extends javax.swing.JFrame {
+public class VCamGerClub extends javax.swing.JFrame {
     
     /**
      * Creates new customizer VentanaCambiarGerenteClubAdmin
@@ -25,7 +25,7 @@ public class VentanaCambiarGerenteClubAdmin extends javax.swing.JFrame {
     private Administrador administrador;
     private JFrame vetanaAnterior;
     
-    public VentanaCambiarGerenteClubAdmin(JFrame ventanaAnterior, Administrador administrador) {
+    public VCamGerClub(JFrame ventanaAnterior, Administrador administrador) {
         this.vetanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         modeloListaClub = new DefaultListModel();

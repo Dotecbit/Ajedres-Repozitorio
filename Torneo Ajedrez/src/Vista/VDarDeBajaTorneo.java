@@ -9,14 +9,14 @@ package Vista;
  *
  * @author donramon
  */
-public class VentanaDarDeBajaTorneo extends javax.swing.JPanel implements java.beans.Customizer {
+public class VDarDeBajaTorneo extends javax.swing.JPanel implements java.beans.Customizer {
     
     private Object bean;
 
     /**
      * Creates new customizer VentanaDarDeBajaTorneo
      */
-    public VentanaDarDeBajaTorneo() {
+    public VDarDeBajaTorneo() {
         initComponents();
     }
     

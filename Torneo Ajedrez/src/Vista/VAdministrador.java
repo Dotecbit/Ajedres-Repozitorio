@@ -12,11 +12,11 @@ import javax.swing.JFrame;
  *
  * @author areba
  */
-public class VentanaAdministrador extends javax.swing.JFrame
+public class VAdministrador extends javax.swing.JFrame
 {
     private static Administrador administrador;
     private JFrame ventanaAnterior;
-    public VentanaAdministrador(Administrador administrador, JFrame ventanaAnterior) {
+    public VAdministrador(Administrador administrador, JFrame ventanaAnterior) {
         this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
@@ -41,10 +41,10 @@ public class VentanaAdministrador extends javax.swing.JFrame
         bAsigJugTor = new javax.swing.JButton();
         bAsigSedTor = new javax.swing.JButton();
         bCambGerClub = new javax.swing.JButton();
+        bCambGerClub1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(null);
         setMinimumSize(null);
 
         bCrearTorneo.setText("Crear torneo");
@@ -126,6 +126,14 @@ public class VentanaAdministrador extends javax.swing.JFrame
             }
         });
 
+        bCambGerClub1.setText("Crear Gerente");
+        bCambGerClub1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bCambGerClub1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCambGerClub1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,13 +150,14 @@ public class VentanaAdministrador extends javax.swing.JFrame
                     .addComponent(bBajaJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAsigJugTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAsigSedTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bCambGerClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bCambGerClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bCambGerClub1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(bCrearTorneo)
                 .addGap(18, 18, 18)
                 .addComponent(bDarDeBaja)
@@ -167,8 +176,10 @@ public class VentanaAdministrador extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(bAsigSedTor)
                 .addGap(18, 18, 18)
+                .addComponent(bCambGerClub1)
+                .addGap(18, 18, 18)
                 .addComponent(bCambGerClub)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,7 +187,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
 
     private void bCrearTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearTorneoActionPerformed
     añadirJugadoresSedes añadirJugador = new añadirJugadoresSedes(administrador);
-    VentanaCrearTorneo crearTorneo = new VentanaCrearTorneo(this, administrador, añadirJugador);
+    VCrearTorneo crearTorneo = new VCrearTorneo(this, administrador, añadirJugador);
 
 
     añadirJugador.setVisible(true);
@@ -193,7 +204,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bCrearTorneoActionPerformed
 
     private void bDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDarDeBajaActionPerformed
-    VentanaDarBajaClub bajaCLub = new VentanaDarBajaClub(this);
+    VDarBajaClub bajaCLub = new VDarBajaClub(this);
     this.setVisible(false); 
     bajaCLub.setVisible(true);
     bajaCLub.setLocationRelativeTo(null);
@@ -202,7 +213,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bDarDeBajaActionPerformed
 
     private void bCrearClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearClubActionPerformed
-    VentanaCrearClub crearClub= new VentanaCrearClub(this,administrador);
+    VCrearClub crearClub= new VCrearClub(this,administrador);
     this.setVisible(false); 
     crearClub.setVisible(true);
     crearClub.setSize(500, 700);
@@ -216,7 +227,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bBajaTorneoActionPerformed
 
     private void bRespInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRespInfActionPerformed
-    VentanaAsignarResponsableInfantilAdmin asignarInfantil = new VentanaAsignarResponsableInfantilAdmin(this);
+    VAsignarRespInf asignarInfantil = new VAsignarRespInf(this);
     this.setVisible(false); 
     asignarInfantil.setVisible(true);
     asignarInfantil.setLocationRelativeTo(null);
@@ -225,7 +236,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bRespInfActionPerformed
 
     private void bResUltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bResUltActionPerformed
-    VentanaIntroducirResultadoUltimaPartidaAdmin introducirResultado = new VentanaIntroducirResultadoUltimaPartidaAdmin(this);
+    VAdminInResUltPar introducirResultado = new VAdminInResUltPar(this);
     this.setVisible(false); 
     introducirResultado.setVisible(true);
     introducirResultado.setLocationRelativeTo(null);
@@ -234,7 +245,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bResUltActionPerformed
 
     private void bBajaJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBajaJugadorActionPerformed
-    VentanaDarDeBajaJugadorAdmin darBajaJugador = new VentanaDarDeBajaJugadorAdmin(this);
+    VAdminDarDeBajaJugador darBajaJugador = new VAdminDarDeBajaJugador(this);
     this.setVisible(false); 
     darBajaJugador.setVisible(true);
     darBajaJugador.setLocationRelativeTo(null);
@@ -243,7 +254,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bBajaJugadorActionPerformed
 
     private void bCambGerClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCambGerClubActionPerformed
-    VentanaCambiarGerenteClubAdmin cambiarGerenteClub = new VentanaCambiarGerenteClubAdmin(this,administrador);
+    VCamGerClub cambiarGerenteClub = new VCamGerClub(this,administrador);
     this.setVisible(false); 
     cambiarGerenteClub.setVisible(true);
     cambiarGerenteClub.setLocationRelativeTo(null);
@@ -252,7 +263,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bCambGerClubActionPerformed
 
     private void bAsigSedTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsigSedTorActionPerformed
-    VentanaAsignarSedeTorneoAdmin asignarJugadorTorneo = new VentanaAsignarSedeTorneoAdmin(this);
+    VAsignarSedeTor asignarJugadorTorneo = new VAsignarSedeTor(this);
     this.setVisible(false); 
     asignarJugadorTorneo.setVisible(true);
     asignarJugadorTorneo.setLocationRelativeTo(null);
@@ -261,7 +272,7 @@ public class VentanaAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bAsigSedTorActionPerformed
 
     private void bAsigJugTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsigJugTorActionPerformed
-    VentanaAsignarJugadorATorneoAdmin asignarJugadorTorneo = new VentanaAsignarJugadorATorneoAdmin(this);
+    VAsignarJugTor asignarJugadorTorneo = new VAsignarJugTor(this);
     this.setVisible(false); 
     asignarJugadorTorneo.setVisible(true);
     asignarJugadorTorneo.setLocationRelativeTo(null);
@@ -269,12 +280,22 @@ public class VentanaAdministrador extends javax.swing.JFrame
     asignarJugadorTorneo.setTitle("Asignar a torneo");
     }//GEN-LAST:event_bAsigJugTorActionPerformed
 
+    private void bCambGerClub1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCambGerClub1ActionPerformed
+    VCrearGerente VCrearGerente = new VCrearGerente(this,administrador);
+    this.setVisible(false); 
+    VCrearGerente.setVisible(true);
+    VCrearGerente.setLocationRelativeTo(null);
+    VCrearGerente.setResizable(false);
+    VCrearGerente.setTitle("Crear Gerente");
+    }//GEN-LAST:event_bCambGerClub1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAsigJugTor;
     private javax.swing.JButton bAsigSedTor;
     private javax.swing.JButton bBajaJugador;
     private javax.swing.JButton bBajaTorneo;
     private javax.swing.JButton bCambGerClub;
+    private javax.swing.JButton bCambGerClub1;
     private javax.swing.JButton bCrearClub;
     private javax.swing.JButton bCrearTorneo;
     private javax.swing.JButton bDarDeBaja;

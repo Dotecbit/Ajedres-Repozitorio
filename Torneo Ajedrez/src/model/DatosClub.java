@@ -5,6 +5,11 @@
  */
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -19,15 +24,22 @@ public class DatosClub {
     //Declaracion de datos
     private String nombre;
     private ArrayList<DatosJugador> jugadores;
-    private ArrayList<String> sedes;
+    private String sede;
     private DatosGerente gerente;
     private DatosEntrenador entrenador;
+    private String federacion;
+
+    public DatosClub() {
+//        cargarDatosClub();
+    }
+    
+    
 
     @Override
     public String toString() {
         return nombre;
     }
-    private String federación;
+    
 
     public String getNombre() {
         return nombre;
@@ -36,16 +48,7 @@ public class DatosClub {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public DatosClub(String nombre, ArrayList<DatosJugador> jugadores, String sede,DatosGerente gerente, DatosEntrenador entrenador, String federación) {
-        this.nombre = nombre;
-        this.jugadores = jugadores;
-        this.sedes.add(sede);
-        this.gerente = gerente;
-        this.entrenador = entrenador;
-        this.federación = federación;
-    }
-
+    
     public ArrayList<DatosJugador> getJugadores() {
         return jugadores;
     }
@@ -54,12 +57,20 @@ public class DatosClub {
         this.jugadores = jugadores;
     }
 
-    public ArrayList<String> getSedes() {
-        return sedes;
+    public ArrayList<DatosClub> getClubes() {
+        return clubes;
     }
 
-    public void setSedes(ArrayList<String> sedes) {
-        this.sedes = sedes;
+    public void setClubes(ArrayList<DatosClub> clubes) {
+        this.clubes = clubes;
+    }
+
+    public String getSede() {
+        return sede;
+    }
+
+    public void setSede(String sede) {
+        this.sede = sede;
     }
 
     public DatosGerente getGerente() {
@@ -78,13 +89,15 @@ public class DatosClub {
         this.entrenador = entrenador;
     }
 
-    public String getFederación() {
-        return federación;
+    public String getFederacion() {
+        return federacion;
     }
 
-    public void setFederación(String federación) {
-        this.federación = federación;
+    public void setFederacion(String federacion) {
+        this.federacion = federacion;
     }
+    
+
     
     
     public ArrayList<DatosClub> getClubs()
@@ -92,16 +105,77 @@ public class DatosClub {
         return clubes;
     }
     
-
-    public void crearClub(String nombre, String sede, DatosGerente gerente) 
+        public void cargarDatosClub()
     {
-        DatosClub newClub = null;
-       
-        clubes.add(newClub = new DatosClub(nombre,null,sede,gerente,null,null));
-        gerente.setClubActual(newClub);
-       
-        System.out.println("Club creado: " + newClub.toString());
+        try {
+            FileReader leer = new FileReader("ficheros/Gerentes.txt");
+            BufferedReader datosJug = new BufferedReader(leer);
+            String dato;
+            
+            while((dato = datosJug.readLine()) != null)
+            {
+                nombre = dato;
+                dato = datosJug.readLine();
+                
+                sede = dato;
+                dato = datosJug.readLine();
+                
+                DatosGerente gerente = new DatosGerente();
+                for(DatosGerente g:gerente.getGerentes())
+                {
+                    if(g.getnCompleto() == dato)
+                        setGerente(g);
+                }
+                
+                if(dato == "null")
+                    setEntrenador(null);
+//                else
+//                DatosEntrenador entrenador = new DatosEntrenador();
+//                for(DatosGerente e:entrenador())
+//                {
+//                    if(e.getnCompleto() == dato)
+//                        setEntrenador(e);
+//                }
+                
+                federacion = dato;
+                dato = datosJug.readLine();
+                
+                clubes.add(this);
+            }
+        } catch (IOException ex) {
+            System.err.println("No se ha encontrado el fichero Gerentes.txt");
+        }
+
     }
+    
+    public void guardarDatosClub(String nombre, String sede, DatosGerente g,
+    DatosEntrenador e, String federacion)
+   {
+        FileWriter fichero = null;
+        PrintWriter p = null;
+        try
+        {   
+            fichero = new FileWriter("ficheros/Gerentes.txt",true);
+            p = new PrintWriter(fichero);
+
+                p.println(nombre);
+                p.println(sede); 
+                p.println(g.getnCompleto()); 
+                //Si no tiene se guarda "null"
+//                p.println(e.getnCompleto()); 
+                p.println(federacion);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+           try {
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+   }
 
     
     

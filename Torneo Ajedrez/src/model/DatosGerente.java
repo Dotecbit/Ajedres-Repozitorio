@@ -5,6 +5,11 @@
  */
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -19,12 +24,17 @@ public class DatosGerente {
     private Float IRPF;
     private ArrayList<DatosClub> histClub;
     private ArrayList<Float> histNom, histIRPF;
-    private DatosClub clubActual = null;
+    private DatosClub clubActual;
 
     @Override
     public String toString() {
         return nCompleto;
     }
+
+    public DatosGerente() {
+//        this.CargarDatosGerente();
+    }
+    
 
     public DatosGerente(String nombre, String apellidos, int edad, String sexo, Float nomina, Float IRPF, ArrayList<DatosClub> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF) {
         this.nombre = nombre;
@@ -144,10 +154,90 @@ public class DatosGerente {
                 gerentesLibres.add(gerentes.get(i).getnCompleto());
         return gerentesLibres;
     }
-    
-    public void crearGerentePrueba()
+        
+    public void cargarDatosGerente()
     {
-        gerentes.add(new DatosGerente("Pepe","Media Villa",55,"H", Float.parseFloat("2500.0"), Float.parseFloat("0.5"), null, null, null));
+        try {
+            FileReader leer = new FileReader("ficheros/Gerentes.txt");
+            BufferedReader datosJug = new BufferedReader(leer);
+            String dato;
+            
+            while((dato = datosJug.readLine()) != null)
+            {
+                setNombre(dato);
+                dato = datosJug.readLine();
+                
+                setApellidos(dato);
+                dato = datosJug.readLine();
+                
+                setSexo(dato);
+                dato = datosJug.readLine();
+                
+                setnCompleto(dato);
+                dato = datosJug.readLine();
+                
+                setEdad(Integer.parseInt(dato));
+                dato = datosJug.readLine();
+                
+                setNomina(Float.parseFloat(dato));
+                dato = datosJug.readLine();
+
+                setIRPF(Float.parseFloat(dato));
+                dato = datosJug.readLine();
+                
+                //Si no existe club, es nulo
+                if(dato == "null")
+                    setClubActual(null);
+                //Si existe buscamos su nombre en los clubes y lo añadimos
+                else
+                {
+                    DatosClub Clubs = new DatosClub();
+                    for(DatosClub club:Clubs.getClubs())
+                    {
+                        if(club.getNombre() == dato)
+                            setClubActual(club);
+                    }
+                }
+                
+                gerentes.add(this);
+            }
+        } catch (IOException ex) {
+            System.err.println("No se ha encontrado el fichero Gerentes.txt");
+        }
+
     }
+    
+    public void guardarDatosGerente(String nombre, String apellidos, String sexo,
+    int edad, float nomina, float IRPF, String clubActual)
+   {
+        FileWriter fichero = null;
+        PrintWriter p = null;
+        try
+        {   
+            fichero = new FileWriter("ficheros/Gerentes.txt",true);
+            p = new PrintWriter(fichero);
+
+                p.println(nombre);
+                p.println(apellidos); 
+                p.println(sexo); 
+                p.println(edad); 
+                p.println(nomina);
+                p.println(IRPF); 
+                //Si no hay club actual, clubActual = "null"
+                p.println(clubActual);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+   }
     
 }

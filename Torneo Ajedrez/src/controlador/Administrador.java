@@ -26,6 +26,8 @@ public class Administrador {
     public Administrador() 
     {
         datosTorneo = new DatosTorneo();
+        club = new DatosClub();
+        gerente = new DatosGerente();
         jugador = new DatosJugador();
         jugador.CargarDatosJugador();
     }
@@ -40,8 +42,10 @@ public class Administrador {
         return gerente.getGerentesLibres();
     }
     
-    public void crearClub(String nombre, String sede, Object gerente) {
-        club.crearClub(nombre, sede,(DatosGerente) gerente);
+    public void guardarGerente(String nombre, String ape1, String ap2, String sexo,String edad, String nomina, String IRPF )
+    {
+        gerente.guardarDatosGerente(nombre, ape1+" "+ap2, sexo, Integer.parseInt(edad),
+                Float.parseFloat(nomina), Float.parseFloat(IRPF), "null");
     }
     
     public ArrayList<DatosClub> getClubs()

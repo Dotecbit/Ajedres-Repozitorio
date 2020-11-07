@@ -11,15 +11,16 @@ import javax.swing.JFrame;
  *
  * @author donramon
  */
-public class VentanaDarBajaClub extends javax.swing.JFrame {
+public class VAdminDarDeBajaJugador extends javax.swing.JFrame {
     
     
     private JFrame ventanaAnterior;
-    public VentanaDarBajaClub(JFrame ventanaAnterior) {
+    public VAdminDarDeBajaJugador(JFrame ventanaAnterior) {
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
     
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,20 +29,20 @@ public class VentanaDarBajaClub extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listClub = new javax.swing.JList<>();
-        labTexClub = new javax.swing.JLabel();
+        labJug = new javax.swing.JLabel();
+        listJug = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         botAtras = new javax.swing.JButton();
         botAceptar = new javax.swing.JButton();
 
-        listClub.setModel(new javax.swing.AbstractListModel<String>() {
+        labJug.setText("Selecciona al jugador que quieres dar de baja");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(listClub);
-
-        labTexClub.setText("Selecciona el club que quieras dar de baja");
+        listJug.setViewportView(jList1);
 
         botAtras.setText("Atrás");
         botAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -51,37 +52,34 @@ public class VentanaDarBajaClub extends javax.swing.JFrame {
         });
 
         botAceptar.setText("Aceptar");
-        botAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botAceptarActionPerformed(evt);
-            }
-        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labTexClub)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(botAtras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botAceptar)
-                .addGap(46, 46, 46))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(labJug, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(listJug, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botAtras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botAceptar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(labTexClub)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
+                .addComponent(labJug)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(listJug, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botAtras)
                     .addComponent(botAceptar))
@@ -94,16 +92,12 @@ public class VentanaDarBajaClub extends javax.swing.JFrame {
         ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_botAtrasActionPerformed
 
-    private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botAceptarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labTexClub;
-    private javax.swing.JList<String> listClub;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel labJug;
+    private javax.swing.JScrollPane listJug;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,24 +1,28 @@
-package Vista;
-
-import javax.swing.JFrame;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Vista;
+
+import javax.swing.JFrame;
 
 /**
  *
  * @author donramon
  */
-public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JFrame {
+public class VAsignarJugTor extends javax.swing.JFrame {
     
+    /**
+     * Creates new customizer VentanaAsignarJugadorATorneoAdmin
+     */
     private JFrame ventanaAnterior;
-    public VentanaAsignarSedeTorneoAdmin(JFrame ventanaAnterior) {
+    public VAsignarJugTor(JFrame ventanaAnterior) {
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,28 +32,21 @@ public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        LabSed = new javax.swing.JLabel();
-        LabTorn = new javax.swing.JLabel();
-        labExpTor = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listSed = new javax.swing.JList<>();
+        listJug = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         listTorneo = new javax.swing.JList<>();
+        labJug = new javax.swing.JLabel();
+        labTorneo = new javax.swing.JLabel();
         butAtras = new javax.swing.JButton();
         butAceptar = new javax.swing.JButton();
 
-        LabSed.setText("Seleccione una sede");
-
-        LabTorn.setText("Seleccione un torneo ");
-
-        labExpTor.setText("Seleccione una sede donde va a jugarse el torneo");
-
-        listSed.setModel(new javax.swing.AbstractListModel<String>() {
+        listJug.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(listSed);
+        jScrollPane1.setViewportView(listJug);
 
         listTorneo.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -57,6 +54,10 @@ public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(listTorneo);
+
+        labJug.setText("Seleccionar jugador");
+
+        labTorneo.setText("Seleccionar torneo");
 
         butAtras.setText("Atrás");
         butAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -66,52 +67,55 @@ public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JFrame {
         });
 
         butAceptar.setText("Aceptar");
+        butAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butAceptarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(labExpTor)
-                .addGap(58, 58, 58))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labJug))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labTorneo))
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(LabSed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(LabTorn, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(butAtras)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(butAceptar)))
+                .addComponent(butAtras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(butAceptar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(labExpTor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabTorn)
-                    .addComponent(LabSed))
-                .addGap(18, 18, 18)
+                    .addComponent(labJug)
+                    .addComponent(labTorneo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butAtras)
                     .addComponent(butAceptar))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_butAceptarActionPerformed
 
     private void butAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtrasActionPerformed
         this.setVisible(false);
@@ -120,14 +124,13 @@ public class VentanaAsignarSedeTorneoAdmin extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabSed;
-    private javax.swing.JLabel LabTorn;
     private javax.swing.JButton butAceptar;
     private javax.swing.JButton butAtras;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labExpTor;
-    private javax.swing.JList<String> listSed;
+    private javax.swing.JLabel labJug;
+    private javax.swing.JLabel labTorneo;
+    private javax.swing.JList<String> listJug;
     private javax.swing.JList<String> listTorneo;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author donramon
  */
-public class VentanaCrearTorneo extends javax.swing.JFrame{
+public class VCrearTorneo extends javax.swing.JFrame{
    
     /**
      * Creates new customizer VentanaCrearTorneo
@@ -29,7 +29,7 @@ public class VentanaCrearTorneo extends javax.swing.JFrame{
     private Object sede, jugador;
     private añadirJugadoresSedes añadirJugador;
     
-    public VentanaCrearTorneo(JFrame ventanaAnterior, Administrador administrador, añadirJugadoresSedes añadirJugador) {
+    public VCrearTorneo(JFrame ventanaAnterior, Administrador administrador, añadirJugadoresSedes añadirJugador) {
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         this.añadirJugador = añadirJugador;

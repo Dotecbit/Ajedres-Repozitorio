@@ -11,14 +11,14 @@ import javax.swing.JFrame;
  *
  * @author donramon
  */
-public class VentanaIntroducirResultadoUltimaPartidaAdmin extends javax.swing.JFrame {
+public class VAdminInResUltPar extends javax.swing.JFrame {
     
 
     /**
      * Creates new customizer VentanaIntroducirResultadoUltimaPartidaAdmin
      */
     private JFrame ventanaAnterior;
-    public VentanaIntroducirResultadoUltimaPartidaAdmin(JFrame ventanaAnterior) {
+    public VAdminInResUltPar(JFrame ventanaAnterior) {
         this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
@@ -75,8 +75,8 @@ public class VentanaIntroducirResultadoUltimaPartidaAdmin extends javax.swing.JF
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
