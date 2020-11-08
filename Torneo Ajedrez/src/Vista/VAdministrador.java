@@ -42,6 +42,7 @@ public class VAdministrador extends javax.swing.JFrame
         bAsigSedTor = new javax.swing.JButton();
         bCambGerClub = new javax.swing.JButton();
         bCambGerClub1 = new javax.swing.JButton();
+        jBCrearEntrenador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -134,6 +135,13 @@ public class VAdministrador extends javax.swing.JFrame
             }
         });
 
+        jBCrearEntrenador.setText("Crear entrenador");
+        jBCrearEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearEntrenadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,13 +159,14 @@ public class VAdministrador extends javax.swing.JFrame
                     .addComponent(bAsigJugTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAsigSedTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bCambGerClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bCambGerClub1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bCambGerClub1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(bCrearTorneo)
                 .addGap(18, 18, 18)
                 .addComponent(bDarDeBaja)
@@ -179,7 +188,9 @@ public class VAdministrador extends javax.swing.JFrame
                 .addComponent(bCambGerClub1)
                 .addGap(18, 18, 18)
                 .addComponent(bCambGerClub)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,6 +300,15 @@ public class VAdministrador extends javax.swing.JFrame
     VCrearGerente.setTitle("Crear Gerente");
     }//GEN-LAST:event_bCambGerClub1ActionPerformed
 
+    private void jBCrearEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearEntrenadorActionPerformed
+    VCrearEntrenador VCrearEntrenador = new VCrearEntrenador(this,administrador);
+    this.setVisible(false); 
+    VCrearEntrenador.setVisible(true);
+    VCrearEntrenador.setLocationRelativeTo(null);
+    VCrearEntrenador.setResizable(false);
+    VCrearEntrenador.setTitle("Crear Entrneador");
+    }//GEN-LAST:event_jBCrearEntrenadorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAsigJugTor;
     private javax.swing.JButton bAsigSedTor;
@@ -301,5 +321,6 @@ public class VAdministrador extends javax.swing.JFrame
     private javax.swing.JButton bDarDeBaja;
     private javax.swing.JButton bResUlt;
     private javax.swing.JButton bRespInf;
+    private javax.swing.JButton jBCrearEntrenador;
     // End of variables declaration//GEN-END:variables
 }

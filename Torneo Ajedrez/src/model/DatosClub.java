@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class DatosClub {
     
     
-    ArrayList<DatosClub> clubes;
+    ArrayList<DatosClub> clubes = new ArrayList();
     
     //Declaracion de datos
     private String nombre;
@@ -29,9 +29,7 @@ public class DatosClub {
     private DatosEntrenador entrenador;
     private String federacion;
 
-    public DatosClub() {
-//        cargarDatosClub();
-    }
+    public DatosClub() {}
     
     
 

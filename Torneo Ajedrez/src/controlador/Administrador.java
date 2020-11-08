@@ -18,39 +18,53 @@ import model.DatosTorneo;
  */
 public class Administrador {
 
-    private DatosGerente gerente; 
-    private DatosJugador jugador;
-    private DatosClub club;
-    private DatosEntrenador entrenador;
+    private Jugador jugador;
+    private DatosGerente datosGerente; 
+    private DatosJugador datosJugador;
+    private DatosClub datosClub;
+    private DatosEntrenador datosEntrenador;
     private DatosTorneo datosTorneo;
-    public Administrador() 
+    public Administrador(Jugador jugador) 
     {
+        
+        this.jugador = jugador;
         datosTorneo = new DatosTorneo();
-        club = new DatosClub();
-        gerente = new DatosGerente();
-        jugador = new DatosJugador();
-        jugador.CargarDatosJugador();
+        datosTorneo.CargarSedes();
+        
+        datosClub = new DatosClub();
+        datosClub.cargarDatosClub();
+        
+        datosGerente = new DatosGerente();
+        datosGerente.cargarDatosGerente();
+        
+        datosEntrenador = new DatosEntrenador();
+        datosEntrenador.cargarDatosEntrenadores();
+        
+        datosJugador = new DatosJugador();
+        datosJugador.CargarDatosJugador();
+        
+        jugadores();
     }
    
     public ArrayList<DatosGerente> getGerentes()
     {
-        return gerente.getGerentes();
+        return datosGerente.getGerentes();
     }
     
     public ArrayList<String> getGerentesLibres()
     {
-        return gerente.getGerentesLibres();
+        return datosGerente.getGerentesLibres();
     }
     
     public void guardarGerente(String nombre, String ape1, String ap2, String sexo,String edad, String nomina, String IRPF )
     {
-        gerente.guardarDatosGerente(nombre, ape1+" "+ap2, sexo, Integer.parseInt(edad),
+        datosGerente.guardarDatosGerente(nombre, ape1+" "+ap2, sexo, Integer.parseInt(edad),
                 Float.parseFloat(nomina), Float.parseFloat(IRPF), "null");
     }
     
     public ArrayList<DatosClub> getClubs()
     {
-        return club.getClubs();
+        return datosClub.getClubs();
     }
 
     public void getCambiaClub(Object gerente, Object club) 
@@ -74,10 +88,24 @@ public class Administrador {
     }
     public void jugadores()
     {
-        datosTorneo.jugadores(jugador.getDatosJugador());
+        datosTorneo.jugadores(datosJugador.getDatosJugador());
     }
     public ArrayList<String> getJugadores()
     {
         return datosTorneo.getJugadores();
+    }
+
+    public void guardarEntrenador(String nombre, String ap1, String ap2, String sexo, String edad) {
+        datosEntrenador.guardarDatosEntrenador(nombre, ap1, ap2, sexo, edad);
+    }
+
+    public boolean entrenadorRepe(String nombre, String ap1, String ap2) {
+        boolean repe = false;
+        for(DatosEntrenador i:datosEntrenador.getEntrenadores())
+        {
+            if(i.getnCompelot() == nombre+" "+ap1+" "+ap2)
+                repe = true;
+        }
+        return repe;
     }
 }

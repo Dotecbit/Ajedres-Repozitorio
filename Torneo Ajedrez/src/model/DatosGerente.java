@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author areba
  */
 public class DatosGerente {
-    ArrayList<DatosGerente> gerentes;
+    ArrayList<DatosGerente> gerentes = new ArrayList();
     private String nombre, apellidos, sexo, nCompleto;
     private int  edad;
     private Float nomina;
@@ -31,9 +31,7 @@ public class DatosGerente {
         return nCompleto;
     }
 
-    public DatosGerente() {
-//        this.CargarDatosGerente();
-    }
+    public DatosGerente() {}
     
 
     public DatosGerente(String nombre, String apellidos, int edad, String sexo, Float nomina, Float IRPF, ArrayList<DatosClub> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF) {
