@@ -145,26 +145,26 @@ public class ResponsableInfantil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-     if(nombre.getText().equals("") || apellido.getText().equals("") || 
+    if(nombre.getText().equals("") || apellido.getText().equals("") || 
        correo.getText().equals("") || fechaNacimiento.getDate() == null)
-         JOptionPane.showMessageDialog(null,"Rellena todos los campos");
-     else
-     {
-         if(jugador.edadJugador(fechaNacimiento.getDate()))
-         {
+        JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para poder registrase.", "¡Campos incompletos!", JOptionPane.WARNING_MESSAGE);
+    else
+    {
+        if(jugador.edadJugador(fechaNacimiento.getDate()) >= 16)
+        {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
             String fechJugador = sdf.format(fechaN.getDate());
             String fechResponsable = sdf.format(fechaNacimiento.getDate());
             
-            jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechJugador, contraseñaJ);
+            jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechJugador, contraseñaJ, null, "Infantil", "1");
             jugador.guardarDatosResponsable(usuarioJ, nombre.getText(), apellido.getText(), correo.getText(), fechResponsable);
             this.setVisible(false);
             ventanaInicio.setVisible(true);
             JOptionPane.showMessageDialog(null,"Bienvenido a nuestra plataforma.");
-         }
-         else
-             JOptionPane.showMessageDialog(null,"Debe introducir un responsable mayor de edad.");
-     }
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Debe introducir un responsable mayor que 15 años.", "¡Responsable infantil!", JOptionPane.WARNING_MESSAGE);
+    }
      
     }//GEN-LAST:event_AceptarActionPerformed
 

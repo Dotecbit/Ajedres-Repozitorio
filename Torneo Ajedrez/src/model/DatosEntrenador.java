@@ -14,10 +14,15 @@ import java.util.ArrayList;
 
 public class DatosEntrenador {
     private ArrayList<DatosEntrenador> entrenadores = new ArrayList();
-    private String nombre, apeilldos, sexo, nCompelot;
+    private String nombre, apeilldos, sexo, nCompleto, club;
     int    edad;
 
     public DatosEntrenador() {}
+    
+    @Override
+    public String toString() {
+        return nCompleto;
+    }
 
     public String getNombre() {
         return nombre;
@@ -43,12 +48,12 @@ public class DatosEntrenador {
         this.sexo = sexo;
     }
 
-    public String getnCompelot() {
-        return nCompelot;
+    public String getnCompleto() {
+        return nCompleto;
     }
 
-    public void setnCompelot(String nCompelot) {
-        this.nCompelot = nCompelot;
+    public void setnCompleto(String nCompleto) {
+        this.nCompleto = nCompleto;
     }
 
     public int getEdad() {
@@ -62,28 +67,32 @@ public class DatosEntrenador {
     
     public void cargarDatosEntrenadores() {
         try {
+            entrenadores = new ArrayList();
             FileReader leer = new FileReader("ficheros/Entrenadores.txt");
             BufferedReader datosJug = new BufferedReader(leer);
             String dato;
             
             while((dato = datosJug.readLine()) != null)
             {
-                nombre = dato;
+                DatosEntrenador nuevoEntrenador = new DatosEntrenador();
+                nuevoEntrenador.nombre = dato;
                 dato = datosJug.readLine();
                 
-                apeilldos = dato;
+                nuevoEntrenador.apeilldos = dato;
                 dato = datosJug.readLine();
                 
-                sexo = dato;
+                nuevoEntrenador.sexo = dato;
                 dato = datosJug.readLine();
                 
-                edad = Integer.parseInt(dato);
+                nuevoEntrenador.edad = Integer.parseInt(dato);
                 dato = datosJug.readLine();
                 
-                nCompelot = dato;
+                nuevoEntrenador.nCompleto = dato;
                 dato = datosJug.readLine();
+                                
+                nuevoEntrenador.club = dato;
                 
-                entrenadores.add(this);
+                entrenadores.add(nuevoEntrenador);
             }
         } catch (IOException ex) {
             System.err.println("No se ha encontrado el fichero Gerentes.txt");
@@ -105,6 +114,7 @@ public class DatosEntrenador {
                 p.println(sexo); 
                 p.println(edad); 
                 p.println(nombre+" "+ap1+" "+ap2);
+                p.println(club);
 
         } catch (IOException ex) {
             ex.printStackTrace();

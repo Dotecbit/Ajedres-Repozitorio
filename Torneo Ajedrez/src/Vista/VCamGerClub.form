@@ -20,46 +20,50 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="34" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labGer" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="listGeren" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="labClub" pref="105" max="32767" attributes="0"/>
-                  <Component id="listClub" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="70" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="butAtras" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="butAceptar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="labGer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      <Component id="labClub" max="32767" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="listClub" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <Component id="listGeren" min="-2" pref="136" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labGer" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labClub" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="listGeren" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="listClub" min="-2" max="-2" attributes="0"/>
+                  <Component id="listGeren" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="butAtras" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="butAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,16 +86,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="lisGerente">
+        <Component class="javax.swing.JList" name="lisC">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -107,16 +105,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="lisClub">
+        <Component class="javax.swing.JList" name="lisG">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -129,6 +121,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Atr&#xe1;s"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butAtrasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="butAceptar">
       <Properties>

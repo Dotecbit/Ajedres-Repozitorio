@@ -5,7 +5,22 @@
  */
 package Vista;
 
+import Vista.VAdminDarDeBajaJugador;
+import Vista.VAdminInResUltPar;
+import Vista.VAsignarJugTor;
+import Vista.VAsignarRespInf;
+import Vista.VAsignarSedeTor;
+import Vista.VCamGerClub;
+import Vista.VCrearClub;
+import Vista.VCrearEntrenador;
+import Vista.VCrearGerente;
+import Vista.VCrearTorneo;
+import Vista.VDarBajaClub;
+import Vista.añadirJugadoresSedes;
 import controlador.Administrador;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -43,6 +58,7 @@ public class VAdministrador extends javax.swing.JFrame
         bCambGerClub = new javax.swing.JButton();
         bCambGerClub1 = new javax.swing.JButton();
         jBCrearEntrenador = new javax.swing.JButton();
+        jBCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -136,9 +152,18 @@ public class VAdministrador extends javax.swing.JFrame
         });
 
         jBCrearEntrenador.setText("Crear entrenador");
+        jBCrearEntrenador.setMaximumSize(new java.awt.Dimension(137, 23));
+        jBCrearEntrenador.setMinimumSize(new java.awt.Dimension(137, 23));
         jBCrearEntrenador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCrearEntrenadorActionPerformed(evt);
+            }
+        });
+
+        jBCerrarSesion.setText("Cerrar Sesión");
+        jBCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -162,11 +187,15 @@ public class VAdministrador extends javax.swing.JFrame
                     .addComponent(bCambGerClub1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(bCrearTorneo)
                 .addGap(18, 18, 18)
                 .addComponent(bDarDeBaja)
@@ -189,8 +218,10 @@ public class VAdministrador extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(bCambGerClub)
                 .addGap(18, 18, 18)
-                .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jBCerrarSesion)
+                .addContainerGap())
         );
 
         pack();
@@ -224,13 +255,12 @@ public class VAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bDarDeBajaActionPerformed
 
     private void bCrearClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearClubActionPerformed
-    VCrearClub crearClub= new VCrearClub(this,administrador);
-    this.setVisible(false); 
-    crearClub.setVisible(true);
-    crearClub.setSize(500, 700);
-    crearClub.setLocationRelativeTo(null);
-    crearClub.setResizable(false);
-    crearClub.setTitle("Crear club");        
+        try {
+            VCrearClub crearClub= new VCrearClub(this,administrador);
+            this.setVisible(false);
+        } catch (IOException ex) {
+            Logger.getLogger(VAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bCrearClubActionPerformed
 
     private void bBajaTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBajaTorneoActionPerformed
@@ -309,6 +339,12 @@ public class VAdministrador extends javax.swing.JFrame
     VCrearEntrenador.setTitle("Crear Entrneador");
     }//GEN-LAST:event_jBCrearEntrenadorActionPerformed
 
+    private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
+    ventanaAnterior.setVisible(true); 
+    this.setVisible(false);
+    this.dispose();
+    }//GEN-LAST:event_jBCerrarSesionActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAsigJugTor;
     private javax.swing.JButton bAsigSedTor;
@@ -321,6 +357,7 @@ public class VAdministrador extends javax.swing.JFrame
     private javax.swing.JButton bDarDeBaja;
     private javax.swing.JButton bResUlt;
     private javax.swing.JButton bRespInf;
+    private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jBCrearEntrenador;
     // End of variables declaration//GEN-END:variables
 }

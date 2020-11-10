@@ -33,12 +33,10 @@ public class VCrearTorneo extends javax.swing.JFrame{
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         this.añadirJugador = añadirJugador;
-        administrador.cargarSedes();
         sedes = administrador.getSedes();
         
-        administrador.jugadores();
         jugadores = administrador.getJugadores();
-        System.out.println("Jugadores: " + jugadores.size());
+//        System.out.println("Jugadores: " + jugadores.size());
         initComponents();
         
         modeloLista = new DefaultListModel();
@@ -65,14 +63,11 @@ public class VCrearTorneo extends javax.swing.JFrame{
         jList1 = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaSede = new javax.swing.JList<>();
-        labNom = new javax.swing.JLabel();
-        nombreTorneo = new javax.swing.JTextField();
         labListSed = new javax.swing.JLabel();
         labListJug = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaJugadores = new javax.swing.JList<>();
         botAtras = new javax.swing.JButton();
-        botAceptar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         añadirSede = new javax.swing.JButton();
 
@@ -85,14 +80,6 @@ public class VCrearTorneo extends javax.swing.JFrame{
 
         jScrollPane1.setViewportView(listaSede);
 
-        labNom.setText("Nombre del torneo:");
-
-        nombreTorneo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreTorneoActionPerformed(evt);
-            }
-        });
-
         labListSed.setText("Selecciona la sede participantes en el torneo");
 
         labListJug.setText("Selecciona los jugadores participantes en el torneo");
@@ -103,13 +90,6 @@ public class VCrearTorneo extends javax.swing.JFrame{
         botAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botAtrasActionPerformed(evt);
-            }
-        });
-
-        botAceptar.setText("Aceptar");
-        botAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botAceptarActionPerformed(evt);
             }
         });
 
@@ -136,68 +116,56 @@ public class VCrearTorneo extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(botAtras)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botAceptar))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addContainerGap(66, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(labListSed)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(labNom)
-                                .addGap(166, 166, 166)
-                                .addComponent(nombreTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(añadirSede)
-                                .addComponent(labListJug)))
-                        .addGap(0, 73, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(180, 180, 180)
+                                .addComponent(añadirSede))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(labListSed)
+                                .addGap(100, 100, 100)))
+                        .addGap(0, 71, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(236, 236, 236)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
+                .addGap(246, 246, 246))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(labListJug)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labNom)
-                    .addComponent(nombreTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(labListSed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(añadirSede)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(labListJug)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botAtras)
-                    .addComponent(botAceptar))
+                .addGap(10, 10, 10)
+                .addComponent(botAtras)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botAtrasActionPerformed
-
-    private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
+        this.setVisible(false);
+        añadirJugador.setVisible(false);
+        ventanaAnterior.setVisible(true);
         
-        if(nombreTorneo.getText().equals("") || sede == null || jugador == null)
-            JOptionPane.showMessageDialog(null,"Rellena todos los campos");
-    }//GEN-LAST:event_botAceptarActionPerformed
-
-    private void nombreTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTorneoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreTorneoActionPerformed
+    }//GEN-LAST:event_botAtrasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        jugador = listaJugadores.getSelectedValue();
@@ -221,7 +189,6 @@ public class VCrearTorneo extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton añadirSede;
-    private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;
     private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jList1;
@@ -230,9 +197,7 @@ public class VCrearTorneo extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labListJug;
     private javax.swing.JLabel labListSed;
-    private javax.swing.JLabel labNom;
     private javax.swing.JList<String> listaJugadores;
     private javax.swing.JList<String> listaSede;
-    private javax.swing.JTextField nombreTorneo;
     // End of variables declaration//GEN-END:variables
 }

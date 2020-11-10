@@ -8,6 +8,7 @@ package Vista;
 import controlador.Administrador;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 //¿Este import se puede hacer?
 import model.DatosGerente;
 
@@ -23,22 +24,29 @@ public class VCamGerClub extends javax.swing.JFrame {
     private DefaultListModel modeloListaClub;
     private DefaultListModel modeloListaGer;
     private Administrador administrador;
-    private JFrame vetanaAnterior;
+    private JFrame ventanaAnterior;
     
     public VCamGerClub(JFrame ventanaAnterior, Administrador administrador) {
-        this.vetanaAnterior = ventanaAnterior;
+        this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
+        this.setVisible(true);
+        this.setSize(400, 300);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);        
+        this.setTitle("Crear club");
+        initComponents();
+        
         modeloListaClub = new DefaultListModel();
         modeloListaGer = new DefaultListModel();
-        lisGerente.setModel(modeloListaClub);
-        lisClub.setModel(modeloListaGer);
-        initComponents();
+        lisC.setModel(modeloListaClub);
+        lisG.setModel(modeloListaGer);
+        
         
         
         for(Object item:administrador.getClubs())
             modeloListaClub.addElement(item);
         
-        for(Object item:administrador.getGerentes())
+        for(Object item:administrador.getGerentesConClub())
             modeloListaGer.addElement(item);
         
     }
@@ -54,9 +62,9 @@ public class VCamGerClub extends javax.swing.JFrame {
         labGer = new javax.swing.JLabel();
         labClub = new javax.swing.JLabel();
         listGeren = new javax.swing.JScrollPane();
-        lisGerente = new javax.swing.JList<>();
+        lisC = new javax.swing.JList<>();
         listClub = new javax.swing.JScrollPane();
-        lisClub = new javax.swing.JList<>();
+        lisG = new javax.swing.JList<>();
         butAtras = new javax.swing.JButton();
         butAceptar = new javax.swing.JButton();
 
@@ -64,21 +72,16 @@ public class VCamGerClub extends javax.swing.JFrame {
 
         labClub.setText("Club a asignar");
 
-        lisGerente.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listGeren.setViewportView(lisGerente);
+        listGeren.setViewportView(lisC);
 
-        lisClub.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listClub.setViewportView(lisClub);
+        listClub.setViewportView(lisG);
 
         butAtras.setText("Atrás");
+        butAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butAtrasActionPerformed(evt);
+            }
+        });
 
         butAceptar.setText("Aceptar");
         butAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,46 +95,54 @@ public class VCamGerClub extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labGer)
-                    .addComponent(listGeren, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labClub, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(listClub))
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(butAtras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(butAceptar)
-                .addContainerGap())
+                .addGap(27, 27, 27))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labGer)
+                        .addGap(108, 108, 108)
+                        .addComponent(labClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(68, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(listClub, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(listGeren, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labGer)
                     .addComponent(labClub))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(listGeren, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listClub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(listClub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listGeren, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butAtras)
                     .addComponent(butAceptar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
-        this.setVisible(false);
-        vetanaAnterior.setVisible(true);
-        administrador.getCambiaClub((Object)lisGerente.getSelectedValue(),(Object) lisClub.getSelectedValue());
+        administrador.getCambiaClub((Object)lisC.getSelectedValue(),(Object) lisG.getSelectedValue());
+        JOptionPane.showMessageDialog(null,"Se ha cambiado al gerente.");
     }//GEN-LAST:event_butAceptarActionPerformed
+
+    private void butAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtrasActionPerformed
+    this.setVisible(false);
+    ventanaAnterior.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_butAtrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -139,8 +150,8 @@ public class VCamGerClub extends javax.swing.JFrame {
     private javax.swing.JButton butAtras;
     private javax.swing.JLabel labClub;
     private javax.swing.JLabel labGer;
-    private javax.swing.JList<String> lisClub;
-    private javax.swing.JList<String> lisGerente;
+    private javax.swing.JList<String> lisC;
+    private javax.swing.JList<String> lisG;
     private javax.swing.JScrollPane listClub;
     private javax.swing.JScrollPane listGeren;
     // End of variables declaration//GEN-END:variables

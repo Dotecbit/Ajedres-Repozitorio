@@ -6,6 +6,12 @@
 package Vista;
 
 import controlador.Administrador;
+import Vista.VCrearClub;
+import Vista.VAdministrador;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +19,13 @@ import javax.swing.JOptionPane;
  * @author areba
  */
 public class VCrearGerente extends javax.swing.JFrame {
-VAdministrador vAnterior;
+JFrame vAnterior;
 Administrador admin;
     /**
      * Creates new form VCrearGerente
      * @param vAnterior
      */
-    public VCrearGerente(VAdministrador vAnterior, Administrador admin) {
+    public VCrearGerente(JFrame vAnterior, Administrador admin) {
         this.vAnterior = vAnterior; 
         this.admin = admin;
         initComponents();
@@ -181,20 +187,48 @@ Administrador admin;
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
     this.setVisible(false);
+    if( getClass().getName().equals("VCrearClub"))
+    {
+        try {
+            ((VCrearClub) vAnterior).comprobarDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(VCrearGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     vAnterior.setLocationRelativeTo(null);
     vAnterior.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_jBAtrasActionPerformed
 
     private void jBAceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptActionPerformed
-    admin.guardarGerente(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText(),
+        if(jTexNom.getText().isEmpty() || jTexAp1.getText().isEmpty() || jTexAp2.getText().isEmpty()
+                || jTexEd.getText().isEmpty() ||jTexNomin.getText().isEmpty() ||jTexIRPF.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
+    }
+    else
+    {
+        if(admin.gerenteRepe(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText()))
+        {
+            JOptionPane.showMessageDialog(null,"El gerente ya se encuentra en la base de datos.");
+            jTexNom.setText("");
+            jTexAp1.setText("");
+            jTexAp2.setText("");
+        }
+        else
+        {
+            admin.guardarGerente(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText(),
                         jCoBSex.getSelectedItem().toString(),jTexEd.getText(),jTexNomin.getText(),
                         jTexIRPF.getText());
-    JOptionPane.showMessageDialog(null,"Se ha añadidio al gerente.");
-    this.setVisible(false);
-    vAnterior.setLocationRelativeTo(null);
-    vAnterior.setVisible(true);
-    this.dispose();
+            JOptionPane.showMessageDialog(null,"Se ha añadidio al gerente.");
+            jTexNom.setText("");
+            jTexAp1.setText("");
+            jTexAp2.setText("");
+            jTexNomin.setText("");
+            jTexIRPF.setText("");
+            jTexEd.setText("");     
+        }
+    }
     }//GEN-LAST:event_jBAceptActionPerformed
 
     private void jCoBSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCoBSexActionPerformed

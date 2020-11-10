@@ -47,12 +47,17 @@
               </Group>
               <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jBCerrarSesion" min="-2" pref="124" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
               <Component id="bCrearTorneo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bDarDeBaja" min="-2" max="-2" attributes="0"/>
@@ -75,8 +80,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bCambGerClub" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jBCrearEntrenador" min="-2" pref="23" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <Component id="jBCrearEntrenador" min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="32767" attributes="0"/>
+              <Component id="jBCerrarSesion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -203,9 +210,23 @@
     <Component class="javax.swing.JButton" name="jBCrearEntrenador">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear entrenador"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[137, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[137, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCrearEntrenadorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBCerrarSesion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCerrarSesionActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

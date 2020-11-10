@@ -120,7 +120,7 @@ public class Login extends javax.swing.JFrame
             VAdministrador ventanaAdministrador= new VAdministrador(administrador, this);
             ventanaAdministrador.setVisible(true);
             this.setVisible(false);
-            ventanaAdministrador.setSize(400, 580);
+            ventanaAdministrador.setSize(400, 650);
             ventanaAdministrador.setLocationRelativeTo(null);
             ventanaAdministrador.setResizable(false);
             ventanaAdministrador.setTitle("Administrador"); 

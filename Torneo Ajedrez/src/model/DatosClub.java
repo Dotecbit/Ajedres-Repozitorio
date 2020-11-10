@@ -19,40 +19,26 @@ import java.util.ArrayList;
 public class DatosClub {
     
     
-    ArrayList<DatosClub> clubes = new ArrayList();
+    ArrayList<DatosClub> clubes;
     
     //Declaracion de datos
     private String nombre;
-    private ArrayList<DatosJugador> jugadores;
     private String sede;
-    private DatosGerente gerente;
-    private DatosEntrenador entrenador;
     private String federacion;
 
     public DatosClub() {}
-    
-    
 
     @Override
     public String toString() {
         return nombre;
     }
     
-
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    
-    public ArrayList<DatosJugador> getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(ArrayList<DatosJugador> jugadores) {
-        this.jugadores = jugadores;
     }
 
     public ArrayList<DatosClub> getClubes() {
@@ -69,22 +55,6 @@ public class DatosClub {
 
     public void setSede(String sede) {
         this.sede = sede;
-    }
-
-    public DatosGerente getGerente() {
-        return gerente;
-    }
-
-    public void setGerente(DatosGerente gerente) {
-        this.gerente = gerente;
-    }
-
-    public DatosEntrenador getEntrenador() {
-        return entrenador;
-    }
-
-    public void setEntrenador(DatosEntrenador entrenador) {
-        this.entrenador = entrenador;
     }
 
     public String getFederacion() {
@@ -106,39 +76,23 @@ public class DatosClub {
         public void cargarDatosClub()
     {
         try {
-            FileReader leer = new FileReader("ficheros/Gerentes.txt");
+            clubes = new ArrayList();
+            FileReader leer = new FileReader("ficheros/Clubs.txt");
             BufferedReader datosJug = new BufferedReader(leer);
             String dato;
             
             while((dato = datosJug.readLine()) != null)
             {
-                nombre = dato;
+                DatosClub nuevoClub = new DatosClub();
+                nuevoClub.nombre = dato;
                 dato = datosJug.readLine();
                 
-                sede = dato;
+                nuevoClub.sede = dato;
                 dato = datosJug.readLine();
+
+                nuevoClub.federacion = dato;
                 
-                DatosGerente gerente = new DatosGerente();
-                for(DatosGerente g:gerente.getGerentes())
-                {
-                    if(g.getnCompleto() == dato)
-                        setGerente(g);
-                }
-                
-                if(dato == "null")
-                    setEntrenador(null);
-//                else
-//                DatosEntrenador entrenador = new DatosEntrenador();
-//                for(DatosGerente e:entrenador())
-//                {
-//                    if(e.getnCompleto() == dato)
-//                        setEntrenador(e);
-//                }
-                
-                federacion = dato;
-                dato = datosJug.readLine();
-                
-                clubes.add(this);
+                clubes.add(nuevoClub);
             }
         } catch (IOException ex) {
             System.err.println("No se ha encontrado el fichero Gerentes.txt");
@@ -146,22 +100,18 @@ public class DatosClub {
 
     }
     
-    public void guardarDatosClub(String nombre, String sede, DatosGerente g,
-    DatosEntrenador e, String federacion)
+    public void guardarDatosClub(String nombre, String sede, String federacion)
    {
         FileWriter fichero = null;
         PrintWriter p = null;
         try
         {   
-            fichero = new FileWriter("ficheros/Gerentes.txt",true);
+            fichero = new FileWriter("ficheros/Clubs.txt",true);
             p = new PrintWriter(fichero);
 
-                p.println(nombre);
-                p.println(sede); 
-                p.println(g.getnCompleto()); 
-                //Si no tiene se guarda "null"
-//                p.println(e.getnCompleto()); 
-                p.println(federacion);
+            p.println(nombre);
+            p.println(sede); 
+            p.println(federacion);
 
         } catch (IOException ex) {
             ex.printStackTrace();

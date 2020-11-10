@@ -161,14 +161,17 @@ public class Registrarse extends javax.swing.JFrame {
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
         boolean ok;  
+        String categoria;
+        int edad;
         if(nombre.getText().equals("") || apellido.getText().equals("") || usuario.getText().equals("") || 
            correoElectrónico.getText().equals("") || contraseña.getText().equals("") || fechaNacimiento.getDate() == null)
         {
-            JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para poder registrase.", "¡Campos incompletos!", JOptionPane.WARNING_MESSAGE); 
         }
         else if(!jugador.validarUsuario(usuario.getText()))
         {
-            if(!jugador.edadJugador(fechaNacimiento.getDate()))
+            edad = jugador.edadJugador(fechaNacimiento.getDate());
+            if(edad <= 15)
             {
                 ResponsableInfantil responsableInfatil = new ResponsableInfantil(this, ventanaAnterior, jugador,
                 nombre.getText(), apellido.getText(), usuario.getText(), correoElectrónico.getText(),contraseña.getText(),
@@ -181,12 +184,16 @@ public class Registrarse extends javax.swing.JFrame {
             }
             else
             {
+                if(edad >= 16 && edad <= 18)
+                    categoria = "Junior";
+                else
+                    categoria = "Senior";
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
                 String fechaComoCadena = sdf.format(fechaNacimiento.getDate());
                 jugador.añadirUsuario(nombre.getText(), apellido.getText(), usuario.getText(), correoElectrónico.getText()
-                        , contraseña.getText(), fechaComoCadena);
+                        , contraseña.getText(), fechaComoCadena, null, categoria, "1");
                 jugador.guardarDatosJugador(nombre.getText(), apellido.getText(), usuario.getText(), 
-                        correoElectrónico.getText(),fechaComoCadena, contraseña.getText());
+                        correoElectrónico.getText(),fechaComoCadena, contraseña.getText(), null, categoria, "1");
                 this.setVisible(false);
                 ventanaAnterior.setVisible(true);
                 JOptionPane.showMessageDialog(null,"Bienvenido a nuestra plataforma.");

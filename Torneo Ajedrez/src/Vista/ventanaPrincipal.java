@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import controlador.Jugador;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -15,8 +19,12 @@ import javax.swing.JOptionPane;
 public class ventanaPrincipal extends javax.swing.JFrame {
 
     private JFrame ventanaAnterior;
-    public ventanaPrincipal(JFrame ventanaAnterior) {
+    private String usuario;
+    private Jugador jugador;
+    public ventanaPrincipal(JFrame ventanaAnterior, String usuario, Jugador jugador) {
         this.ventanaAnterior = ventanaAnterior;
+        this.usuario = usuario;
+        this.jugador = jugador;
         initComponents();
     }
 
@@ -157,16 +165,30 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_apuntarseTorneoActionPerformed
 
     private void verTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTarjetaActionPerformed
-        verTarjeta verTarjeta = new verTarjeta(this);
+        verTarjeta tarjeta = new verTarjeta(this, usuario, jugador);
         this.setVisible(false); 
-        verTarjeta.setVisible(true);
-        verTarjeta.setLocationRelativeTo(null);
-        verTarjeta.setResizable(false);
-        verTarjeta.setTitle("Tarjeta");
+        tarjeta.setVisible(true);
+        tarjeta.setLocationRelativeTo(null);
+        tarjeta.setResizable(false);
+        tarjeta.setTitle("Tarjeta");
     }//GEN-LAST:event_verTarjetaActionPerformed
 
     private void darseDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darseDeBajaActionPerformed
-            JOptionPane.showMessageDialog(null,"¿Estas seguro?");
+            //JOptionPane.showMessageDialog(null,"¿Estas seguro?");
+        int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere darse de baja?", "¡Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+        
+        if(resp == 0)
+        {
+            try {
+                jugador.darDeBaja(usuario);
+            } catch (IOException ex) {
+                Logger.getLogger(ventanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.setVisible(false);
+            ventanaAnterior.setVisible(true);
+            JOptionPane.showMessageDialog(null, "La cuenta ha sido eliminada.");
+        }
+                        
     }//GEN-LAST:event_darseDeBajaActionPerformed
 
     private void reservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservarSedeActionPerformed

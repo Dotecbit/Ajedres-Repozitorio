@@ -8,8 +8,13 @@ package Vista;
 import controlador.Administrador;
 import java.awt.Component;
 import java.awt.PopupMenu;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.DatosGerente;
 
 /**
  *
@@ -17,26 +22,27 @@ import javax.swing.JFrame;
  */
 public class VCrearClub extends javax.swing.JFrame
 { 
-    Administrador administrador;
-    DefaultListModel modeloListaGerente;
+    private final Administrador administrador;
+    private DefaultListModel modeloListaGerente;
+    private DefaultListModel modeloListaFederaciones;
+    private DefaultListModel modeloListaSedes;
 
-    /**
-     * Creates new customizer VentanaCrearTorneo
-     */
     private JFrame ventanaAnterior;
-    public VCrearClub(JFrame ventanaAnterior, Administrador administrador) 
+
+    public VCrearClub(JFrame ventanaAnterior, Administrador administrador) throws IOException 
     {
+        initComponents();
+        this.setVisible(true);
+        this.setSize(840, 300);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);        
+        this.setTitle("Crear club");
         this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
-        modeloListaGerente = new DefaultListModel();
-        listGer.setModel(modeloListaGerente);
-        initComponents();
         
-        
-        for(Object item:administrador.getClubs())
-            modeloListaGerente.addElement(item);
-        
-        initComponents();
+        this.comprobarDatos();
+
+
     }
     
 
@@ -57,7 +63,11 @@ public class VCrearClub extends javax.swing.JFrame
         listGer = new javax.swing.JList<>();
         botAtras = new javax.swing.JButton();
         botAceptar = new javax.swing.JButton();
-        jtextSedeClub = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLSede = new javax.swing.JList<>();
+        jLFed = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jLFede = new javax.swing.JList<>();
 
         labGer.setText("Gerente para el club");
 
@@ -71,11 +81,6 @@ public class VCrearClub extends javax.swing.JFrame
             }
         });
 
-        listGer.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listGer);
 
         botAtras.setText("Atrás");
@@ -92,62 +97,77 @@ public class VCrearClub extends javax.swing.JFrame
             }
         });
 
-        jtextSedeClub.setToolTipText("");
-        jtextSedeClub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtextSedeClubActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jLSede);
+
+        jLFed.setText("Federaciones");
+
+        jScrollPane3.setViewportView(jLFede);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labNom)
-                        .addGap(32, 32, 32)
-                        .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labSedClub)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtextSedeClub, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labGer)
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botAtras)
-                        .addGap(133, 133, 133)
-                        .addComponent(botAceptar))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labGer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(labNom)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(jLFed)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textNom, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labSedClub)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botAceptar))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labNom))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(labNom))
-                    .addComponent(textNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(labSedClub))
-                    .addComponent(jtextSedeClub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(80, 80, 80)
+                        .addComponent(jLFed)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(labSedClub)
+                                .addGap(82, 82, 82))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(labGer)
+                                .addGap(81, 81, 81)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(labGer))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botAtras)
-                    .addComponent(botAceptar)))
+                    .addComponent(botAceptar)
+                    .addComponent(botAtras)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,27 +178,82 @@ public class VCrearClub extends javax.swing.JFrame
     private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
         this.setVisible(false);
         ventanaAnterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botAtrasActionPerformed
 
     private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
-//        administrador.crearClub(textNom.getText(), labSedClub.getText(), listGer.getSelectedValue());
+    if(textNom.getText().isBlank())
+    {
+        JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
+    }
+    else
+    {
+        if(administrador.clubRepe(textNom.getText()))
+        {
+            JOptionPane.showMessageDialog(null,"El club ya se encuentra en la base de datos.");
+            textNom.setText("");
+        }
+        else
+        {
+            try {
+                administrador.crearClub(textNom.getText(), jLFede.getSelectedValue(), jLSede.getSelectedValue(), listGer.getSelectedValue());
+                JOptionPane.showMessageDialog(null,"Se ha creado el club.");  
+                textNom.setText("");
+                this.comprobarDatos();
+            } catch (IOException ex) {
+                Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     }//GEN-LAST:event_botAceptarActionPerformed
+    public void comprobarDatos() throws IOException
+    {
+        modeloListaGerente = new DefaultListModel();
+        modeloListaFederaciones = new DefaultListModel();
+        modeloListaSedes = new DefaultListModel();
+        
+        listGer.setModel(modeloListaGerente);
+        jLFede.setModel(modeloListaFederaciones);
+        jLSede.setModel(modeloListaSedes);
+        
+        if(administrador.getGerentesLibres().size() != 0)
+        {
+            for(Object item:administrador.getGerentesLibres())
+                modeloListaGerente.addElement(item);
 
-    private void jtextSedeClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtextSedeClubActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtextSedeClubActionPerformed
+            for(Object item:administrador.getSedes())
+                modeloListaFederaciones.addElement(item);
 
+             for(String item:administrador.getFederaciones())
+                modeloListaSedes.addElement(item);
+        }
+        else
+        {
+            this.setVisible(false); 
+            JOptionPane.showMessageDialog(null,"No existe ningún gerente, debe crearse");
+            VCrearGerente VCrearGerente = new VCrearGerente(ventanaAnterior,administrador);
+            VCrearGerente.setVisible(true);
+            VCrearGerente.setLocationRelativeTo(null);
+            VCrearGerente.setResizable(false);
+            VCrearGerente.setTitle("Crear Gerente");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;
+    private javax.swing.JLabel jLFed;
+    private javax.swing.JList<String> jLFede;
+    private javax.swing.JList<String> jLSede;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtextSedeClub;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labGer;
     private javax.swing.JLabel labNom;
     private javax.swing.JLabel labSedClub;
-    private javax.swing.JList<String> listGer;
+    private javax.swing.JList<Object> listGer;
     private javax.swing.JTextField textNom;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,10 +22,44 @@ import java.util.Date;
  */
 public class DatosJugador{
     private ArrayList<DatosJugador> jugador = new ArrayList<>();
+    private ArrayList<String> responsableInfantil = new ArrayList<>();
+
+
     private String nombre, apellido, usuario, correo, contraseña;
-    private String fechaNacimiento;
+    private String fechaNacimiento, club, elo, categoria;
     
-    public DatosJugador(String nombre, String apellido, String usuario, String correo, String contraseña, String fechaNacimiento) 
+    @Override
+    public String toString() {
+        return nombre+" "+apellido;
+    }
+
+    public String getElo() {
+        return elo;
+    }
+
+    public void setElo(String elo) {
+        this.elo = elo;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getClub() {
+        return club;
+    }
+
+    public void setClub(String club) {
+        this.club = club;
+    }
+    public DatosJugador()
+    {}
+    public DatosJugador(String nombre, String apellido, String usuario, String correo, 
+            String contraseña, String fechaNacimiento, String club, String categoria, String elo) 
     {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,10 +67,10 @@ public class DatosJugador{
         this.correo = correo;
         this.contraseña = contraseña;
         this.fechaNacimiento = fechaNacimiento;
+        this.club = club;
+        this.categoria = categoria;
+        this.elo = elo;
     }
- 
-    public DatosJugador()
-    {}
     public String getNombre() {
         return nombre;
     }
@@ -86,7 +120,7 @@ public class DatosJugador{
     }
     
 
-    public boolean edadJugador(Date fecha)
+    public int edadJugador(Date fecha)
     {
         boolean ok = true;
         int difAño, difMes, difDia;
@@ -102,16 +136,11 @@ public class DatosJugador{
         if (difMes < 0 || (difMes == 0 && difDia < 0)) 
             difAño = difAño - 1;
         
-        if(difAño < 18)
-            ok = false;
-        
-        System.out.println(ok);
-        
-        return ok;
+        return difAño;
     }
     
    public void guardarDatosJugador(String nombre, String apellido, String usuario,
-                String correo, String fecha, String contraseña)
+                String correo, String fecha, String contraseña, String club, String categoria, String elo)
    {
         FileWriter fichero = null;
         PrintWriter p = null;
@@ -125,7 +154,10 @@ public class DatosJugador{
                 p.println(usuario); 
                 p.println(correo); 
                 p.println(fecha);
-                p.println(contraseña);  
+                p.println(contraseña);
+                p.println(club);
+                p.println(categoria);
+                p.println(elo);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -172,26 +204,48 @@ public class DatosJugador{
     public void CargarDatosJugador()
     {
         try {
+            jugador = new ArrayList();
             FileReader leer = new FileReader("ficheros/Jugadores.txt");
             BufferedReader datosJug = new BufferedReader(leer);
             String dato;
             
             while((dato = datosJug.readLine()) != null)
             {
-                setNombre(dato);
+                DatosJugador datosJugador = new DatosJugador();
+                datosJugador.setNombre(dato);
                 dato = datosJug.readLine();
-                setApellido(dato);
+                datosJugador.setApellido(dato);
                 dato = datosJug.readLine();
-                setUsuario(dato);
+                datosJugador.setUsuario(dato);
                 dato = datosJug.readLine();
-                setCorreo(dato);
+                datosJugador.setCorreo(dato);
                 dato = datosJug.readLine();
-                setFechaNacimiento(dato);
+                datosJugador.setFechaNacimiento(dato);
                 dato = datosJug.readLine();
-                setContraseña(dato);
-                //System.out.println("Hola");
-                jugador.add(this);
+                datosJugador.setContraseña(dato);
+                dato = datosJug.readLine();
+                datosJugador.setClub(dato);
+                dato = datosJug.readLine();
+                datosJugador.setCategoria(dato);
+                dato = datosJug.readLine();
+                datosJugador.setElo(dato);
+                
+                jugador.add(datosJugador);
             }
+        } catch (IOException ex) {
+            System.err.println("No se ha encontrado el fichero Jugador.txt");
+        }
+
+    }
+    public void CargarDatosResponsable()
+    {
+        try {
+            FileReader leer = new FileReader("ficheros/responsablesInfantiles.txt");
+            BufferedReader datosJug = new BufferedReader(leer);
+            String dato;
+            
+            while((dato = datosJug.readLine()) != null)
+                responsableInfantil.add(dato);
         } catch (IOException ex) {
             System.err.println("No se ha encontrado el fichero Jugador.txt");
         }
@@ -212,11 +266,12 @@ public class DatosJugador{
         return ok;
     }
     
-    public void añadirUsuario(String nombre, String apellido, String usuario, String correo, String contraseña, String fechaNacimiento)
+    public void añadirUsuario(String nombre, String apellido, String usuario, String correo, String contraseña, String fechaNacimiento, 
+            String club, String categoria, String elo)
     {
         DatosJugador datosJugador = null;
         
-        jugador.add(datosJugador = new DatosJugador(nombre, apellido, usuario, correo, contraseña, fechaNacimiento));
+        jugador.add(datosJugador = new DatosJugador(nombre, apellido, usuario, correo, contraseña, fechaNacimiento, club, categoria, elo));
         
     }
     
@@ -236,5 +291,93 @@ public class DatosJugador{
     public ArrayList<DatosJugador> getDatosJugador()
     {
         return jugador;
+    }
+
+    public ArrayList<String> datosTarjeta(String usuarioJugador)
+    {
+        ArrayList<String> tarjeta = new ArrayList<>();
+        boolean ok = false;
+        int i = 0;
+        while(i < jugador.size() && !ok)
+        {
+            if(jugador.get(i).getUsuario().equals(usuarioJugador))
+            {
+                tarjeta.add(jugador.get(i).getNombre());
+                tarjeta.add(jugador.get(i).getFechaNacimiento());
+                tarjeta.add(jugador.get(i).getApellido());
+                tarjeta.add(jugador.get(i).getCategoria());
+                tarjeta.add(jugador.get(i).getElo());
+                ok = true;
+            }
+            i++;
+        }
+        return tarjeta;
+    }
+    public void darDeBaja(String usuarioJugador) throws IOException
+    {
+
+        boolean ok = false, responsable = false;
+        int i = 0;
+        
+        while(i < jugador.size() && !ok)
+        {
+            if(jugador.get(i).getUsuario().equals(usuarioJugador))
+            {
+                if(jugador.get(i).getCategoria().equals("Infantil"))
+                    responsable = true;
+                jugador.remove(i);
+                ok = true;
+            }
+            i++;
+        }
+        if(ok)
+            actualizarDatosJugador();
+        if(responsable)
+        {
+            i = 0;
+            ok = false;
+            
+            while(i < responsableInfantil.size() && !ok)
+            {
+                if(responsableInfantil.get(i).equals(usuarioJugador))
+                {
+                    responsableInfantil.remove(i);
+                    responsableInfantil.remove(i);
+                    responsableInfantil.remove(i);
+                    responsableInfantil.remove(i);
+                    responsableInfantil.remove(i);
+                    
+                    ok = true;
+                }
+            }   
+        }
+    }
+    public void actualizarDatosJugador()
+    {
+        FileWriter fichero = null;
+        PrintWriter bufferEscritura;
+        try
+        {
+            
+            fichero = new FileWriter(new File("ficheros/Jugadores.txt"), true);
+            bufferEscritura = new PrintWriter(fichero);
+                
+            for(int i = 0; i < jugador.size(); i++)
+            {
+                bufferEscritura.println(jugador.get(i).getNombre());
+                bufferEscritura.println(jugador.get(i).getApellido());
+                bufferEscritura.println(jugador.get(i).getUsuario());
+                bufferEscritura.println(jugador.get(i).getCorreo());
+                bufferEscritura.println(jugador.get(i).getFechaNacimiento());
+                bufferEscritura.println(jugador.get(i).getContraseña());
+                bufferEscritura.println(jugador.get(i).getClub());
+                bufferEscritura.println(jugador.get(i).getCategoria());
+                bufferEscritura.println(jugador.get(i).getElo());
+            }  
+        }        
+        catch (IOException ex) 
+        {        
+            System.err.println(ex);
+        }        
     }
 }

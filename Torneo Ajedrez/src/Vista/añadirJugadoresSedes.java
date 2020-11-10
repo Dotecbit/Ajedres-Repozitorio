@@ -8,6 +8,7 @@ package Vista;
 import controlador.Administrador;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,6 +88,8 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
         aceptar = new javax.swing.JButton();
         eliminarSede = new javax.swing.JButton();
         eliminarJugador = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        nombreTorneo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +101,12 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
 
         jLabel2.setText("Sedes");
 
-        aceptar.setText("Aceptar");
+        aceptar.setText("Crear torneo");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
 
         eliminarSede.setText("Eliminar");
         eliminarSede.addActionListener(new java.awt.event.ActionListener() {
@@ -114,20 +122,22 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Nombre");
+
+        nombreTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreTorneoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(131, 131, 131))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -140,11 +150,27 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(eliminarSede)
                 .addGap(94, 94, 94))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(131, 131, 131))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(172, 172, 172)
+                .addComponent(jLabel3)
+                .addGap(27, 27, 27)
+                .addComponent(nombreTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(nombreTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -165,18 +191,54 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void eliminarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSedeActionPerformed
-        
+  
         Object aux = listaSede.getSelectedValue();
         if(aux != null)
         {
             String nombre  = (String)aux;
             sede.remove(nombre);
+            modeloListaSede.removeElement(aux);
         }
+        else
+            JOptionPane.showMessageDialog(null, "Primero debe seleccionar una sede para eliminarlo.", "¡Sin seleccionar!", JOptionPane.WARNING_MESSAGE); 
     }//GEN-LAST:event_eliminarSedeActionPerformed
 
     private void eliminarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarJugadorActionPerformed
-        // TODO add your handling code here:
+        Object aux = listaAñadirJugador.getSelectedValue();
+        if(aux != null)
+        {
+            String nombre  = (String)aux;
+            jugador.remove(nombre);
+            modeloLista.removeElement(aux);
+        }
+        else
+           JOptionPane.showMessageDialog(null, "Primero debe seleccionar un jugador para eliminarlo.", "¡Sin seleccionar!", JOptionPane.WARNING_MESSAGE); 
     }//GEN-LAST:event_eliminarJugadorActionPerformed
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        if(nombreTorneo.getText().equals("") || sede.size() == 0 || jugador.size() == 0)
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para crear un torneo.", "¡Campos incompletos!", JOptionPane.WARNING_MESSAGE);
+        else
+        {
+            administrador.guardarTorneo(nombreTorneo.getText(), jugador, sede);
+            JOptionPane.showMessageDialog(null,"El torneo " + nombreTorneo.getText()+" ha sido creado"
+                    + " correctamente.");
+            nombreTorneo.setText("");
+            
+            for(int i = 0; i < jugador.size(); i++)
+                jugador.remove(i);
+            modeloLista.removeAllElements();
+            for(int i = 0; i < sede.size(); i++)
+                sede.remove(i);
+            modeloListaSede.removeAllElements();
+            
+            
+        }
+    }//GEN-LAST:event_aceptarActionPerformed
+
+    private void nombreTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTorneoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreTorneoActionPerformed
 
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,9 +247,11 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
     private javax.swing.JButton eliminarSede;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> listaAñadirJugador;
     private javax.swing.JList<String> listaSede;
+    private javax.swing.JTextField nombreTorneo;
     // End of variables declaration//GEN-END:variables
 }

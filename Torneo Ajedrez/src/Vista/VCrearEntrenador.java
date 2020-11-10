@@ -159,16 +159,19 @@ Administrador admin;
         if(admin.entrenadorRepe(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText()))
         {
             JOptionPane.showMessageDialog(null,"El entrenador ya se encuentra en la base de datos.");
+            jTexNom.setText("");
+            jTexAp1.setText("");
+            jTexAp2.setText("");
         }
         else
         {
             admin.guardarEntrenador(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText(),
                                 jCoBoSexo.getSelectedItem().toString(),jTexEdad.getText());
             JOptionPane.showMessageDialog(null,"Se ha añadidio el entrenador.");
-            this.setVisible(false);
-            vAnterior.setLocationRelativeTo(null);
-            vAnterior.setVisible(true);
-            this.dispose();
+            jTexNom.setText("");
+            jTexAp1.setText("");
+            jTexAp2.setText("");
+            jTexEdad.setText("");
         }
     }
     }//GEN-LAST:event_jBAceptarActionPerformed
