@@ -182,7 +182,7 @@ public class VCrearClub extends javax.swing.JFrame
     }//GEN-LAST:event_botAtrasActionPerformed
 
     private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
-    if(textNom.getText().isBlank())
+    if(textNom.getText().isEmpty())
     {
         JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
     }

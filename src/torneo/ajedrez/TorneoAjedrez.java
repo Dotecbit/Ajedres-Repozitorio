@@ -5,6 +5,9 @@
  */
 package torneo.ajedrez;
 
+import DAO.DatosDAO;
+import java.sql.SQLException;
+
 /**
  *
  * @author donramon
@@ -14,8 +17,8 @@ public class TorneoAjedrez {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws SQLException {
+        DatosDAO dao = new DatosDAO();
     }
     
 }
