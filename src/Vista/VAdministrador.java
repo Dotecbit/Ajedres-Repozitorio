@@ -19,6 +19,7 @@ import Vista.VDarBajaClub;
 import Vista.añadirJugadoresSedes;
 import Facade.Administrador;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -260,6 +261,8 @@ public class VAdministrador extends javax.swing.JFrame
             this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(VAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bCrearClubActionPerformed
 
@@ -295,12 +298,16 @@ public class VAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bBajaJugadorActionPerformed
 
     private void bCambGerClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCambGerClubActionPerformed
-    VCamGerClub cambiarGerenteClub = new VCamGerClub(this,administrador);
-    this.setVisible(false); 
-    cambiarGerenteClub.setVisible(true);
-    cambiarGerenteClub.setLocationRelativeTo(null);
-    cambiarGerenteClub.setResizable(false);
-    cambiarGerenteClub.setTitle("Cambiar de club");
+        try {
+            VCamGerClub cambiarGerenteClub = new VCamGerClub(this,administrador);
+            this.setVisible(false);
+            cambiarGerenteClub.setVisible(true);
+            cambiarGerenteClub.setLocationRelativeTo(null);
+            cambiarGerenteClub.setResizable(false);
+            cambiarGerenteClub.setTitle("Cambiar de club");
+        } catch (SQLException ex) {
+            Logger.getLogger(VAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bCambGerClubActionPerformed
 
     private void bAsigSedTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsigSedTorActionPerformed

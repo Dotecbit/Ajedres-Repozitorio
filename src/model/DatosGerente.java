@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * @author areba
  */
 public class DatosGerente extends Persona{
-    ArrayList<DatosGerente> gerentes;
     private String sexo, nCompleto;
     private int  edad;
     private Float nomina;
@@ -35,15 +34,14 @@ public class DatosGerente extends Persona{
     public DatosGerente() {}
     
 
-    public DatosGerente(String nombre, String apellidos, int edad, String sexo, Float nomina, Float IRPF, ArrayList<DatosClub> histClub, ArrayList<Float> histNom, ArrayList<Float> histIRPF) {
+    public DatosGerente(String nombre, String apellidos, String sexo,int edad, Float nomina, Float IRPF) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
         this.sexo = sexo;
         this.nomina = nomina;
         this.IRPF = IRPF;
-        this.histNom = histNom;
-        this.histIRPF = histIRPF;
+        this.clubActual = null;
         nCompleto= nombre + " " + apellidos;
     }
 
@@ -62,15 +60,6 @@ public class DatosGerente extends Persona{
     public void setClubActual(String clubActual) {
         this.clubActual = clubActual;
     }
-
-    public void setGerentes( ArrayList<DatosGerente> gerente) {
-        gerentes = gerente;
-    }
-    
-    public ArrayList<DatosGerente> getGerentes() {
-        return gerentes;
-    }
-    
 
     public String getnCompleto() {
         return nCompleto;
@@ -143,7 +132,7 @@ public class DatosGerente extends Persona{
     public void setHistIRPF(ArrayList<Float> histIRPF) {
         this.histIRPF = histIRPF;
     }
-    
+   /*
         public ArrayList<DatosGerente> getGerentesLibres()
     {
         ArrayList<DatosGerente> gerentesLibres = new ArrayList();
@@ -152,49 +141,7 @@ public class DatosGerente extends Persona{
                 gerentesLibres.add(i);
         return gerentesLibres;
     }
-        
-    public void cargarDatosGerente()
-    {
-        try {
-            gerentes = new ArrayList();
-            FileReader leer = new FileReader("ficheros/Gerentes.txt");
-            BufferedReader datosJug = new BufferedReader(leer);
-            String dato;
-            
-            while((dato = datosJug.readLine()) != null)
-            {
-                Persona persona = new Persona();
-                DatosGerente nuevoGerente = (DatosGerente) persona.crearPersona(2);
-                nuevoGerente.setNombre(dato);
-                dato = datosJug.readLine();
-                
-                nuevoGerente.setApellidos(dato);
-                dato = datosJug.readLine();
-                
-                nuevoGerente.setSexo(dato);
-                dato = datosJug.readLine();
-                
-                nuevoGerente.setnCompleto(dato);
-                dato = datosJug.readLine();
-                
-                nuevoGerente.setEdad(Integer.parseInt(dato));
-                dato = datosJug.readLine();
-                
-                nuevoGerente.setNomina(Float.parseFloat(dato));
-                dato = datosJug.readLine();
 
-                nuevoGerente.setIRPF(Float.parseFloat(dato));
-                dato = datosJug.readLine();
-                
-                nuevoGerente.setClubActual(dato);
-                
-                gerentes.add(nuevoGerente);
-            }
-        } catch (IOException ex) {
-            System.err.println("No se ha encontrado el fichero Gerentes.txt");
-        }
-
-    }
     
     public void guardarDatosGerenteActuales()
    {
@@ -264,5 +211,5 @@ public class DatosGerente extends Persona{
            }
         }
    }
-    
+    */
 }

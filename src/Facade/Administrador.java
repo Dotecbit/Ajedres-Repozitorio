@@ -5,6 +5,8 @@
  */
 package Facade;
 
+import DAO.DatosClubDAO;
+import DAO.DatosGerenteDAO;
 import Factory.Persona;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.DatosClub;
 import model.DatosJugador;
@@ -26,13 +29,16 @@ import model.DatosTorneo;
 public class Administrador {
 
     private Jugador jugador;
-    private DatosGerente datosGerente; 
+    private DatosGerente datosGerente;
+    private ArrayList<DatosGerente> gerentes;
+    private DatosGerenteDAO datosGerenteDAO;
+    private DatosClubDAO datosClubDAO;
     private DatosClub datosClub;
     private DatosEntrenador datosEntrenador;
     private DatosTorneo datosTorneo;
-    public Administrador(Jugador jugador) 
+    public Administrador(Jugador jugador) throws SQLException 
     {
-        
+        datosGerenteDAO = new DatosGerenteDAO();
         this.jugador = jugador;
         datosTorneo = new DatosTorneo();
         datosTorneo.CargarSedes();
@@ -42,7 +48,6 @@ public class Administrador {
         
         Persona personaGerente = new Persona();
         datosGerente = (DatosGerente) personaGerente.crearPersona(2);
-        datosGerente.cargarDatosGerente();
         
         Persona personaEntrenador = new Persona();
         datosEntrenador = (DatosEntrenador) personaEntrenador.crearPersona(3);
@@ -51,55 +56,50 @@ public class Administrador {
         jugadores();
     }
    
-    public ArrayList<DatosGerente> getGerentes()
+    public ArrayList<DatosGerente> getGerentes() throws SQLException
     {
-        datosGerente.cargarDatosGerente();
-        return datosGerente.getGerentes();
+        return datosGerenteDAO.getGerentes();
     }
     
-    public ArrayList<DatosGerente> getGerentesConClub()
+    public ArrayList<DatosGerente> getGerentesConClub() throws SQLException
     {
         ArrayList<DatosGerente> gerEnvio = new ArrayList();
         
         //Seleccionamos todos los gerentes que tengan club
-        for(DatosGerente i:datosGerente.getGerentes())
+        gerentes = datosGerenteDAO.getGerentes();
+        for(DatosGerente i:gerentes)
         {
-            if(!i.getClubActual().toLowerCase().equals(("null")))
+            if(i.getClubActual() != null)
                 gerEnvio.add(i);
         }
         return gerEnvio;
     }
     
-    public ArrayList<DatosGerente> getGerentesLibres()
+    public ArrayList<DatosGerente> getGerentesLibres() throws SQLException
     {
-        datosGerente.cargarDatosGerente();
-        return datosGerente.getGerentesLibres();
+        ArrayList<DatosGerente> gerentesLibres = new ArrayList();
+        gerentes = datosGerenteDAO.getGerentes();
+        for(DatosGerente g:gerentes)
+        {
+            if(g.getClubActual().equals("null"))
+                gerentesLibres.add(g);
+        }
+        return gerentesLibres;
     }
     
-    public void guardarGerente(String nombre, String ape1, String ap2, String sexo,String edad, String nomina, String IRPF )
+    public void guardarGerente(String nombre, String ape1, String ap2, String sexo,String edad, String nomina, String IRPF ) throws SQLException
     {
-        datosGerente.guardarDatosGerente(nombre, ape1+" "+ap2, sexo, Integer.parseInt(edad),
-                Float.parseFloat(nomina), Float.parseFloat(IRPF), "null");
-        datosGerente.cargarDatosGerente();
+        DatosGerente gerente = new DatosGerente(nombre, ape1+" "+ap2, sexo, Integer.parseInt(edad),
+                Float.parseFloat(nomina), Float.parseFloat(IRPF));
+    
+        datosGerenteDAO.CrearGerentes(gerente);
     }
     
-    public ArrayList<DatosClub> getClubs()
+    public ArrayList<DatosClub> getClubs() throws SQLException
     {
-        datosClub.cargarDatosClub();
-        return datosClub.getClubs();
+        return datosClubDAO.getClub();
     }
 
-//    public void getCambiaClub(Object gerente, Object club) 
-//    {
-//        //Actualizamos el club que se ha cambiado el gerente
-//        ((DatosGerente) gerente).getClubActual().setGerente(null);
-//        //Añadimso el nuevo club al historial
-//        ((DatosGerente) gerente).actHistClub((DatosClub) club);
-//        //Asignamos al gerente el club al que se ha cambiado
-//        ((DatosGerente) gerente).setClubActual((DatosClub) club);
-//        //Asignamos al club el nuevo gerente
-//        ((DatosClub) club).setGerente((DatosGerente) gerente);
-//    }
     public void cargarSedes()
     {
         datosTorneo.CargarSedes();
@@ -138,10 +138,9 @@ public class Administrador {
         datosTorneo.GuardarTorneo(nombre, usuario, sede);
     }
 
-    public boolean gerenteRepe(String nombre, String ap1, String ap2) {
+    public boolean gerenteRepe(String nombre, String ap1, String ap2) throws SQLException {
         boolean repe = false;
-        datosGerente.cargarDatosGerente();
-        for(DatosGerente i:datosGerente.getGerentes())
+        for(DatosGerente i:datosGerenteDAO.getGerentes())
         {
             if(i.getnCompleto().toLowerCase().equals((nombre+" "+ap1+" "+ap2).toLowerCase()))
                 repe = true;
@@ -151,7 +150,6 @@ public class Administrador {
 
     public boolean clubRepe(String nombre) {
         boolean repe = false;
-        datosGerente.cargarDatosGerente();
         for(DatosClub i:datosClub.getClubes())
         {
             if(i.getNombre().toLowerCase().equals((nombre).toLowerCase()))
@@ -160,7 +158,7 @@ public class Administrador {
         return repe;
     }
 
-    public void crearClub(String nombre, String sede, String federacion, Object ger) throws FileNotFoundException, IOException {
+    public void crearClub(String nombre, String sede, String federacion, Object ger) throws FileNotFoundException, IOException, SQLException {
         datosClub.guardarDatosClub(nombre, sede, federacion);
         datosClub.cargarDatosClub();
         ArrayList<DatosGerente> listagerente = new ArrayList();
@@ -168,15 +166,13 @@ public class Administrador {
         ((DatosGerente) ger).setClubActual(nombre);
         
         //Copiamos los datos de todos los gerentes excepto el nuevo que queremos añadir con la nueva informacion
-        for(DatosGerente i:datosGerente.getGerentes())
+        for(DatosGerente i:datosGerenteDAO.getGerentes())
         {
             if(!i.getnCompleto().equals(((DatosGerente)ger).getnCompleto()))
                 listagerente.add(i);
         }
         listagerente.add((DatosGerente) ger);
-        datosGerente.setGerentes(listagerente);
-        datosGerente.guardarDatosGerenteActuales();
-        datosGerente.cargarDatosGerente();
+        datosGerenteDAO.setGerentes(listagerente);
         
         //Eliminar sede de sedes disponibles
         ArrayList<String> sed = new ArrayList();
@@ -222,26 +218,21 @@ public class Administrador {
         return federaciones;    
     }
 
-    public void getCambiaClub(Object club, Object ger ) {
-        ArrayList<DatosGerente> listagerente = new ArrayList();
-        //Actualizar datos gerente
+    public void getCambiaClub(Object club, Object ger ) throws SQLException {
         
         
         //Copiamos los datos de todos los gerentes excepto el nuevo que queremos añadir con la nueva informacion
-        for(DatosGerente i:datosGerente.getGerentes())
+        for(DatosGerente i:datosGerenteDAO.getGerentes())
         {
             //Cambiamos el club del gerente anterior a null
             //Si fuera el mismo no sería erróneo porque no lo añadiríamos en la lista, quedándose en el mismo club
             if(((DatosClub) club).getNombre().equals(i.getClubActual()))
+            {
                 i.setClubActual("null");
-            //No añadimos a nuestra lista de gerentes el gerente con los datos antiguos
-            if(!i.getnCompleto().equals(((DatosGerente)ger).getnCompleto()))
-                listagerente.add(i);
+                datosGerenteDAO.actualizarGerente(i);
+            }
         }
         ((DatosGerente) ger).setClubActual(((DatosClub) club).getNombre());
-        listagerente.add((DatosGerente) ger);
-        datosGerente.setGerentes(listagerente);
-        datosGerente.guardarDatosGerenteActuales();
-        datosGerente.cargarDatosGerente();
+        datosGerenteDAO.actualizarGerente((DatosGerente) ger);
     }
 }

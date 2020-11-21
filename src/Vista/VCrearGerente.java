@@ -9,6 +9,7 @@ import Facade.Administrador;
 import Vista.VCrearClub;
 import Vista.VAdministrador;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -190,7 +191,11 @@ Administrador admin;
     if( getClass().getName().equals("VCrearClub"))
     {
         try {
-            ((VCrearClub) vAnterior).comprobarDatos();
+            try {
+                ((VCrearClub) vAnterior).comprobarDatos();
+            } catch (SQLException ex) {
+                Logger.getLogger(VCrearGerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (IOException ex) {
             Logger.getLogger(VCrearGerente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -208,26 +213,33 @@ Administrador admin;
     }
     else
     {
-        if(admin.gerenteRepe(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText()))
-        {
-            JOptionPane.showMessageDialog(null,"El gerente ya se encuentra en la base de datos.");
-            jTexNom.setText("");
-            jTexAp1.setText("");
-            jTexAp2.setText("");
-        }
-        else
-        {
-            admin.guardarGerente(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText(),
-                        jCoBSex.getSelectedItem().toString(),jTexEd.getText(),jTexNomin.getText(),
-                        jTexIRPF.getText());
-            JOptionPane.showMessageDialog(null,"Se ha añadidio al gerente.");
-            jTexNom.setText("");
-            jTexAp1.setText("");
-            jTexAp2.setText("");
-            jTexNomin.setText("");
-            jTexIRPF.setText("");
-            jTexEd.setText("");     
-        }
+            try {
+                if(admin.gerenteRepe(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText()))
+                {
+                    JOptionPane.showMessageDialog(null,"El gerente ya se encuentra en la base de datos.");
+                    jTexNom.setText("");
+                    jTexAp1.setText("");
+                    jTexAp2.setText("");
+                }
+                else
+                {
+                    try {
+                        admin.guardarGerente(jTexNom.getText(),jTexAp1.getText(),jTexAp2.getText(),
+                                jCoBSex.getSelectedItem().toString(),jTexEd.getText(),jTexNomin.getText(),
+                                jTexIRPF.getText());
+                        JOptionPane.showMessageDialog(null,"Se ha añadidio al gerente.");
+                        jTexNom.setText("");
+                        jTexAp1.setText("");
+                        jTexAp2.setText("");
+                        jTexNomin.setText("");
+                        jTexIRPF.setText("");
+                        jTexEd.setText("");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VCrearGerente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }   } catch (SQLException ex) {
+                Logger.getLogger(VCrearGerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     }//GEN-LAST:event_jBAceptActionPerformed
 
