@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import DAO.DatosTorneoDAO;
 import Factory.Persona;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -30,12 +31,16 @@ public class Administrador {
     private DatosClub datosClub;
     private DatosEntrenador datosEntrenador;
     private DatosTorneo datosTorneo;
+    private DatosTorneoDAO torneoDAO;
     public Administrador(Jugador jugador) 
     {
         
         this.jugador = jugador;
         datosTorneo = new DatosTorneo();
-        datosTorneo.CargarSedes();
+        
+        torneoDAO = new DatosTorneoDAO();
+        torneoDAO.cargarSede();
+        
         
         datosClub = new DatosClub();
         datosClub.cargarDatosClub();
