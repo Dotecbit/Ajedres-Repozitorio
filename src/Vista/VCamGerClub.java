@@ -6,6 +6,9 @@
 package Vista;
 
 import Facade.Administrador;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,7 +29,7 @@ public class VCamGerClub extends javax.swing.JFrame {
     private Administrador administrador;
     private JFrame ventanaAnterior;
     
-    public VCamGerClub(JFrame ventanaAnterior, Administrador administrador) {
+    public VCamGerClub(JFrame ventanaAnterior, Administrador administrador) throws SQLException {
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         this.setVisible(true);
@@ -134,8 +137,12 @@ public class VCamGerClub extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
-        administrador.getCambiaClub((Object)lisC.getSelectedValue(),(Object) lisG.getSelectedValue());
-        JOptionPane.showMessageDialog(null,"Se ha cambiado al gerente.");
+        try {
+            administrador.getCambiaClub((Object)lisC.getSelectedValue(),(Object) lisG.getSelectedValue());
+            JOptionPane.showMessageDialog(null,"Se ha cambiado al gerente.");
+        } catch (SQLException ex) {
+            Logger.getLogger(VCamGerClub.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_butAceptarActionPerformed
 
     private void butAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtrasActionPerformed

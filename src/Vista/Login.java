@@ -7,6 +7,7 @@ package Vista;
 
 import Facade.Administrador;
 import Facade.Jugador;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,9 +33,13 @@ public class Login extends javax.swing.JFrame
     private DatosEntrenador entrenador;
  
     public Login() {
-        jugador = new Jugador();
-        administrador = new Administrador(jugador);
-        initComponents();
+        try {
+            jugador = new Jugador();
+            administrador = new Administrador(jugador);
+            initComponents();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

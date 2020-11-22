@@ -20,7 +20,6 @@ private Connection conexionBD;
     
     public DatosDAO() throws SQLException
     {
-        
         String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql

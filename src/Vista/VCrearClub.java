@@ -8,7 +8,9 @@ package Vista;
 import Facade.Administrador;
 import java.awt.Component;
 import java.awt.PopupMenu;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -29,7 +31,7 @@ public class VCrearClub extends javax.swing.JFrame
 
     private JFrame ventanaAnterior;
 
-    public VCrearClub(JFrame ventanaAnterior, Administrador administrador) throws IOException 
+    public VCrearClub(JFrame ventanaAnterior, Administrador administrador) throws IOException, SQLException 
     {
         initComponents();
         this.setVisible(true);
@@ -202,12 +204,14 @@ public class VCrearClub extends javax.swing.JFrame
                 this.comprobarDatos();
             } catch (IOException ex) {
                 Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
     }//GEN-LAST:event_botAceptarActionPerformed
-    public void comprobarDatos() throws IOException
+    public void comprobarDatos() throws IOException, SQLException
     {
         modeloListaGerente = new DefaultListModel();
         modeloListaFederaciones = new DefaultListModel();
