@@ -190,23 +190,27 @@ public class VCrearClub extends javax.swing.JFrame
     }
     else
     {
-        if(administrador.clubRepe(textNom.getText()))
-        {
-            JOptionPane.showMessageDialog(null,"El club ya se encuentra en la base de datos.");
-            textNom.setText("");
-        }
-        else
-        {
-            try {
-                administrador.crearClub(textNom.getText(), jLFede.getSelectedValue(), jLSede.getSelectedValue(), listGer.getSelectedValue());
-                JOptionPane.showMessageDialog(null,"Se ha creado el club.");  
+        try {
+            if(administrador.clubRepe(textNom.getText()))
+            {
+                JOptionPane.showMessageDialog(null,"El club ya se encuentra en la base de datos.");  
                 textNom.setText("");
-                this.comprobarDatos();
-            } catch (IOException ex) {
-                Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
             }
+            else
+            {
+                try {
+                    administrador.crearClub(textNom.getText(), jLFede.getSelectedValue(), jLSede.getSelectedValue(), listGer.getSelectedValue());
+                    JOptionPane.showMessageDialog(null,"Se ha creado el club.");
+                    textNom.setText("");
+                    this.comprobarDatos();
+                } catch (IOException ex) {
+                    Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VCrearClub.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

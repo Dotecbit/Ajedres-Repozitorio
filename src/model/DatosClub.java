@@ -18,13 +18,16 @@ import java.util.ArrayList;
  */
 public class DatosClub {
     
-    
-    ArrayList<DatosClub> clubes;
-    
     //Declaracion de datos
     private String nombre;
     private String sede;
     private String federacion;
+
+    public DatosClub(String nombre, String sede, String federacion) {
+        this.nombre = nombre;
+        this.sede = sede;
+        this.federacion = federacion;
+    }
 
     public DatosClub() {}
 
@@ -39,14 +42,6 @@ public class DatosClub {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public ArrayList<DatosClub> getClubes() {
-        return clubes;
-    }
-
-    public void setClubes(ArrayList<DatosClub> clubes) {
-        this.clubes = clubes;
     }
 
     public String getSede() {
@@ -65,40 +60,32 @@ public class DatosClub {
         this.federacion = federacion;
     }
     
-
-    
-    
-    public ArrayList<DatosClub> getClubs()
-    {
-        return clubes;
-    }
-    
-        public void cargarDatosClub()
-    {
-        try {
-            clubes = new ArrayList();
-            FileReader leer = new FileReader("ficheros/Clubs.txt");
-            BufferedReader datosJug = new BufferedReader(leer);
-            String dato;
-            
-            while((dato = datosJug.readLine()) != null)
-            {
-                DatosClub nuevoClub = new DatosClub();
-                nuevoClub.nombre = dato;
-                dato = datosJug.readLine();
-                
-                nuevoClub.sede = dato;
-                dato = datosJug.readLine();
-
-                nuevoClub.federacion = dato;
-                
-                clubes.add(nuevoClub);
-            }
-        } catch (IOException ex) {
-            System.err.println("No se ha encontrado el fichero Gerentes.txt");
-        }
-
-    }
+//        public void cargarDatosClub()
+//    {
+//        try {
+//            clubes = new ArrayList();
+//            FileReader leer = new FileReader("ficheros/Clubs.txt");
+//            BufferedReader datosJug = new BufferedReader(leer);
+//            String dato;
+//            
+//            while((dato = datosJug.readLine()) != null)
+//            {
+//                DatosClub nuevoClub = new DatosClub();
+//                nuevoClub.nombre = dato;
+//                dato = datosJug.readLine();
+//                
+//                nuevoClub.sede = dato;
+//                dato = datosJug.readLine();
+//
+//                nuevoClub.federacion = dato;
+//                
+//                clubes.add(nuevoClub);
+//            }
+//        } catch (IOException ex) {
+//            System.err.println("No se ha encontrado el fichero Gerentes.txt");
+//        }
+//
+//    }
     
     public void guardarDatosClub(String nombre, String sede, String federacion)
    {

@@ -30,7 +30,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }

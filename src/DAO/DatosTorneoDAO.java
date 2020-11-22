@@ -28,7 +28,7 @@ public class DatosTorneoDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
             System.out.println(e);
         }        
@@ -36,7 +36,6 @@ public class DatosTorneoDAO
     
     public ArrayList<String> cargarSede()
     {
-        ArrayList<String> sede = new ArrayList<>();
         String id;
         //System.out.println(usser);
         ResultSet resultados = null;
@@ -44,7 +43,7 @@ public class DatosTorneoDAO
             String con;
             Statement s = conexionBD.createStatement();
             // Consulta SQL
-            con = "SELECT nombre FROM ajdrez.sede ";
+            con = "SELECT * FROM ajdrez.sede ";
             resultados = s.executeQuery(con);
             while (resultados.next()) 
             {

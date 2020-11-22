@@ -33,7 +33,7 @@ private ArrayList<DatosGerente> gerentes;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -47,7 +47,7 @@ private ArrayList<DatosGerente> gerentes;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -102,7 +102,7 @@ private ArrayList<DatosGerente> gerentes;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -128,7 +128,7 @@ private ArrayList<DatosGerente> gerentes;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -150,7 +150,7 @@ private ArrayList<DatosGerente> gerentes;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -158,15 +158,26 @@ private ArrayList<DatosGerente> gerentes;
         ResultSet resultados = null;
         String con, dato;
         Statement s = conexionBD.createStatement();
-
+       
+        if(gerente.getClubActual() != null)
         {
-                con = "UPDATE  ajdrez.gerentes SET nCompleto =" + gerente.getnCompleto()+
-                        ",nombre =" + gerente.getNombre()+ ",apellidos =" + gerente.getApellidos()+ ",sexo =" +gerente.getSexo()+ 
-                        ",edad =" + gerente.getEdad()+ ",nomina =" + gerente.getNomina()+ ",IRPF =" + gerente.getIRPF() +
-                        "Club =" + gerente.getClubActual()+
-                        "WHERE nCompleto =" +gerente.getnCompleto();
-                PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
-                preparedStmt.executeUpdate();
+            con = "UPDATE  ajdrez.gerentes SET nCompleto ='" + gerente.getnCompleto()+
+                    "' ,nombre ='" + gerente.getNombre()+ "' ,apellidos ='" + gerente.getApellidos()+ "' ,sexo ='" +gerente.getSexo()+ 
+                    "' ,edad =" + gerente.getEdad()+ " ,nomina =" + gerente.getNomina()+ " ,IRPF =" + gerente.getIRPF() +
+                    ", Club ='" + gerente.getClubActual()+
+                    "' WHERE nCompleto ='" +gerente.getnCompleto()+"'";
+            PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+            preparedStmt.executeUpdate();
+        }
+        else
+        {
+            con = "UPDATE  ajdrez.gerentes SET nCompleto ='" + gerente.getnCompleto()+
+                    "' ,nombre ='" + gerente.getNombre()+ "' ,apellidos ='" + gerente.getApellidos()+ "' ,sexo ='" +gerente.getSexo()+ 
+                    "' ,edad =" + gerente.getEdad()+ " ,nomina =" + gerente.getNomina()+ " ,IRPF =" + gerente.getIRPF() +
+                    ", Club = null"+
+                    " WHERE nCompleto ='" +gerente.getnCompleto()+"'";
+            PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+            preparedStmt.executeUpdate();
         }
         conexionBD.close();
 

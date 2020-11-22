@@ -34,7 +34,7 @@ private ArrayList<DatosClub> clubs;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -48,7 +48,7 @@ private ArrayList<DatosClub> clubs;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -89,7 +89,7 @@ private ArrayList<DatosClub> clubs;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -114,7 +114,7 @@ private ArrayList<DatosClub> clubs;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -123,7 +123,7 @@ private ArrayList<DatosClub> clubs;
         String con, dato;
         Statement s = conexionBD.createStatement();
                 con = "INSERT INTO ajdrez.clubs VALUES ('" + club.getNombre()+
-                        "','" + club.getFederacion()+ "','" + club.getSede()+ ")";
+                        "','" + club.getFederacion()+ "','" + club.getSede()+ "')";
                 PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
                 preparedStmt.executeUpdate();
         conexionBD.close();
@@ -135,7 +135,7 @@ private ArrayList<DatosClub> clubs;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -153,6 +153,40 @@ private ArrayList<DatosClub> clubs;
         }
         conexionBD.close();
 
+    }
+
+    public ArrayList<String> getFederaciones() throws SQLException {
+        
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        ArrayList<String> federaciones = new ArrayList();
+        
+        ResultSet resultados = null;
+        String con, dato;
+        Statement s = conexionBD.createStatement();
+
+        // Consulta SQL
+        con = "SELECT * FROM ajdrez.federaciones";
+        resultados = s.executeQuery(con);
+
+        while (resultados.next()) 
+        {
+            DatosClub nuevoClub = new DatosClub();
+            dato = resultados.getString("nombre");
+
+            federaciones.add(dato);
+        }
+        
+        conexionBD.close();
+        
+        return federaciones;
     }
         
 }

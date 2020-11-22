@@ -34,31 +34,18 @@ public class Administrador {
     private ArrayList<DatosGerente> gerentes;
     private DatosGerenteDAO datosGerenteDAO;
     private DatosClubDAO datosClubDAO;
-    private DatosClub datosClub;
     private DatosEntrenador datosEntrenador;
     private DatosTorneo datosTorneo;
     private DatosTorneoDAO torneoDAO;
     public Administrador(Jugador jugador) throws SQLException 
     {
+        datosClubDAO = new DatosClubDAO();
         datosGerenteDAO = new DatosGerenteDAO();
         this.jugador = jugador;
         
         torneoDAO = new DatosTorneoDAO();
 
         torneoDAO.cargarSede();
-        
-        
-        //datosClub = new DatosClub();
-        //datosClub.cargarDatosClub();
-        
-        //Persona personaGerente = new Persona();
-        //datosGerente = (DatosGerente) personaGerente.crearPersona(2);
-        
-        //Persona personaEntrenador = new Persona();
-        //datosEntrenador = (DatosEntrenador) personaEntrenador.crearPersona(3);
-        //datosEntrenador.cargarDatosEntrenadores();
-        
-        //jugadores();
     }
    
     public ArrayList<DatosGerente> getGerentes() throws SQLException
@@ -86,7 +73,7 @@ public class Administrador {
         gerentes = datosGerenteDAO.getGerentes();
         for(DatosGerente g:gerentes)
         {
-            if(g.getClubActual().equals("null"))
+            if(g.getClubActual() == null)
                 gerentesLibres.add(g);
         }
         return gerentesLibres;
@@ -107,11 +94,11 @@ public class Administrador {
 
     public void cargarSedes()
     {
-        datosTorneo.CargarSedes();
+        torneoDAO.cargarSede();
     }
     public ArrayList<String> getSedes()
     {
-        return datosTorneo.getSedes();
+        return torneoDAO.getSedes();
     }
     public void jugadores()
     {
@@ -153,9 +140,9 @@ public class Administrador {
         return repe;
     }
 
-    public boolean clubRepe(String nombre) {
+    public boolean clubRepe(String nombre) throws SQLException {
         boolean repe = false;
-        for(DatosClub i:datosClub.getClubes())
+        for(DatosClub i:datosClubDAO.getClub())
         {
             if(i.getNombre().toLowerCase().equals((nombre).toLowerCase()))
                 repe = true;
@@ -164,63 +151,11 @@ public class Administrador {
     }
 
     public void crearClub(String nombre, String sede, String federacion, Object ger) throws FileNotFoundException, IOException, SQLException {
-        datosClub.guardarDatosClub(nombre, sede, federacion);
-        datosClub.cargarDatosClub();
-        ArrayList<DatosGerente> listagerente = new ArrayList();
-        //Actualizar datos gerente y guardarlos
+        DatosClub nuevoClub = new DatosClub(nombre,sede,federacion);
         ((DatosGerente) ger).setClubActual(nombre);
         
-        //Copiamos los datos de todos los gerentes excepto el nuevo que queremos añadir con la nueva informacion
-        for(DatosGerente i:datosGerenteDAO.getGerentes())
-        {
-            if(!i.getnCompleto().equals(((DatosGerente)ger).getnCompleto()))
-                listagerente.add(i);
-        }
-        listagerente.add((DatosGerente) ger);
-        datosGerenteDAO.setGerentes(listagerente);
-        
-        //Eliminar sede de sedes disponibles
-        ArrayList<String> sed = new ArrayList();
-
-        FileReader leer = new FileReader("ficheros/SedesDisponibles.txt");
-        BufferedReader datosSedes = new BufferedReader(leer);
-        String dato;
-
-        while((dato = datosSedes.readLine()) != null)
-        {
-            if(!dato.equals(sede))
-                sed.add(dato);
-        } 
-        
-        leer.close();
-        datosSedes.close();
-        
-        FileWriter escribir = new FileWriter("ficheros/SedesDisponibles.txt");
-        PrintWriter p = new PrintWriter(escribir);
-
-        for(String s:sed)
-        {
-                p.println(s);
-        } 
-        
-        escribir.close();
-        p.close();
-    }
-
-    public ArrayList<String> getFederaciones() throws FileNotFoundException, IOException {
-            ArrayList<String> federaciones = new ArrayList();
-            
-            FileReader leer = new FileReader("ficheros/Federaciones.txt");
-            BufferedReader datosFederaciones = new BufferedReader(leer);
-            String dato;
-            
-            while((dato = datosFederaciones.readLine()) != null)
-            {
-                federaciones.add(dato);
-                datosFederaciones.readLine();
-            }
-            
-        return federaciones;    
+        datosClubDAO.CrearClub(nuevoClub);
+        datosGerenteDAO.actualizarGerente((DatosGerente) ger);
     }
 
     public void getCambiaClub(Object club, Object ger ) throws SQLException {
@@ -233,11 +168,15 @@ public class Administrador {
             //Si fuera el mismo no sería erróneo porque no lo añadiríamos en la lista, quedándose en el mismo club
             if(((DatosClub) club).getNombre().equals(i.getClubActual()))
             {
-                i.setClubActual("null");
+                i.setClubActual(null);
                 datosGerenteDAO.actualizarGerente(i);
             }
         }
         ((DatosGerente) ger).setClubActual(((DatosClub) club).getNombre());
         datosGerenteDAO.actualizarGerente((DatosGerente) ger);
+    }
+
+    public Iterable<String> getFederaciones() throws SQLException {
+        return datosClubDAO.getFederaciones();
     }
 }
