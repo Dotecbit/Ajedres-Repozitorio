@@ -138,7 +138,7 @@ public class Login extends javax.swing.JFrame
         //Aqui iría la verificación de la cuenta.
         else 
         {
-            ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this, Usuario.getText(), jugador);
+            ventanaPrincipal ventanaPrincipal = new ventanaPrincipal(this, Usuario.getText(), jugador, administrador);
             this.setVisible(false); 
             ventanaPrincipal.setVisible(true);
             ventanaPrincipal.setLocationRelativeTo(null);

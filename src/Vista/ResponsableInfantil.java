@@ -156,7 +156,7 @@ public class ResponsableInfantil extends javax.swing.JFrame {
             String fechJugador = sdf.format(fechaN.getDate());
             String fechResponsable = sdf.format(fechaNacimiento.getDate());
             
-            jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechJugador, contraseñaJ, null, "Infantil", "1", null);
+            jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechJugador, contraseñaJ, null, "Infantil", "1");
             jugador.guardarDatosResponsable(usuarioJ, nombre.getText(), apellido.getText(), correo.getText(), fechResponsable);
             this.setVisible(false);
             ventanaInicio.setVisible(true);

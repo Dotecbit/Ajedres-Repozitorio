@@ -220,19 +220,22 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para crear un torneo.", "¡Campos incompletos!", JOptionPane.WARNING_MESSAGE);
         else
         {
+            if(administrador.comprobarTorneo(nombreTorneo.getText()))
+                JOptionPane.showMessageDialog(null, "Debe introducir otro nombre de torneo.", "¡Torneo existente!", JOptionPane.WARNING_MESSAGE);
+            else
+            {
             administrador.guardarTorneo(nombreTorneo.getText(), jugador, sede);
-            JOptionPane.showMessageDialog(null,"El torneo " + nombreTorneo.getText()+" ha sido creado"
-                    + " correctamente.");
-            nombreTorneo.setText("");
-            
-            for(int i = 0; i < jugador.size(); i++)
-                jugador.remove(i);
-            modeloLista.removeAllElements();
-            for(int i = 0; i < sede.size(); i++)
-                sede.remove(i);
-            modeloListaSede.removeAllElements();
-            
-            
+                JOptionPane.showMessageDialog(null,"El torneo " + nombreTorneo.getText()+" ha sido creado"
+                        + " correctamente.");
+                nombreTorneo.setText("");
+
+                for(int i = 0; i < jugador.size(); i++)
+                    jugador.remove(i);
+                modeloLista.removeAllElements();
+                for(int i = 0; i < sede.size(); i++)
+                    sede.remove(i);
+                modeloListaSede.removeAllElements();               
+            }
         }
     }//GEN-LAST:event_aceptarActionPerformed
 

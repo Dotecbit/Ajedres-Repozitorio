@@ -33,8 +33,9 @@ public class VCrearTorneo extends javax.swing.JFrame{
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         this.añadirJugador = añadirJugador;
-        sedes = administrador.getSedes();
         
+        sedes = administrador.getSedes();
+        System.err.println(sedes);
         jugadores = administrador.getJugadores();
 //        System.out.println("Jugadores: " + jugadores.size());
         initComponents();
@@ -171,7 +172,6 @@ public class VCrearTorneo extends javax.swing.JFrame{
        jugador = listaJugadores.getSelectedValue();
         if(jugador != null)
        {    
-           System.out.println(jugador);
            añadirJugador.añadirJugador(jugador);
        }
        else

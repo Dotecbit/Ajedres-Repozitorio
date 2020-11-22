@@ -7,6 +7,7 @@ package Facade;
 
 import DAO.DatosClubDAO;
 import DAO.DatosGerenteDAO;
+import DAO.DatosJugadorDAO;
 import DAO.DatosTorneoDAO;
 import Factory.Persona;
 import java.io.BufferedReader;
@@ -43,11 +44,9 @@ public class Administrador {
         datosGerenteDAO = new DatosGerenteDAO();
         this.jugador = jugador;
         
+        datosTorneo = new DatosTorneo();
         torneoDAO = new DatosTorneoDAO();
-
-        torneoDAO.cargarSede();
-        
-        
+      
         //datosClub = new DatosClub();
         //datosClub.cargarDatosClub();
         
@@ -104,24 +103,27 @@ public class Administrador {
     {
         return datosClubDAO.getClub();
     }
-
-    public void cargarSedes()
-    {
-        datosTorneo.CargarSedes();
-    }
     public ArrayList<String> getSedes()
     {
-        return datosTorneo.getSedes();
-    }
-    public void jugadores()
-    {
-        datosTorneo.jugadores(jugador.getDatosJugador());
-    }
-    public ArrayList<String> getJugadores()
-    {
-        return datosTorneo.getJugadores();
+        torneoDAO.cargarSede();
+        return torneoDAO.getSedes();
     }
 
+    public ArrayList<String> getJugadores()
+    {
+        torneoDAO.cargarSede();
+        return jugador.obtenerUsuarios();
+    }
+    
+    public boolean comprobarTorneo(String nombreTorneo)
+    {
+        return datosTorneo.comprobarTorneo(nombreTorneo, torneoDAO.nombreTorneos());
+    }
+    
+    public ArrayList<String> getNombreTorneo(String usuario)
+    {
+        return torneoDAO.nombreTorneosUsuario(usuario);
+    }
     public void guardarEntrenador(String nombre, String ap1, String ap2, String sexo, String edad) {
         datosEntrenador.guardarDatosEntrenador(nombre, ap1, ap2, sexo, edad);
         datosEntrenador.cargarDatosEntrenadores();
@@ -140,7 +142,9 @@ public class Administrador {
     
     public void guardarTorneo(String nombre, ArrayList<String> usuario, ArrayList<String> sede)
     {
-        datosTorneo.GuardarTorneo(nombre, usuario, sede);
+        torneoDAO.agregarTorneo(nombre);
+        torneoDAO.agregarTorneoJugador(nombre, usuario);
+        torneoDAO.agregarTorneoSede(nombre, sede);
     }
 
     public boolean gerenteRepe(String nombre, String ap1, String ap2) throws SQLException {

@@ -26,7 +26,10 @@ public class Jugador
         Persona personaJugador = new Persona();
         
         datosJugador = (DatosJugador) personaJugador.crearPersona(1);
-        datosJugador.CargarDatosJugador();
+        
+        jugadorDAO = new DatosJugadorDAO();
+        
+        
     }
     public int edadJugador(Date fecha)
     {
@@ -47,19 +50,16 @@ public class Jugador
      * @param torneo
      */
     public void guardarDatosJugador(String nombre, String apellido, String usuario,
-                String correo, String fecha, String contraseña, String club, String categoria, String elo, String torneo)
+                String correo, String fecha, String contraseña, String club, String categoria, String elo)
     {
-        jugadorDAO = new DatosJugadorDAO();
-        
-        jugadorDAO.agregarUsuario(nombre, apellido, usuario, correo, contraseña, fecha, club, categoria, elo, torneo);
+
+        jugadorDAO.agregarUsuario(nombre, apellido, usuario, correo, contraseña, fecha, club, categoria, elo);
        
     }
     public void guardarDatosResponsable(String usuario, String nombre, String Apellido,
                 String correo, String fecha)
             
     {
-        jugadorDAO = new DatosJugadorDAO();
-       
         jugadorDAO.añadirResponsableInfantil(usuario, nombre, Apellido, correo, fecha);
     }
     public void cargarDatosJugador()
@@ -68,8 +68,6 @@ public class Jugador
     }
     public boolean validarUsuario(String usuario)
     {
-        jugadorDAO = new DatosJugadorDAO();
-        
         return jugadorDAO.validarUsuario(usuario);
     }
     public void añadirUsuario(String nombre, String apellido, String usuario, String correo, String contraseña, 
@@ -81,7 +79,6 @@ public class Jugador
     
     public boolean validarCuenta(String usuario, String contraseña)
     {
-        jugadorDAO = new DatosJugadorDAO();
         
         return jugadorDAO.validarUsuario(usuario, contraseña);
     }
@@ -91,14 +88,17 @@ public class Jugador
     }
     public ArrayList<String> getTarjeta(String usuario)
     {
-        jugadorDAO = new DatosJugadorDAO();
-        
+
         return jugadorDAO.verTarjeta(usuario);
     }
     public void darDeBaja(String usuario) throws IOException
     {
-        jugadorDAO = new DatosJugadorDAO();
         jugadorDAO.darBajaUsuario(usuario);
-
+    }
+    
+    public ArrayList<String> obtenerUsuarios()
+    {
+        jugadorDAO.obtenerUsuarios();
+        return jugadorDAO.getUsuarios();
     }
 }

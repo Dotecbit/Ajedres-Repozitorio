@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Facade.Administrador;
 import Facade.Jugador;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,10 +22,12 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     private JFrame ventanaAnterior;
     private String usuario;
     private Jugador jugador;
-    public ventanaPrincipal(JFrame ventanaAnterior, String usuario, Jugador jugador) {
+    private Administrador administrador;
+    public ventanaPrincipal(JFrame ventanaAnterior, String usuario, Jugador jugador, Administrador administrador) {
         this.ventanaAnterior = ventanaAnterior;
         this.usuario = usuario;
         this.jugador = jugador;
+        this.administrador = administrador;
         initComponents();
     }
 
@@ -156,7 +159,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarSesiónActionPerformed
 
     private void apuntarseTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuntarseTorneoActionPerformed
-        apuntarseTorneo apuntarseTorneo = new apuntarseTorneo(this);
+        apuntarseTorneo apuntarseTorneo = new apuntarseTorneo(this, administrador, usuario);
         this.setVisible(false); 
         apuntarseTorneo.setVisible(true);
         apuntarseTorneo.setLocationRelativeTo(null);
