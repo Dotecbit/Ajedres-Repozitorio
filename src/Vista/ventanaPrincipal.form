@@ -26,8 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="introducirResultado" max="32767" attributes="0"/>
-                  <Component id="responsableInfantil" alignment="0" pref="151" max="32767" attributes="0"/>
+                  <Component id="introducirResultado" pref="151" max="32767" attributes="0"/>
                   <Component id="reservarSede" alignment="0" max="32767" attributes="0"/>
                   <Component id="darseDeBaja" alignment="0" max="32767" attributes="0"/>
                   <Component id="verTarjeta" alignment="0" max="32767" attributes="0"/>
@@ -57,9 +56,7 @@
               <Component id="reservarSede" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="introducirResultado" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="responsableInfantil" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace pref="58" max="32767" attributes="0"/>
               <Component id="cerrarSesión" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -113,14 +110,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="introducirResultadoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="responsableInfantil">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Responsable infantil"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="responsableInfantilActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cerrarSesi&#xf3;n">

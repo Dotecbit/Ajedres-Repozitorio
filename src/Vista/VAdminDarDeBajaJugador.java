@@ -5,7 +5,14 @@
  */
 package Vista;
 
+import Facade.Administrador;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +22,23 @@ public class VAdminDarDeBajaJugador extends javax.swing.JFrame {
     
     
     private JFrame ventanaAnterior;
-    public VAdminDarDeBajaJugador(JFrame ventanaAnterior) {
+    private Administrador administrador;
+    private ArrayList<String> jugadores;
+    private DefaultListModel modeloLista;
+    private Object jugador;
+    public VAdminDarDeBajaJugador(JFrame ventanaAnterior, Administrador administrador, ArrayList<String> jugadores) 
+    {
+        this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
+        
+        this.jugadores = jugadores;
         initComponents();
+        
+        modeloLista = new DefaultListModel();
+        darBajaJugador.setModel(modeloLista);
+
+        for (Object item : jugadores) 
+            modeloLista.addElement(item);
     }
     
  
@@ -31,18 +52,13 @@ public class VAdminDarDeBajaJugador extends javax.swing.JFrame {
 
         labJug = new javax.swing.JLabel();
         listJug = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        darBajaJugador = new javax.swing.JList<>();
         botAtras = new javax.swing.JButton();
-        botAceptar = new javax.swing.JButton();
+        darDeBaja = new javax.swing.JButton();
 
         labJug.setText("Selecciona al jugador que quieres dar de baja");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listJug.setViewportView(jList1);
+        listJug.setViewportView(darBajaJugador);
 
         botAtras.setText("Atrás");
         botAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -51,7 +67,12 @@ public class VAdminDarDeBajaJugador extends javax.swing.JFrame {
             }
         });
 
-        botAceptar.setText("Aceptar");
+        darDeBaja.setText("Dar de baja");
+        darDeBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darDeBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,29 +81,31 @@ public class VAdminDarDeBajaJugador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(labJug, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(listJug, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botAtras)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botAceptar)))
-                .addContainerGap())
+                        .addComponent(darDeBaja)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(labJug)
+                        .addGap(114, 114, 114))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(listJug, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(labJug)
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addComponent(labJug, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listJug, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(listJug, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botAtras)
-                    .addComponent(botAceptar))
+                    .addComponent(darDeBaja))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -92,11 +115,43 @@ public class VAdminDarDeBajaJugador extends javax.swing.JFrame {
         ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_botAtrasActionPerformed
 
+    private void darDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darDeBajaActionPerformed
+        
+        jugador = darBajaJugador.getSelectedValue();
+        
+        if(jugador != null)
+        {
+            try {
+                administrador.darDeBajaJugador((String)jugador);
+                jugadores.remove((String)jugador);
+                modeloLista.removeElement(jugador);
+                
+                JOptionPane.showMessageDialog(null,"El usuario " + (String)jugador+" ha sido dado de baja correctamente.");
+                
+                if(jugadores.size() == 0)
+                {
+                    JOptionPane.showMessageDialog(null, "No hay más usuarios.", "¡Usuarios!", JOptionPane.WARNING_MESSAGE);
+                    this.setVisible(false);
+                    ventanaAnterior.setVisible(true);
+                }
+                    
+                
+            } catch (IOException ex) {
+                Logger.getLogger(VAdminDarDeBajaJugador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Primero debe seleccionar a un usuario.", "¡Selecciona usuarios!", JOptionPane.WARNING_MESSAGE);
+        }
+             
+    }//GEN-LAST:event_darDeBajaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> darBajaJugador;
+    private javax.swing.JButton darDeBaja;
     private javax.swing.JLabel labJug;
     private javax.swing.JScrollPane listJug;
     // End of variables declaration//GEN-END:variables

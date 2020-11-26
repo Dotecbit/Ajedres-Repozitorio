@@ -23,13 +23,22 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
     private DefaultListModel modeloLista, modeloListaSede;
     private ArrayList<String> jugador;
     private ArrayList<String> sede;
-    public añadirJugadoresSedes(Administrador administrador) {
+    private boolean ok;
+    public añadirJugadoresSedes(Administrador administrador, boolean ok) {
         this.administrador = administrador;
         jugador = new ArrayList<>();
         sede = new ArrayList<>();
+        
+        this.ok = ok;
+        
         initComponents();
+        
+        if(ok)
+            eliminarJugador.setEnabled(false);
+        
         modeloLista = new DefaultListModel();
         modeloListaSede = new DefaultListModel();
+        
         listaAñadirJugador.setModel(modeloLista);
         listaSede.setModel(modeloListaSede);
     }
@@ -216,15 +225,15 @@ public class añadirJugadoresSedes extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarJugadorActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        if(nombreTorneo.getText().equals("") || sede.size() == 0 || jugador.size() == 0)
-            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para crear un torneo.", "¡Campos incompletos!", JOptionPane.WARNING_MESSAGE);
+        if(nombreTorneo.getText().equals(""))
+            JOptionPane.showMessageDialog(null, "Debe introducir un nombre para el torneo.", "¡Torneo sin nombre!", JOptionPane.WARNING_MESSAGE);
         else
         {
             if(administrador.comprobarTorneo(nombreTorneo.getText()))
                 JOptionPane.showMessageDialog(null, "Debe introducir otro nombre de torneo.", "¡Torneo existente!", JOptionPane.WARNING_MESSAGE);
             else
             {
-            administrador.guardarTorneo(nombreTorneo.getText(), jugador, sede);
+                administrador.guardarTorneo(nombreTorneo.getText(), jugador, sede);
                 JOptionPane.showMessageDialog(null,"El torneo " + nombreTorneo.getText()+" ha sido creado"
                         + " correctamente.");
                 nombreTorneo.setText("");

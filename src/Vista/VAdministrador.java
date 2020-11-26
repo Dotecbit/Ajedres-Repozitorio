@@ -8,7 +8,6 @@ package Vista;
 import Vista.VAdminDarDeBajaJugador;
 import Vista.VAdminInResUltPar;
 import Vista.VAsignarJugTor;
-import Vista.VAsignarRespInf;
 import Vista.VAsignarSedeTor;
 import Vista.VCamGerClub;
 import Vista.VCrearClub;
@@ -20,9 +19,11 @@ import Vista.añadirJugadoresSedes;
 import Facade.Administrador;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,7 +52,6 @@ public class VAdministrador extends javax.swing.JFrame
         bDarDeBaja = new javax.swing.JButton();
         bCrearClub = new javax.swing.JButton();
         bBajaTorneo = new javax.swing.JButton();
-        bRespInf = new javax.swing.JButton();
         bResUlt = new javax.swing.JButton();
         bBajaJugador = new javax.swing.JButton();
         bAsigJugTor = new javax.swing.JButton();
@@ -94,14 +94,6 @@ public class VAdministrador extends javax.swing.JFrame
         bBajaTorneo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bBajaTorneoActionPerformed(evt);
-            }
-        });
-
-        bRespInf.setText("Asignar responsables infantiles");
-        bRespInf.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        bRespInf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRespInfActionPerformed(evt);
             }
         });
 
@@ -179,7 +171,6 @@ public class VAdministrador extends javax.swing.JFrame
                     .addComponent(bDarDeBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bCrearClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bBajaTorneo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bRespInf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bResUlt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bBajaJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAsigJugTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,7 +187,7 @@ public class VAdministrador extends javax.swing.JFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(bCrearTorneo)
                 .addGap(18, 18, 18)
                 .addComponent(bDarDeBaja)
@@ -204,8 +195,6 @@ public class VAdministrador extends javax.swing.JFrame
                 .addComponent(bCrearClub)
                 .addGap(18, 18, 18)
                 .addComponent(bBajaTorneo)
-                .addGap(18, 18, 18)
-                .addComponent(bRespInf)
                 .addGap(18, 18, 18)
                 .addComponent(bResUlt)
                 .addGap(18, 18, 18)
@@ -220,30 +209,44 @@ public class VAdministrador extends javax.swing.JFrame
                 .addComponent(bCambGerClub)
                 .addGap(18, 18, 18)
                 .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addComponent(jBCerrarSesion)
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCrearTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearTorneoActionPerformed
-    añadirJugadoresSedes añadirJugador = new añadirJugadoresSedes(administrador);
-    VCrearTorneo crearTorneo = new VCrearTorneo(this, administrador, añadirJugador);
+    
+        boolean ok = false;
+        ArrayList<String> jugadores = new ArrayList<>();
+        
+        jugadores = administrador.getJugadores();
+        
+        if(jugadores.size() == 0)
+        {
+            ok  = true;
+            JOptionPane.showMessageDialog(null, "Todavía no hay usuarios. Solo se puede crear un torneo sin usuarios", "¡torneos!", JOptionPane.WARNING_MESSAGE);
+        }
+            
+        
+        
+        añadirJugadoresSedes añadirJugador = new añadirJugadoresSedes(administrador, ok);
+        VCrearTorneo crearTorneo = new VCrearTorneo(this, administrador, añadirJugador, jugadores);
 
 
-    añadirJugador.setVisible(true);
-    añadirJugador.setLocationRelativeTo(null);
-    añadirJugador.setResizable(false);
-    añadirJugador.setTitle("Añadir jugador");
+        añadirJugador.setVisible(true);
+        añadirJugador.setLocationRelativeTo(null);
+        añadirJugador.setResizable(false);
+        añadirJugador.setTitle("Añadir jugador");
 
-    crearTorneo.setSize(500, 700);
-    this.setVisible(false); 
-    crearTorneo.setVisible(true);
-    crearTorneo.setLocationRelativeTo(null);
-    crearTorneo.setResizable(false);
-    crearTorneo.setTitle("Crear torneo");
+        crearTorneo.setSize(500, 550);
+        this.setVisible(false); 
+        crearTorneo.setVisible(true);
+        crearTorneo.setLocationRelativeTo(null);
+        crearTorneo.setResizable(false);
+        crearTorneo.setTitle("Crear torneo");
     }//GEN-LAST:event_bCrearTorneoActionPerformed
 
     private void bDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDarDeBajaActionPerformed
@@ -267,17 +270,25 @@ public class VAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bCrearClubActionPerformed
 
     private void bBajaTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBajaTorneoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bBajaTorneoActionPerformed
+       
+        ArrayList<String> torneo = new ArrayList<>();
+        
+        torneo = administrador.getTorneos();
+        
+        if(torneo.size() == 0)
+            JOptionPane.showMessageDialog(null, "Todavía no hay torneos disponibles.", "¡Sin torneos!", JOptionPane.WARNING_MESSAGE);
+        else
+        {
+           VDarDeBajaTorneo darBajaTorneo = new VDarDeBajaTorneo(this, administrador, torneo);
+           this.setVisible(false); 
+           darBajaTorneo.setSize(500, 400);
+           darBajaTorneo.setVisible(true);
+           darBajaTorneo.setLocationRelativeTo(null);
+           darBajaTorneo.setResizable(false);
+           darBajaTorneo.setTitle("Baja torneo");           
+        }
 
-    private void bRespInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRespInfActionPerformed
-    VAsignarRespInf asignarInfantil = new VAsignarRespInf(this);
-    this.setVisible(false); 
-    asignarInfantil.setVisible(true);
-    asignarInfantil.setLocationRelativeTo(null);
-    asignarInfantil.setResizable(false);
-    asignarInfantil.setTitle("Introducir resultado"); 
-    }//GEN-LAST:event_bRespInfActionPerformed
+    }//GEN-LAST:event_bBajaTorneoActionPerformed
 
     private void bResUltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bResUltActionPerformed
     VAdminInResUltPar introducirResultado = new VAdminInResUltPar(this);
@@ -289,12 +300,25 @@ public class VAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bResUltActionPerformed
 
     private void bBajaJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBajaJugadorActionPerformed
-    VAdminDarDeBajaJugador darBajaJugador = new VAdminDarDeBajaJugador(this);
-    this.setVisible(false); 
-    darBajaJugador.setVisible(true);
-    darBajaJugador.setLocationRelativeTo(null);
-    darBajaJugador.setResizable(false);
-    darBajaJugador.setTitle("Baja jugador"); 
+        
+        ArrayList<String> jugadores = new ArrayList<>();
+        
+        jugadores = administrador.getJugadores();
+        
+        if(jugadores.size() == 0)
+            JOptionPane.showMessageDialog(null, "Todavía no hay usuarios registrados.", "¡Usuarios!", JOptionPane.WARNING_MESSAGE);
+        else
+        {
+            VAdminDarDeBajaJugador darBajaJugador = new VAdminDarDeBajaJugador(this, administrador, jugadores);
+            this.setVisible(false); 
+            darBajaJugador.setSize(500, 400);
+            darBajaJugador.setVisible(true);
+            darBajaJugador.setLocationRelativeTo(null);
+            darBajaJugador.setResizable(false);
+            darBajaJugador.setTitle("Baja jugador");            
+        }
+        
+
     }//GEN-LAST:event_bBajaJugadorActionPerformed
 
     private void bCambGerClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCambGerClubActionPerformed
@@ -311,21 +335,58 @@ public class VAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bCambGerClubActionPerformed
 
     private void bAsigSedTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsigSedTorActionPerformed
-    VAsignarSedeTor asignarJugadorTorneo = new VAsignarSedeTor(this);
-    this.setVisible(false); 
-    asignarJugadorTorneo.setVisible(true);
-    asignarJugadorTorneo.setLocationRelativeTo(null);
-    asignarJugadorTorneo.setResizable(false);
-    asignarJugadorTorneo.setTitle("Asignar sede torneo");
+    
+        ArrayList<String> torneo = new ArrayList<>();
+        
+        torneo = administrador.getTorneos();
+        
+        if(torneo.size() == 0)
+            JOptionPane.showMessageDialog(null, "Todavía no hay torneos disponibles.", "¡Sin torneos!", JOptionPane.WARNING_MESSAGE);
+        
+        else
+        {
+            VAsignarSedeTor asignarJugadorTorneo = new VAsignarSedeTor(this, administrador, torneo);
+            asignarJugadorTorneo.setSize(600, 400);
+            this.setVisible(false); 
+            asignarJugadorTorneo.setVisible(true);
+            asignarJugadorTorneo.setLocationRelativeTo(null);
+            asignarJugadorTorneo.setResizable(false);
+            asignarJugadorTorneo.setTitle("Asignar sede torneo");           
+        }
+
     }//GEN-LAST:event_bAsigSedTorActionPerformed
 
     private void bAsigJugTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsigJugTorActionPerformed
-    VAsignarJugTor asignarJugadorTorneo = new VAsignarJugTor(this);
-    this.setVisible(false); 
-    asignarJugadorTorneo.setVisible(true);
-    asignarJugadorTorneo.setLocationRelativeTo(null);
-    asignarJugadorTorneo.setResizable(false);
-    asignarJugadorTorneo.setTitle("Asignar a torneo");
+
+        ArrayList<String> jugadores = new ArrayList<>();
+        ArrayList<String> torneos = new ArrayList<>();
+        jugadores = administrador.getJugadores();
+        torneos = administrador.getTorneos();
+        
+        if(jugadores.size() == 0 && torneos.size() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Todavía no hay usuarios registrados ni torneos creados.", "¡Sin torneos ni jugadores!", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(jugadores.size() == 0 || torneos.size() == 0)
+        {
+            if(jugadores.size() == 0)
+                JOptionPane.showMessageDialog(null, "Todavía no hay usuarios registrados.", "¡Sin usuarios!", JOptionPane.WARNING_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(null, "Todavía no hay torneos creados.", "¡Sin torneos!", JOptionPane.WARNING_MESSAGE);      
+        }
+        else
+        {
+           VAsignarJugTor asignarJugadorTorneo = new VAsignarJugTor(this, administrador, torneos);
+           this.setVisible(false); 
+           asignarJugadorTorneo.setSize(600, 400);
+           asignarJugadorTorneo.setVisible(true);
+           asignarJugadorTorneo.setLocationRelativeTo(null);
+           asignarJugadorTorneo.setResizable(false);
+           asignarJugadorTorneo.setTitle("Asignar a torneo");           
+        }
+        
+
+
     }//GEN-LAST:event_bAsigJugTorActionPerformed
 
     private void bCambGerClub1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCambGerClub1ActionPerformed
@@ -363,7 +424,6 @@ public class VAdministrador extends javax.swing.JFrame
     private javax.swing.JButton bCrearTorneo;
     private javax.swing.JButton bDarDeBaja;
     private javax.swing.JButton bResUlt;
-    private javax.swing.JButton bRespInf;
     private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jBCrearEntrenador;
     // End of variables declaration//GEN-END:variables

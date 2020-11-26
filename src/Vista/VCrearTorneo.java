@@ -29,17 +29,21 @@ public class VCrearTorneo extends javax.swing.JFrame{
     private Object sede, jugador;
     private añadirJugadoresSedes añadirJugador;
     
-    public VCrearTorneo(JFrame ventanaAnterior, Administrador administrador, añadirJugadoresSedes añadirJugador) {
+    public VCrearTorneo(JFrame ventanaAnterior, Administrador administrador, añadirJugadoresSedes añadirJugador, ArrayList<String> jugadores) {
         this.ventanaAnterior = ventanaAnterior;
         this.administrador = administrador;
         this.añadirJugador = añadirJugador;
+        this.jugadores = jugadores;
         
         sedes = administrador.getSedes();
-        System.err.println(sedes);
-        jugadores = administrador.getJugadores();
-//        System.out.println("Jugadores: " + jugadores.size());
+        
+       
+        
         initComponents();
         
+        if(jugadores.size() == 0)
+            jButton1.setEnabled(false);
+            
         modeloLista = new DefaultListModel();
         modeloListaJugador = new DefaultListModel();
         listaSede.setModel(modeloLista);
@@ -136,7 +140,7 @@ public class VCrearTorneo extends javax.swing.JFrame{
                 .addComponent(jButton1)
                 .addGap(246, 246, 246))
             .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+                .addGap(117, 117, 117)
                 .addComponent(labListJug)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

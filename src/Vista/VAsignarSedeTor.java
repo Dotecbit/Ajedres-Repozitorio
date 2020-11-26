@@ -1,6 +1,10 @@
 package Vista;
 
+import Facade.Administrador;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,9 +19,24 @@ import javax.swing.JFrame;
 public class VAsignarSedeTor extends javax.swing.JFrame {
     
     private JFrame ventanaAnterior;
-    public VAsignarSedeTor(JFrame ventanaAnterior) {
+    private Administrador administrador;
+    private ArrayList<String> torneos, sedesDisponibles, sedeTorneo;
+    private DefaultListModel modeloLista, modeloListaSedeDisponible, modeloListaSedeTorneo;
+    private Object torneo, sedeD, sedeT;
+    public VAsignarSedeTor(JFrame ventanaAnterior, Administrador administrador, ArrayList<String> torneos) {
+        
+        this.administrador = administrador;
         this.ventanaAnterior = ventanaAnterior;
+        this.torneos = torneos;
+        
         initComponents();
+        
+        modeloLista = new DefaultListModel();
+        seleccionaTorneo.setModel(modeloLista);
+        
+        for (Object item : torneos) 
+               modeloLista.addElement(item);      
+        
     }
 
     /**
@@ -32,31 +51,27 @@ public class VAsignarSedeTor extends javax.swing.JFrame {
         LabTorn = new javax.swing.JLabel();
         labExpTor = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listSed = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listTorneo = new javax.swing.JList<>();
+        seleccionaTorneo = new javax.swing.JList<>();
         butAtras = new javax.swing.JButton();
-        butAceptar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        sedeParticipante = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        sedeDisponible = new javax.swing.JList<>();
+        añadir = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
 
-        LabSed.setText("Seleccione una sede");
+        LabSed.setText("Seleccione un torneo");
 
-        LabTorn.setText("Seleccione un torneo ");
+        LabTorn.setText("Sedes que participan");
 
-        labExpTor.setText("Seleccione una sede donde va a jugarse el torneo");
+        labExpTor.setText("Sedes disponibles");
 
-        listSed.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        seleccionaTorneo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seleccionaTorneoMouseClicked(evt);
+            }
         });
-        jScrollPane1.setViewportView(listSed);
-
-        listTorneo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(listTorneo);
+        jScrollPane1.setViewportView(seleccionaTorneo);
 
         butAtras.setText("Atrás");
         butAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -65,51 +80,81 @@ public class VAsignarSedeTor extends javax.swing.JFrame {
             }
         });
 
-        butAceptar.setText("Aceptar");
+        jScrollPane3.setViewportView(sedeParticipante);
+
+        jScrollPane4.setViewportView(sedeDisponible);
+
+        añadir.setText("Añadir");
+        añadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirActionPerformed(evt);
+            }
+        });
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(labExpTor)
-                .addGap(58, 58, 58))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(LabSed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(LabTorn, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(butAtras)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(butAtras)
+                        .addGap(41, 41, 41)
+                        .addComponent(LabSed)
+                        .addGap(97, 97, 97)
+                        .addComponent(labExpTor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(butAceptar)))
-                .addContainerGap())
+                        .addComponent(LabTorn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(añadir)
+                .addGap(138, 138, 138)
+                .addComponent(eliminar)
+                .addGap(74, 74, 74))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(labExpTor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabTorn)
+                            .addComponent(labExpTor, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LabSed)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabTorn)
-                    .addComponent(LabSed))
+                    .addComponent(eliminar)
+                    .addComponent(añadir))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(butAtras)
-                    .addComponent(butAceptar))
-                .addContainerGap())
+                .addComponent(butAtras)
+                .addGap(23, 23, 23))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,16 +163,80 @@ public class VAsignarSedeTor extends javax.swing.JFrame {
         ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_butAtrasActionPerformed
 
+    private void seleccionaTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seleccionaTorneoMouseClicked
+        torneo = seleccionaTorneo.getSelectedValue();
+        
+        sedesDisponibles = new ArrayList<>();
+        sedeTorneo = new ArrayList<>();
+        
+        sedesDisponibles = administrador.asignarSedesTorneo((String)torneo);
+        sedeTorneo = administrador.sedesParticipantes((String)torneo);
+                
+        modeloListaSedeDisponible = new DefaultListModel();
+        sedeDisponible.setModel(modeloListaSedeDisponible);
+        
+        modeloListaSedeTorneo = new DefaultListModel();
+        sedeParticipante.setModel(modeloListaSedeTorneo);
+        
+        
+        if(sedesDisponibles.size() == 0)
+            JOptionPane.showMessageDialog(null, "Este torneo contiene todas las sedes.", "¡Torneo!", JOptionPane.WARNING_MESSAGE);
+        
+        for (Object item : sedesDisponibles) 
+            modeloListaSedeDisponible.addElement(item);
+        
+        for (Object item : sedeTorneo) 
+            modeloListaSedeTorneo.addElement(item);
+
+        
+    }//GEN-LAST:event_seleccionaTorneoMouseClicked
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        sedeT = sedeParticipante.getSelectedValue();
+        
+        if(sedeT != null)
+        {
+            administrador.eliminarSedeTorneo((String)sedeT, (String)torneo);
+            JOptionPane.showMessageDialog(null,"La sede "+(String)sedeT + " ha sido sido eliminada del torneo "+(String)torneo + " correctamente");
+            
+          modeloListaSedeDisponible.addElement(sedeT);
+           modeloListaSedeTorneo.removeElement(sedeT);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una sede.", "¡Sede!", JOptionPane.WARNING_MESSAGE);
+        
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
+       sedeD = sedeDisponible.getSelectedValue();
+       
+       if(sedeD != null)
+       {
+           administrador.guardarSedeTorneo((String)sedeD, (String)torneo);
+           JOptionPane.showMessageDialog(null,"La sede "+(String)sedeD + " ha sido sido registrada en el torneo "+(String)torneo + " correctamente");
+           
+           modeloListaSedeDisponible.removeElement(sedeD);
+           modeloListaSedeTorneo.addElement(sedeD);
+           
+       }
+       else
+           JOptionPane.showMessageDialog(null, "Debe seleccionar una sede.", "¡Sede!", JOptionPane.WARNING_MESSAGE);
+       
+    }//GEN-LAST:event_añadirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabSed;
     private javax.swing.JLabel LabTorn;
-    private javax.swing.JButton butAceptar;
+    private javax.swing.JButton añadir;
     private javax.swing.JButton butAtras;
+    private javax.swing.JButton eliminar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel labExpTor;
-    private javax.swing.JList<String> listSed;
-    private javax.swing.JList<String> listTorneo;
+    private javax.swing.JList<String> sedeDisponible;
+    private javax.swing.JList<String> sedeParticipante;
+    private javax.swing.JList<String> seleccionaTorneo;
     // End of variables declaration//GEN-END:variables
 }

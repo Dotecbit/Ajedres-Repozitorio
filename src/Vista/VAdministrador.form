@@ -4,7 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-      <Color id="Default Cursor"/>
+      <Color id="Cursor Por defecto"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="null"/>
@@ -36,7 +36,6 @@
                   <Component id="bDarDeBaja" max="32767" attributes="0"/>
                   <Component id="bCrearClub" max="32767" attributes="0"/>
                   <Component id="bBajaTorneo" max="32767" attributes="0"/>
-                  <Component id="bRespInf" max="32767" attributes="0"/>
                   <Component id="bResUlt" max="32767" attributes="0"/>
                   <Component id="bBajaJugador" max="32767" attributes="0"/>
                   <Component id="bAsigJugTor" max="32767" attributes="0"/>
@@ -57,7 +56,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
               <Component id="bCrearTorneo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bDarDeBaja" min="-2" max="-2" attributes="0"/>
@@ -65,8 +64,6 @@
               <Component id="bCrearClub" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bBajaTorneo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="bRespInf" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bResUlt" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -81,9 +78,9 @@
               <Component id="bCambGerClub" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jBCrearEntrenador" min="-2" pref="24" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Component id="jBCerrarSesion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,7 +90,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear torneo"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -104,7 +101,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar de baja club"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -115,7 +112,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Club"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -126,22 +123,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar de baja torneo"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bBajaTorneoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bRespInf">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Asignar responsables infantiles"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRespInfActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bResUlt">
@@ -156,7 +142,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar de baja jugador"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -167,7 +153,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignar jugadores a torneo"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -178,7 +164,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignacion de sede de torneos"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -189,7 +175,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar gerente club"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>
@@ -200,7 +186,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Gerente"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <Events>

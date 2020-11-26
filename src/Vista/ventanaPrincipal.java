@@ -8,6 +8,7 @@ package Vista;
 import Facade.Administrador;
 import Facade.Jugador;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -46,7 +47,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         darseDeBaja = new javax.swing.JButton();
         reservarSede = new javax.swing.JButton();
         introducirResultado = new javax.swing.JButton();
-        responsableInfantil = new javax.swing.JButton();
         cerrarSesión = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,13 +93,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        responsableInfantil.setText("Responsable infantil");
-        responsableInfantil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                responsableInfantilActionPerformed(evt);
-            }
-        });
-
         cerrarSesión.setText("Cerrar sesión");
         cerrarSesión.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,8 +107,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(introducirResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(responsableInfantil, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                    .addComponent(introducirResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                     .addComponent(reservarSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(darseDeBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(verTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -141,9 +133,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
                 .addComponent(reservarSede)
                 .addGap(18, 18, 18)
                 .addComponent(introducirResultado)
-                .addGap(18, 18, 18)
-                .addComponent(responsableInfantil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(cerrarSesión)
                 .addContainerGap())
         );
@@ -168,12 +158,18 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_apuntarseTorneoActionPerformed
 
     private void verTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTarjetaActionPerformed
-        verTarjeta tarjeta = new verTarjeta(this, usuario, jugador);
-        this.setVisible(false); 
-        tarjeta.setVisible(true);
-        tarjeta.setLocationRelativeTo(null);
-        tarjeta.setResizable(false);
-        tarjeta.setTitle("Tarjeta");
+        verTarjeta tarjeta;
+        try {
+            tarjeta = new verTarjeta(this, usuario, jugador);
+            this.setVisible(false); 
+            tarjeta.setVisible(true);
+            tarjeta.setLocationRelativeTo(null);
+            tarjeta.setResizable(false);
+            tarjeta.setTitle("Tarjeta");
+        } catch (ParseException ex) {
+            Logger.getLogger(ventanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_verTarjetaActionPerformed
 
     private void darseDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darseDeBajaActionPerformed
@@ -183,7 +179,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         if(resp == 0)
         {
             try {
-                jugador.darDeBaja(usuario);
+                jugador.darDeBajaJugador(usuario);
             } catch (IOException ex) {
                 Logger.getLogger(ventanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -212,15 +208,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         resultadoPartida.setTitle("Resultado partida");
     }//GEN-LAST:event_introducirResultadoActionPerformed
 
-    private void responsableInfantilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsableInfantilActionPerformed
-        asignarResponsableInfantil asignarResponsableInfantil = new asignarResponsableInfantil(this);
-        this.setVisible(false); 
-        asignarResponsableInfantil.setVisible(true);
-        asignarResponsableInfantil.setLocationRelativeTo(null);
-        asignarResponsableInfantil.setResizable(false);
-        asignarResponsableInfantil.setTitle("Responsable infantil");
-    }//GEN-LAST:event_responsableInfantilActionPerformed
-
     private void buscarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEquipoActionPerformed
         buscarEquipo buscarEquipo = new buscarEquipo(this);
         this.setVisible(false); 
@@ -238,7 +225,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton darseDeBaja;
     private javax.swing.JButton introducirResultado;
     private javax.swing.JButton reservarSede;
-    private javax.swing.JButton responsableInfantil;
     private javax.swing.JButton verTarjeta;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,7 +23,6 @@ public class DatosJugadorDAO
 {
     private Connection conexionBD;
     private PreparedStatement prep;
-    private ArrayList<String> jugadores = new ArrayList<>();
     
     public DatosJugadorDAO()
     {
@@ -35,7 +34,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -68,7 +67,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -78,7 +77,7 @@ public class DatosJugadorDAO
             String con;
             Statement s = conexionBD.createStatement();
             // Consulta SQL
-            con =   "INSERT INTO ajdrez.jugador VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            con =   "INSERT INTO ajdrez.jugador VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
             preparedStmt.setString (1, usuario);
@@ -103,7 +102,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -136,7 +135,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -168,7 +167,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -198,7 +197,7 @@ public class DatosJugadorDAO
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -240,11 +239,11 @@ public class DatosJugadorDAO
     public void darBajaUsuario(String usser)
     {
         String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
-        String jugadores, torneo;
+        String jugadores, torneo, responsable;
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -252,11 +251,18 @@ public class DatosJugadorDAO
         
         try {
                 // Consulta SQL
+                responsable = "DELETE FROM ajdrez.responsablesinfantiles " +
+                    "WHERE usuario = ?";
+                
                 torneo = "DELETE FROM ajdrez.torneo_jugador " +
                     "WHERE jugador = ?";
                 
                 jugadores = "DELETE FROM ajdrez.jugador " +
                     "WHERE usuario = ?";
+            
+            PreparedStatement prepaResponsable = conexionBD.prepareStatement(responsable);
+            prepaResponsable.setString (1, usser);
+            prepaResponsable.execute();    
             
             PreparedStatement prepaTorneo = conexionBD.prepareStatement(torneo);
             prepaTorneo.setString (1, usser);
@@ -272,13 +278,14 @@ public class DatosJugadorDAO
         }
     }
     
-    public void obtenerUsuarios()
+    public ArrayList<String> obtenerUsuarios()
     {
+        ArrayList<String> jugadores = new ArrayList<>();
         String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
         // Conexión usando usuario y clave de administrador de la BD
-        conexionBD = DriverManager.getConnection(bd, "root", "Ayoub6275");
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
@@ -300,16 +307,9 @@ public class DatosJugadorDAO
             conexionBD.close();
         } catch (Exception e) { // Error al realizar la consulta
             System.err.println(e);
-        }        
-    }
-    
-    public ArrayList<String> getUsuarios()
-    {
+        }  
+        
         return jugadores;
-    }
-    public void setJugadores(String usuarios)
-    {
-        jugadores.add(usuarios);
     }
     
 }
