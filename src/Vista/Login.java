@@ -119,7 +119,7 @@ public class Login extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesiónActionPerformed
-        
+
         if(Usuario.getText().equals("") || Contraseña.getText().equals(""))
         {
             VAdministrador ventanaAdministrador= new VAdministrador(administrador, this);
@@ -132,7 +132,6 @@ public class Login extends javax.swing.JFrame
             //JOptionPane.showMessageDialog(null,"Ingresa su cuenta.");
         }
             
-        
         else if(!jugador.validarCuenta(Usuario.getText(), Contraseña.getText()))
             JOptionPane.showMessageDialog(null, "El usuario o la contraseña que has introducido no coinciden con ninguna cuenta. Regístrate para crear una cuenta.", "¡Cuenta incorrecta!", JOptionPane.WARNING_MESSAGE);
         //Aqui iría la verificación de la cuenta.
@@ -143,11 +142,8 @@ public class Login extends javax.swing.JFrame
             ventanaPrincipal.setVisible(true);
             ventanaPrincipal.setLocationRelativeTo(null);
             ventanaPrincipal.setResizable(false);
-            ventanaPrincipal.setTitle("Principal");
-            
+            ventanaPrincipal.setTitle("Principal"); 
         }
-
-        
     }//GEN-LAST:event_iniciarSesiónActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed

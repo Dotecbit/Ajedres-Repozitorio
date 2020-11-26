@@ -9,12 +9,14 @@ import Facade.Administrador;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ayoub El Moussaoui
  */
-public class apuntarseTorneo extends javax.swing.JFrame {
+public class apuntarseTorneo extends javax.swing.JFrame 
+{
 
     /**
      * Creates new form apuntarseTorneo
@@ -23,19 +25,32 @@ public class apuntarseTorneo extends javax.swing.JFrame {
     private ArrayList<String> torneos;
     private Administrador administrador;
     private DefaultListModel modeloLista;
+    private Object torneo;
+    private String usuario;
     public apuntarseTorneo(JFrame ventanaAnterior, Administrador administrador, String usuario) {
-        this.ventanaAnterior = ventanaAnterior;
         
+        this.ventanaAnterior = ventanaAnterior;
+        this.administrador = administrador;
+        this.usuario = usuario;
         torneos = new ArrayList<>();
-        torneos = administrador.getNombreTorneo(usuario);
+        torneos = administrador.getTorneos();
        
         initComponents();
         
-        modeloLista = new DefaultListModel();
-        apuntarseTorneo.setModel(modeloLista);
+        if(torneos.size() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Todavía no hay torneos.", "¡torneos!", JOptionPane.WARNING_MESSAGE);
+            this.setVisible(false);
+            ventanaAnterior.setVisible(true);
+        }
+        else   
+        {
+            modeloLista = new DefaultListModel();
+            apuntarseTorneo.setModel(modeloLista);
         
-        for (Object item : torneos) 
-          modeloLista.addElement(item);
+            for (Object item : torneos) 
+                modeloLista.addElement(item);
+        }
     }
 
     /**
@@ -109,7 +124,22 @@ public class apuntarseTorneo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void apuntarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuntarseActionPerformed
-        // TODO add your handling code here:
+        
+        torneo = apuntarseTorneo.getSelectedValue();
+        
+        if(torneo != null)
+        {
+            if(!administrador.comprobarTorneoUsuario(usuario, (String)torneo))
+            {
+                administrador.guardarTorneoUsuario(usuario, (String)torneo);
+                JOptionPane.showMessageDialog(null,"Se ha apuntado al torneo "+(String)torneo + " correctamente");
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Ya perteneces a ese torneo. Seleccione otro.", "¡Torneo!", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un torneo");
+         
     }//GEN-LAST:event_apuntarseActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed

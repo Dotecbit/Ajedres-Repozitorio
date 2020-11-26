@@ -153,7 +153,7 @@ public class ResponsableInfantil extends javax.swing.JFrame {
         if(jugador.edadJugador(fechaNacimiento.getDate()) >= 16)
         {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-            String fechJugador = sdf.format(fechaN.getDate());
+            String fechJugador = sdf.format(fechaN);
             String fechResponsable = sdf.format(fechaNacimiento.getDate());
             
             jugador.guardarDatosJugador(nombreJ, apellidoJ, usuarioJ, correoJ, fechJugador, contraseñaJ, null, "Infantil", "1");

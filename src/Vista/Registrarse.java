@@ -190,8 +190,7 @@ public class Registrarse extends javax.swing.JFrame {
                     categoria = "Senior";
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
                 String fechaComoCadena = sdf.format(fechaNacimiento.getDate());
-                jugador.añadirUsuario(nombre.getText(), apellido.getText(), usuario.getText(), correoElectrónico.getText()
-                        , contraseña.getText(), fechaComoCadena, null, categoria, "1");
+
                 jugador.guardarDatosJugador(nombre.getText(), apellido.getText(), usuario.getText(), 
                         correoElectrónico.getText(),fechaComoCadena, contraseña.getText(), null, categoria, "1");
                 this.setVisible(false);

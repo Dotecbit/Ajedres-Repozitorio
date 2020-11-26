@@ -6,7 +6,10 @@
 package Vista;
 
 import Facade.Jugador;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 
 /**
@@ -22,18 +25,25 @@ public class verTarjeta extends javax.swing.JFrame {
     private String usuarioJugador;
     private Jugador jugador;
     private ArrayList<String> tarjeta = new ArrayList<>();
-    public verTarjeta(JFrame ventanaAnterior, String usuarioJugador, Jugador jugador) {
+    public verTarjeta(JFrame ventanaAnterior, String usuarioJugador, Jugador jugador) throws ParseException {
         this.usuarioJugador = usuarioJugador;
         this.ventanaAnterior = ventanaAnterior;
         this.jugador = jugador;
         
         tarjeta = jugador.getTarjeta(usuarioJugador);
+        
+        
         initComponents();
         
         nombre.setText(tarjeta.get(0));
         nombre.setEditable(false);
         
-        edad.setText(tarjeta.get(1));
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        
+        fechaDate = formato.parse(tarjeta.get(1));
+        
+        edad.setText(Integer.toString(jugador.edadJugador(fechaDate)));
         edad.setEditable(false);
         
         apellido.setText(tarjeta.get(2));

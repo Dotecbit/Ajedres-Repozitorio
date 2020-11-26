@@ -100,7 +100,6 @@ public class Administrador {
     }
     public ArrayList<String> getSedes()
     {
-        torneoDAO.cargarSede();
         return torneoDAO.getSedes();
     }
 
@@ -109,16 +108,44 @@ public class Administrador {
         torneoDAO.cargarSede();
         return jugador.obtenerUsuarios();
     }
-    
+    public ArrayList<String> getTorneos()
+    {
+        return torneoDAO.nombreTorneos();
+    }
     public boolean comprobarTorneo(String nombreTorneo)
     {
         return datosTorneo.comprobarTorneo(nombreTorneo, torneoDAO.nombreTorneos());
     }
     
-    public ArrayList<String> getNombreTorneo(String usuario)
+    public boolean comprobarTorneoUsuario(String usuario, String torneo)
     {
-        return torneoDAO.nombreTorneosUsuario(usuario);
+        return torneoDAO.comprobarTorneoUsuario(usuario, torneo);
     }
+    
+    public ArrayList<String> asignarJugadoresTorneo(String nombreTorneo)
+    {
+        return torneoDAO.asignarJugadoresTorneo(nombreTorneo);
+    }
+    
+    public ArrayList<String> jugadoresParticipantes(String nombreTorneo) throws SQLException
+    {
+        return torneoDAO.jugadoresParticipantes(nombreTorneo);
+    }
+    
+    public void eliminarJugadorTorneo(String usuario, String torneo)
+    {
+        torneoDAO.eliminarJugadorTorneo(usuario, torneo);
+    }
+    
+    public ArrayList<String> asignarSedesTorneo(String nombreTorneo)
+    {
+        return torneoDAO.asignarSedesTorneo(nombreTorneo);
+    }
+    
+     public ArrayList<String> sedesParticipantes(String nombreTorneo)
+    {
+        return torneoDAO.sedesParticipantes(nombreTorneo);
+    }   
     public void guardarEntrenador(String nombre, String ap1, String ap2, String sexo, String edad) throws SQLException 
     {
         //Al crear el entrenador nos aseguramos de que no haya espacios al haber creado al entrenador
@@ -139,11 +166,44 @@ public class Administrador {
         return repe;
     }
     
+    public void guardarTorneoUsuario(String usuario, String torneo)        
+    {
+        ArrayList <String> jugador = new ArrayList<>();
+        jugador.add(usuario);
+        
+        torneoDAO.agregarTorneoJugador(torneo, jugador);
+    }
+    
     public void guardarTorneo(String nombre, ArrayList<String> usuario, ArrayList<String> sede)
     {
         torneoDAO.agregarTorneo(nombre);
-        torneoDAO.agregarTorneoJugador(nombre, usuario);
-        torneoDAO.agregarTorneoSede(nombre, sede);
+        
+        if(sede.size() > 0)
+            torneoDAO.agregarTorneoSede(nombre, sede);
+        
+        if(usuario.size() > 0)
+            torneoDAO.agregarTorneoJugador(nombre, usuario);
+    }
+    public void guardarSedeTorneo(String sede, String nombreTorneo)
+    {
+        ArrayList<String> sedes = new ArrayList<>();
+        sedes.add(sede);
+        torneoDAO.agregarTorneoSede(nombreTorneo, sedes);
+    }
+    
+    public void eliminarSedeTorneo(String sede, String nombreTorneo)
+    {
+        torneoDAO.eliminarSedeTorneo(sede, nombreTorneo);
+    }
+    
+    public void darDeBajaJugador(String usuario) throws IOException
+    {
+        jugador.darDeBajaJugador(usuario);
+    }
+    
+    public void darDeBajaTorneo(String torneo)
+    {
+        torneoDAO.darDebajaTorneo(torneo);
     }
 
     public boolean gerenteRepe(String nombre, String ap1, String ap2) throws SQLException 

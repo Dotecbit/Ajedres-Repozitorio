@@ -62,43 +62,30 @@ public class Jugador
     {
         jugadorDAO.añadirResponsableInfantil(usuario, nombre, Apellido, correo, fecha);
     }
-    public void cargarDatosJugador()
-    {
-        datosJugador.CargarDatosJugador();
-    }
+
     public boolean validarUsuario(String usuario)
     {
         return jugadorDAO.validarUsuario(usuario);
     }
-    public void añadirUsuario(String nombre, String apellido, String usuario, String correo, String contraseña, 
-            String fechaNacimiento, String club, String categoria, String elo)
-    {
-        datosJugador.añadirUsuario(nombre, apellido, usuario, correo, contraseña, fechaNacimiento, club,
-                categoria, elo);
-    }
-    
+
     public boolean validarCuenta(String usuario, String contraseña)
     {
         
         return jugadorDAO.validarUsuario(usuario, contraseña);
     }
-    public ArrayList<DatosJugador> getDatosJugador() 
-    {
-        return datosJugador.getDatosJugador();
-    }
+
     public ArrayList<String> getTarjeta(String usuario)
     {
 
         return jugadorDAO.verTarjeta(usuario);
     }
-    public void darDeBaja(String usuario) throws IOException
+    public void darDeBajaJugador(String usuario) throws IOException
     {
         jugadorDAO.darBajaUsuario(usuario);
     }
     
     public ArrayList<String> obtenerUsuarios()
     {
-        jugadorDAO.obtenerUsuarios();
-        return jugadorDAO.getUsuarios();
+        return jugadorDAO.obtenerUsuarios();
     }
 }

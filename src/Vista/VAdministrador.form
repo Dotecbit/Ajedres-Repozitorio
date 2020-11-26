@@ -35,7 +35,7 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="bCrearTorneo" max="32767" attributes="0"/>
                   <Component id="bDarDeBaja" max="32767" attributes="0"/>
@@ -50,7 +50,7 @@
                   <Component id="jBCrearEntrenador" max="32767" attributes="0"/>
                   <Component id="jBHistGer" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,7 +135,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="bResUlt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Instroducir resultados &#xfa;ltima partida"/>
+        <Property name="text" type="java.lang.String" value="Introducir resultados &#xfa;ltima partida"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bResUltActionPerformed"/>

@@ -9,6 +9,7 @@ import Facade.Administrador;
 import Facade.Jugador;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -158,12 +159,18 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_apuntarseTorneoActionPerformed
 
     private void verTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTarjetaActionPerformed
-        verTarjeta tarjeta = new verTarjeta(this, usuario, jugador);
-        this.setVisible(false); 
-        tarjeta.setVisible(true);
-        tarjeta.setLocationRelativeTo(null);
-        tarjeta.setResizable(false);
-        tarjeta.setTitle("Tarjeta");
+        verTarjeta tarjeta;
+        try {
+            tarjeta = new verTarjeta(this, usuario, jugador);
+            this.setVisible(false); 
+            tarjeta.setVisible(true);
+            tarjeta.setLocationRelativeTo(null);
+            tarjeta.setResizable(false);
+            tarjeta.setTitle("Tarjeta");
+        } catch (ParseException ex) {
+            Logger.getLogger(ventanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_verTarjetaActionPerformed
 
     private void darseDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darseDeBajaActionPerformed
@@ -173,7 +180,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         if(resp == 0)
         {
             try {
-                jugador.darDeBaja(usuario);
+                jugador.darDeBajaJugador(usuario);
             } catch (IOException ex) {
                 Logger.getLogger(ventanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }

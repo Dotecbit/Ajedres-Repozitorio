@@ -5,7 +5,14 @@
  */
 package Vista;
 
+import Facade.Administrador;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +24,24 @@ public class VAsignarJugTor extends javax.swing.JFrame {
      * Creates new customizer VentanaAsignarJugadorATorneoAdmin
      */
     private JFrame ventanaAnterior;
-    public VAsignarJugTor(JFrame ventanaAnterior) {
+    private Administrador administrador;
+    private ArrayList<String> torneos, jugadores, participantes;
+    private DefaultListModel modeloLista;
+    private String usuario;
+    private DefaultListModel modeloListaPosibles, modeloListaParticipantes;
+    private Object torneo, jugador, jugadorEliminar;
+    public VAsignarJugTor(JFrame ventanaAnterior, Administrador administrador, ArrayList<String> torneos) {
         this.ventanaAnterior = ventanaAnterior;
+        this.administrador = administrador;
+        
+        this.torneos = torneos;
         initComponents();
+        
+        modeloLista = new DefaultListModel();
+        seleccionaTorneo.setModel(modeloLista);
+        
+        for (Object item : torneos) 
+               modeloLista.addElement(item);   
     }
     
 
@@ -32,32 +54,25 @@ public class VAsignarJugTor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listJug = new javax.swing.JList<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listTorneo = new javax.swing.JList<>();
-        labJug = new javax.swing.JLabel();
+        seleccionarParticipantes = new javax.swing.JList<>();
         labTorneo = new javax.swing.JLabel();
         butAtras = new javax.swing.JButton();
-        butAceptar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        seleccionaTorneo = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        eliminarParticipantes = new javax.swing.JList<>();
+        añadirJugador = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        labTorneo1 = new javax.swing.JLabel();
+        labTorneo2 = new javax.swing.JLabel();
 
-        listJug.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(listJug);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        listTorneo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(listTorneo);
+        jScrollPane2.setViewportView(seleccionarParticipantes);
 
-        labJug.setText("Seleccionar jugador");
-
-        labTorneo.setText("Seleccionar torneo");
+        labTorneo.setText("Selecciona torneo");
 
         butAtras.setText("Atrás");
         butAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -66,71 +81,180 @@ public class VAsignarJugTor extends javax.swing.JFrame {
             }
         });
 
-        butAceptar.setText("Aceptar");
-        butAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butAceptarActionPerformed(evt);
+        seleccionaTorneo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                seleccionaTorneoFocusGained(evt);
             }
         });
+        seleccionaTorneo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seleccionaTorneoMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(seleccionaTorneo);
+
+        jScrollPane4.setViewportView(eliminarParticipantes);
+
+        añadirJugador.setText("Añadir");
+        añadirJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirJugadorActionPerformed(evt);
+            }
+        });
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+
+        labTorneo1.setText("Jugadores participantes");
+
+        labTorneo2.setText("Posibles participantes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labJug))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labTorneo))
-                .addContainerGap(36, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(butAtras)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(labTorneo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(butAceptar)
-                .addContainerGap())
+                .addComponent(labTorneo2)
+                .addGap(85, 85, 85)
+                .addComponent(labTorneo1)
+                .addGap(55, 55, 55))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(añadirJugador)
+                .addGap(128, 128, 128)
+                .addComponent(eliminar)
+                .addGap(75, 75, 75))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(butAtras))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labJug)
-                    .addComponent(labTorneo))
+                    .addComponent(labTorneo)
+                    .addComponent(labTorneo1)
+                    .addComponent(labTorneo2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(butAtras)
-                    .addComponent(butAceptar))
+                    .addComponent(añadirJugador)
+                    .addComponent(eliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(butAtras)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void butAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_butAceptarActionPerformed
 
     private void butAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtrasActionPerformed
         this.setVisible(false);
         ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_butAtrasActionPerformed
 
+    private void añadirJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirJugadorActionPerformed
+        jugador = seleccionarParticipantes.getSelectedValue();
+        
+        if(jugador != null)
+        {
+            System.err.println((String)torneo);
+            administrador.guardarTorneoUsuario((String)jugador, (String)torneo);
+            JOptionPane.showMessageDialog(null,"El usuario "+(String)jugador + " ha sido apuntado al torneo "+(String)torneo + " correctamente");
+            
+            modeloListaPosibles.removeElement(jugador);
+            modeloListaParticipantes.addElement(jugador);
+            
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un jugador");
+        
+    }//GEN-LAST:event_añadirJugadorActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        jugadorEliminar = eliminarParticipantes.getSelectedValue();
+        
+        if(jugadorEliminar != null)
+        {
+            administrador.eliminarJugadorTorneo((String)jugadorEliminar, (String)torneo);
+            JOptionPane.showMessageDialog(null,"El usuario "+(String)jugadorEliminar + " ha sido eliminado del torneo "+(String)torneo + " correctamente");
+            
+            modeloListaPosibles.addElement(jugadorEliminar);
+            modeloListaParticipantes.removeElement(jugadorEliminar);
+            
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un jugador");
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void seleccionaTorneoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_seleccionaTorneoFocusGained
+        
+    }//GEN-LAST:event_seleccionaTorneoFocusGained
+
+    private void seleccionaTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seleccionaTorneoMouseClicked
+        torneo = seleccionaTorneo.getSelectedValue();
+        
+        jugadores = new ArrayList<>();
+        participantes = new ArrayList<>();
+        jugadores = administrador.asignarJugadoresTorneo((String)torneo);
+        try {
+            participantes = administrador.jugadoresParticipantes((String)torneo);
+        } catch (SQLException ex) {
+            Logger.getLogger(VAsignarJugTor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if(jugadores.size() == 0)
+            JOptionPane.showMessageDialog(null, "Este torneo contiene todos los usuarios.", "¡Torneo lleno!", JOptionPane.WARNING_MESSAGE);
+            
+            modeloListaPosibles = new DefaultListModel();
+            seleccionarParticipantes.setModel(modeloListaPosibles);
+
+            modeloListaParticipantes = new DefaultListModel();
+            eliminarParticipantes.setModel(modeloListaParticipantes);
+
+            for (Object item : jugadores) 
+                modeloListaPosibles.addElement(item); 
+
+            for (Object item : participantes) 
+                modeloListaParticipantes.addElement(item);            
+            
+               
+    }//GEN-LAST:event_seleccionaTorneoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton butAceptar;
+    private javax.swing.JButton añadirJugador;
     private javax.swing.JButton butAtras;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton eliminar;
+    private javax.swing.JList<String> eliminarParticipantes;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labJug;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel labTorneo;
-    private javax.swing.JList<String> listJug;
-    private javax.swing.JList<String> listTorneo;
+    private javax.swing.JLabel labTorneo1;
+    private javax.swing.JLabel labTorneo2;
+    private javax.swing.JList<String> seleccionaTorneo;
+    private javax.swing.JList<String> seleccionarParticipantes;
     // End of variables declaration//GEN-END:variables
 }
