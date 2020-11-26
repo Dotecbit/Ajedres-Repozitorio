@@ -225,7 +225,7 @@ public class VCrearClub extends javax.swing.JFrame
         jLFede.setModel(modeloListaFederaciones);
         jLSede.setModel(modeloListaSedes);
         
-        if(administrador.getGerentesLibres().size() != 0)
+        if(!administrador.getGerentesLibres().isEmpty())
         {
             for(Object item:administrador.getGerentesLibres())
                 modeloListaGerente.addElement(item);

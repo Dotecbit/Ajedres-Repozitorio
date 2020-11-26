@@ -25,8 +25,9 @@ import model.DatosGerente;
  * @author areba
  */
 public class DatosClubDAO {
-private Connection conexionBD;
-private ArrayList<DatosClub> clubs;
+    
+    private Connection conexionBD;
+    private ArrayList<DatosClub> clubs;
     
     public DatosClubDAO() throws SQLException
     {
@@ -188,5 +189,28 @@ private ArrayList<DatosClub> clubs;
         
         return federaciones;
     }
+    
+     public void eliminarClub(DatosClub club) throws SQLException {
+        
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        ResultSet resultados = null;
+        String con, dato;
+        Statement s = conexionBD.createStatement();
+
+        {
+                con = "DELETE FROM  ajdrez.clubs WHERE nombre ='" + club.getNombre()+"'";
+                PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+                preparedStmt.executeUpdate();
+        }
+        conexionBD.close();
+    }   
         
 }

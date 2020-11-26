@@ -5,7 +5,14 @@
  */
 package Vista;
 
+import Facade.Administrador;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.DatosClub;
 
 /**
  *
@@ -13,11 +20,15 @@ import javax.swing.JFrame;
  */
 public class VDarBajaClub extends javax.swing.JFrame {
     
-    
     private JFrame ventanaAnterior;
-    public VDarBajaClub(JFrame ventanaAnterior) {
+    private Administrador admin;
+    private DefaultListModel listaMoClub;
+    
+    public VDarBajaClub(JFrame ventanaAnterior, Administrador administrador) throws SQLException {
         this.ventanaAnterior = ventanaAnterior;
+        this.admin = administrador;
         initComponents();
+        comprobarClub();
     }
     
     /**
@@ -66,7 +77,7 @@ public class VDarBajaClub extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labTexClub)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(botAtras)
@@ -81,7 +92,7 @@ public class VDarBajaClub extends javax.swing.JFrame {
                 .addComponent(labTexClub)
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botAtras)
                     .addComponent(botAceptar))
@@ -92,13 +103,43 @@ public class VDarBajaClub extends javax.swing.JFrame {
     private void botAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAtrasActionPerformed
         this.setVisible(false);
         ventanaAnterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botAtrasActionPerformed
 
     private void botAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAceptarActionPerformed
-        // TODO add your handling code here:
+        try {
+            admin.eliminarClub(listClub.getSelectedValue());
+            JOptionPane.showMessageDialog(null,"Se ha eliminado el club","Confirmación",JOptionPane.DEFAULT_OPTION);
+            comprobarClub();
+        } catch (SQLException ex) {
+            Logger.getLogger(VDarBajaClub.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botAceptarActionPerformed
+private void comprobarClub() throws SQLException
+{
+       if(!admin.getClubs().isEmpty())
+        {
+            this.setSize(400, 300);
+            this.setVisible(true);
+            this.setLocationRelativeTo(null);
+            this.setResizable(false);
+            this.setTitle("Baja club");
+        
+            listaMoClub = new DefaultListModel();
 
+            listClub.setModel(listaMoClub);
 
+            for(DatosClub item:admin.getClubs())
+               listaMoClub.addElement(item);
+        }
+        else
+        {
+            this.setVisible(false); 
+            JOptionPane.showMessageDialog(null,"No hay ningún Club creado","Atención",JOptionPane.WARNING_MESSAGE);
+            ventanaAnterior.setVisible(true);
+            this.dispose();
+        }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botAceptar;
     private javax.swing.JButton botAtras;

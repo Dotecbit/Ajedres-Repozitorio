@@ -6,19 +6,15 @@
 package Facade;
 
 import DAO.DatosClubDAO;
+import DAO.DatosEntrenadorDAO;
 import DAO.DatosGerenteDAO;
+import DAO.DatosJugadorDAO;
 import DAO.DatosTorneoDAO;
-import Factory.Persona;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.DatosClub;
-import model.DatosJugador;
 import model.DatosEntrenador;
 import model.DatosGerente;
 import model.DatosTorneo;
@@ -30,9 +26,11 @@ import model.DatosTorneo;
 public class Administrador {
 
     private Jugador jugador;
+    private DatosJugadorDAO datosJugadorDAO;
     private DatosGerente datosGerente;
     private ArrayList<DatosGerente> gerentes;
     private DatosGerenteDAO datosGerenteDAO;
+    private DatosEntrenadorDAO datosEntrenadorDAO;
     private DatosClubDAO datosClubDAO;
     private DatosEntrenador datosEntrenador;
     private DatosTorneo datosTorneo;
@@ -42,7 +40,11 @@ public class Administrador {
         datosClubDAO = new DatosClubDAO();
         datosGerenteDAO = new DatosGerenteDAO();
         this.jugador = jugador;
+        datosJugadorDAO = new DatosJugadorDAO();
         
+        datosEntrenadorDAO = new DatosEntrenadorDAO();
+        
+        datosTorneo = new DatosTorneo();
         torneoDAO = new DatosTorneoDAO();
 
         torneoDAO.cargarSede();
@@ -81,7 +83,7 @@ public class Administrador {
     
     public void guardarGerente(String nombre, String ape1, String ap2, String sexo,String edad, String nomina, String IRPF ) throws SQLException
     {
-        DatosGerente gerente = new DatosGerente(nombre, ape1+" "+ap2, sexo, Integer.parseInt(edad),
+        DatosGerente gerente = new DatosGerente(nombre.replace(" ", ""), ape1.replace(" ", "")+" "+ap2.replace(" ", ""), sexo, Integer.parseInt(edad),
                 Float.parseFloat(nomina), Float.parseFloat(IRPF));
     
         datosGerenteDAO.CrearGerentes(gerente);
@@ -98,49 +100,67 @@ public class Administrador {
     }
     public ArrayList<String> getSedes()
     {
+        torneoDAO.cargarSede();
         return torneoDAO.getSedes();
     }
-    public void jugadores()
-    {
-        datosTorneo.jugadores(jugador.getDatosJugador());
-    }
+
     public ArrayList<String> getJugadores()
     {
-        return datosTorneo.getJugadores();
+        torneoDAO.cargarSede();
+        return jugador.obtenerUsuarios();
+    }
+    
+    public boolean comprobarTorneo(String nombreTorneo)
+    {
+        return datosTorneo.comprobarTorneo(nombreTorneo, torneoDAO.nombreTorneos());
+    }
+    
+    public ArrayList<String> getNombreTorneo(String usuario)
+    {
+        return torneoDAO.nombreTorneosUsuario(usuario);
+    }
+    public void guardarEntrenador(String nombre, String ap1, String ap2, String sexo, String edad) throws SQLException 
+    {
+        //Al crear el entrenador nos aseguramos de que no haya espacios al haber creado al entrenador
+        DatosEntrenador entrenador = new DatosEntrenador(nombre.replace(" ", ""),ap1.replace(" ", ""),ap2.replace(" ", ""),sexo,Integer.parseInt(edad));
+        datosEntrenadorDAO.CrearEntrenador(entrenador);
     }
 
-    public void guardarEntrenador(String nombre, String ap1, String ap2, String sexo, String edad) {
-        datosEntrenador.guardarDatosEntrenador(nombre, ap1, ap2, sexo, edad);
-        datosEntrenador.cargarDatosEntrenadores();
-    }
-
-    public boolean entrenadorRepe(String nombre, String ap1, String ap2) {
+    public boolean entrenadorRepe(String nombre, String ap1, String ap2) throws SQLException 
+    {
         boolean repe = false;
-        datosEntrenador.cargarDatosEntrenadores();
-        for(DatosEntrenador i:datosEntrenador.getEntrenadores())
+        String nCompleto = nombre+ap1+ap2;
+
+        for(DatosEntrenador i:datosEntrenadorDAO.getEntrenadores())
         {
-            if(i.getnCompleto().toLowerCase().equals((nombre+" "+ap1+" "+ap2).toLowerCase()))
-                repe = true;
+                if(i.getnCompleto().toLowerCase().replace(" ", "").equalsIgnoreCase(nCompleto.toLowerCase().replace(" ", "")))
+                    repe = true;
         }
         return repe;
     }
     
     public void guardarTorneo(String nombre, ArrayList<String> usuario, ArrayList<String> sede)
     {
-        datosTorneo.GuardarTorneo(nombre, usuario, sede);
+        torneoDAO.agregarTorneo(nombre);
+        torneoDAO.agregarTorneoJugador(nombre, usuario);
+        torneoDAO.agregarTorneoSede(nombre, sede);
     }
 
-    public boolean gerenteRepe(String nombre, String ap1, String ap2) throws SQLException {
+    public boolean gerenteRepe(String nombre, String ap1, String ap2) throws SQLException 
+    {
         boolean repe = false;
+        String nCompleto = nombre+ap1+ap2;
+
         for(DatosGerente i:datosGerenteDAO.getGerentes())
         {
-            if(i.getnCompleto().toLowerCase().equals((nombre+" "+ap1+" "+ap2).toLowerCase()))
+            if(i.getnCompleto().toLowerCase().replace(" ", "").equalsIgnoreCase(nCompleto.toLowerCase().replace(" ", "")))
                 repe = true;
         }
         return repe;
     }
 
-    public boolean clubRepe(String nombre) throws SQLException {
+    public boolean clubRepe(String nombre) throws SQLException 
+    {
         boolean repe = false;
         for(DatosClub i:datosClubDAO.getClub())
         {
@@ -150,7 +170,8 @@ public class Administrador {
         return repe;
     }
 
-    public void crearClub(String nombre, String sede, String federacion, Object ger) throws FileNotFoundException, IOException, SQLException {
+    public void crearClub(String nombre, String sede, String federacion, Object ger) throws FileNotFoundException, IOException, SQLException 
+    {
         DatosClub nuevoClub = new DatosClub(nombre,sede,federacion);
         ((DatosGerente) ger).setClubActual(nombre);
         
@@ -158,25 +179,83 @@ public class Administrador {
         datosGerenteDAO.actualizarGerente((DatosGerente) ger);
     }
 
-    public void getCambiaClub(Object club, Object ger ) throws SQLException {
-        
-        
-        //Copiamos los datos de todos los gerentes excepto el nuevo que queremos añadir con la nueva informacion
+    public void getCambiaClub(Object club, Object ger, String nomina, String IRPF) throws SQLException 
+    {
+        //Actualizamos el gerente del club anterior
         for(DatosGerente i:datosGerenteDAO.getGerentes())
         {
             //Cambiamos el club del gerente anterior a null
-            //Si fuera el mismo no sería erróneo porque no lo añadiríamos en la lista, quedándose en el mismo club
             if(((DatosClub) club).getNombre().equals(i.getClubActual()))
             {
+                datosGerenteDAO.guardarHistorialGer(i);
                 i.setClubActual(null);
+                i.setNomina(Float.parseFloat("0"));
+                i.setIRPF(Float.parseFloat("0"));
                 datosGerenteDAO.actualizarGerente(i);
             }
         }
+        //Actualizamos el gerente nuevo
+        datosGerenteDAO.guardarHistorialGer((DatosGerente) ger);
         ((DatosGerente) ger).setClubActual(((DatosClub) club).getNombre());
+        ((DatosGerente) ger).setNomina(Float.parseFloat(nomina));
+        ((DatosGerente) ger).setIRPF(Float.parseFloat(IRPF));
         datosGerenteDAO.actualizarGerente((DatosGerente) ger);
     }
 
-    public Iterable<String> getFederaciones() throws SQLException {
+    public Iterable<String> getFederaciones() throws SQLException 
+    {
         return datosClubDAO.getFederaciones();
+    }
+
+    public boolean gerDelClub(Object gere, Object club) 
+    {
+        boolean pertenece = false;
+
+        if(((DatosGerente) gere).getClubActual().equals(((DatosClub) club).getNombre()))
+                pertenece = true;
+        
+        return pertenece;
+        
+    }
+
+    public ArrayList<String> getHistClub(Object gerente) throws SQLException {
+        return datosGerenteDAO.getHistClub((DatosGerente) gerente);
+    }
+
+    public ArrayList<String> getHistNomina(Object gerente) throws SQLException {
+        return datosGerenteDAO.getHistNomina((DatosGerente) gerente);
+    }
+
+    public ArrayList<String> getHistIRPF(Object gerente) throws SQLException {
+        return datosGerenteDAO.getHistIRPF((DatosGerente) gerente);
+    }
+    
+    public void eliminarClub(Object club) throws SQLException
+    {
+        /*  Buscamos al gerente del club y cambiamos su club actual a "null"    *
+        *   y guardamos en su historial la infromación del club al queperteneció*/
+        for(DatosGerente g:this.getGerentesConClub())
+        {
+            if(g.getClubActual().equals(((DatosClub) club).getNombre()))
+            {
+                datosGerenteDAO.guardarHistorialGer(g);
+                g.setClubActual(null);
+                g.setNomina(Float.parseFloat("0"));
+                g.setIRPF(Float.parseFloat("0"));
+                datosGerenteDAO.actualizarGerente(g);
+            }
+        }
+        //Eliminamos el club
+        datosClubDAO.eliminarClub(((DatosClub) club));
+    }
+    
+    public boolean jugClubRepe(String usuario, Object club)
+    {
+        return (datosJugadorDAO.obtenerClubDeUsuario(usuario) != null 
+                && datosJugadorDAO.obtenerClubDeUsuario(usuario).equals(((DatosClub) club).getNombre()));
+    }
+
+    public void apuntarJugEquipo(String usuario, Object club) throws SQLException {
+        datosJugadorDAO.actualizarClubJugador(usuario, ((DatosClub)club).getNombre());
     }
 }

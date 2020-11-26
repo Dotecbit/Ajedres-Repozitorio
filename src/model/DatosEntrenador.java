@@ -16,11 +16,27 @@ import java.util.ArrayList;
 public class DatosEntrenador extends Persona{
     private ArrayList<DatosEntrenador> entrenador = new ArrayList();
     private String sexo, nCompleto, club;
-    int    edad;
+    int edad;
 
-    public DatosEntrenador() 
-    {
-        ;
+    public DatosEntrenador() {
+    }
+
+    public DatosEntrenador(String nombre, String ap1, String ap2, String sexo, int edad) {
+        this.sexo = sexo;
+        this.nCompleto = nombre+" "+ap1+" "+ap2;
+        this.edad = edad;
+        super.apellidos= ap1+" "+ap2;
+        super.nombre=nombre;
+    }
+
+    
+
+    public String getClub() {
+        return club;
+    }
+
+    public void setClub(String club) {
+        this.club = club;
     }
     
     @Override
@@ -36,7 +52,7 @@ public class DatosEntrenador extends Persona{
         super.nombre = nombre;
     }
 
-    public String getApeilldos() {
+    public String getApellidos() {
         return super.apellidos;
     }
 

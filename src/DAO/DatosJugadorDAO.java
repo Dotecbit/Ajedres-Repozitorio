@@ -5,15 +5,15 @@
  */
 package DAO;
 
-import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.TimeZone;
+import model.DatosJugador;
 
 /**
  *
@@ -24,7 +24,12 @@ public class DatosJugadorDAO
     private Connection conexionBD;
     private PreparedStatement prep;
     private ArrayList<String> jugadores = new ArrayList<>();
+    
     public DatosJugadorDAO()
+    {
+    }
+    
+    public boolean comprobarUsuario(String usuarioNuevo)
     {
         String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
         try {
@@ -34,10 +39,6 @@ public class DatosJugadorDAO
         } catch (Exception e) { // Error en la conexión con la BD
         System.out.println(e);
         }
-    }
-    
-    public boolean comprobarUsuario(String usuarioNuevo)
-    {
         boolean ok = false;
         ResultSet resultados = null;
         try {
@@ -61,15 +62,23 @@ public class DatosJugadorDAO
     }
     
     public void agregarUsuario(String nombre, String apellido, String usuario, String correo, String contraseña, 
-            String fechaNacimiento, String club, String categoria, String elo, String torneo)
+            String fechaNacimiento, String club, String categoria, String elo)
     {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
         ResultSet resultados = null;
         try {
             
             String con;
             Statement s = conexionBD.createStatement();
             // Consulta SQL
-            con =   "INSERT INTO ajdrez.jugador VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            con =   "INSERT INTO ajdrez.jugador VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
             preparedStmt.setString (1, usuario);
@@ -81,7 +90,6 @@ public class DatosJugadorDAO
             preparedStmt.setString (7, club);
             preparedStmt.setString   (8, categoria);
             preparedStmt.setString(9, elo);
-            preparedStmt.setString(10, torneo);
             preparedStmt.execute();
             conexionBD.close();
         } catch (Exception e) { // Error al realizar la consulta
@@ -91,7 +99,14 @@ public class DatosJugadorDAO
     public void añadirResponsableInfantil(String usuario, String nombre, String apellido,
                 String correo, String fecha)
     {
-        
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
         ResultSet resultados = null;
         try {
             
@@ -117,6 +132,14 @@ public class DatosJugadorDAO
     
     public boolean validarUsuario(String user, String pass)
     {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
         boolean ok = false;
         ResultSet resultados = null;
         try {
@@ -141,6 +164,14 @@ public class DatosJugadorDAO
     
     public boolean validarUsuario(String usser)
     {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
         boolean ok = false;
         ResultSet resultados = null;
         try {
@@ -163,6 +194,14 @@ public class DatosJugadorDAO
     }
     public ArrayList<String> verTarjeta(String usser)
     {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
         ArrayList<String> tarjeta = new ArrayList<>();
         String id;
         //System.out.println(usser);
@@ -200,16 +239,32 @@ public class DatosJugadorDAO
     
     public void darBajaUsuario(String usser)
     {
-        ResultSet resultados = null;
-        Statement stmt = null;
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        String jugadores, torneo;
         try {
-            String con;
-            //Statement s = conexionBD.createStatement();
-            // Consulta SQL
-            stmt = (Statement) conexionBD.createStatement();
-            con = "DELETE FROM ajdrez.jugador " +
-                    "WHERE usuario = '" + usser + "'";
-            stmt.executeQuery(con);
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        ResultSet resultados = null;
+        
+        try {
+                // Consulta SQL
+                torneo = "DELETE FROM ajdrez.torneo_jugador " +
+                    "WHERE jugador = ?";
+                
+                jugadores = "DELETE FROM ajdrez.jugador " +
+                    "WHERE usuario = ?";
+            
+            PreparedStatement prepaTorneo = conexionBD.prepareStatement(torneo);
+            prepaTorneo.setString (1, usser);
+            prepaTorneo.execute();    
+                
+            PreparedStatement preparJugador = conexionBD.prepareStatement(jugadores);
+            preparJugador.setString (1, usser);
+            preparJugador.execute();
             conexionBD.close();
             
         } catch (Exception e) { // Error al realizar la consulta
@@ -219,6 +274,14 @@ public class DatosJugadorDAO
     
     public void obtenerUsuarios()
     {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
         ArrayList<String> tarjeta = new ArrayList<>();
         String id;
         //System.out.println(usser);
@@ -239,6 +302,97 @@ public class DatosJugadorDAO
             System.err.println(e);
         }        
     }
+    
+     public String obtenerClubDeUsuario(String usuario)
+    {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        String id = null;
+
+        ResultSet resultados = null;
+        try {
+            String con;
+            Statement s = conexionBD.createStatement();
+            // Consulta SQL
+            con = "SELECT club FROM ajdrez.jugador WHERE usuario = '"+usuario+"'";
+            resultados = s.executeQuery(con);
+            while (resultados.next()) 
+            {
+                id = resultados.getString("club");
+            }
+            conexionBD.close();
+            
+        } catch (Exception e) { // Error al realizar la consulta
+            System.err.println(e);
+        }        
+        return id;
+    }
+    
+    public void actualizarJugador(DatosJugador jugador) throws SQLException
+    {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        String con;
+       
+        if(jugador.getClub()!= null)
+        {
+            con = "UPDATE  ajdrez.jugador SET usuario ='" + jugador.getUsuario()+
+                    "' ,nombre ='" + jugador.getNombre()+ "' ,apellido ='" + jugador.getApellido()+ "' ,correo ='" +jugador.getCorreo()+ 
+                    "' ,fechaNacimiento =" + jugador.getFechaNacimiento()+ " ,contraseña =" + jugador.getContraseña()+ " ,club ='" + jugador.getClub()+
+                    "', categoria ='" + jugador.getCategoria()+ ", ELO ='" + jugador.getElo()+ ", torneo = null "+
+                    "' WHERE usuario ='" +jugador.getUsuario()+"'";
+            PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+            preparedStmt.executeUpdate();
+        }
+        else
+        {
+            con = "UPDATE  ajdrez.jugador SET usuario ='" + jugador.getUsuario()+
+                    "' ,nombre ='" + jugador.getNombre()+ "' ,apellido ='" + jugador.getApellido()+ "' ,correo ='" +jugador.getCorreo()+ 
+                    "' ,fechaNacimiento =" + jugador.getFechaNacimiento()+ " ,contraseña =" + jugador.getContraseña()+ " ,club =null"+
+                    ", categoria ='" + jugador.getCategoria()+ ", ELO ='" + jugador.getElo()+ ", torneo = null "+
+                    "' WHERE usuario ='" +jugador.getUsuario()+"'";
+            PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+            preparedStmt.executeUpdate();
+        }
+        conexionBD.close();
+
+    }
+    
+    public void actualizarClubJugador(String usuario, String club) throws SQLException
+    {
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) 
+        { // Error en la conexión con la BD
+            System.out.println(e);
+        }
+        
+        String con;
+
+        con = "UPDATE  ajdrez.jugador SET club ='" + club+
+              "' WHERE usuario ='" +usuario+"'";
+        PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+        preparedStmt.executeUpdate();
+
+        conexionBD.close();
+    }
+
     public ArrayList<String> getUsuarios()
     {
         return jugadores;

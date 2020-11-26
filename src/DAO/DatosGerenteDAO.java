@@ -183,6 +183,126 @@ private ArrayList<DatosGerente> gerentes;
 
     }
 
+    public void guardarHistorialGer(DatosGerente i) throws SQLException {
+                String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        String con, dato;
+        Statement s = conexionBD.createStatement();
+        
+        con = "INSERT INTO ajdrez.histirpf VALUES (" + i.getIRPF()+",'"+i.getnCompleto()+"')";
+        PreparedStatement preparedStmt = conexionBD.prepareStatement(con);
+        preparedStmt.executeUpdate();
+
+        con = "INSERT INTO ajdrez.histnom VALUES (" + i.getNomina()+",'"+i.getnCompleto()+"')";
+        PreparedStatement preparedStmt2 = conexionBD.prepareStatement(con);
+        preparedStmt2.executeUpdate();                
+
+        con = "INSERT INTO ajdrez.histclub VALUES ('" + i.getClubActual()+"','"+i.getnCompleto()+"')";
+        PreparedStatement preparedStmt3 = conexionBD.prepareStatement(con);
+        preparedStmt3.executeUpdate();                
+                
+        conexionBD.close();
+    }
+
+    public ArrayList<String> getHistClub(DatosGerente ger) throws SQLException {
+        ArrayList<String> clubs = new ArrayList<String>();
+        
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        ResultSet resultados = null;
+        String con, dato;
+        Statement s = conexionBD.createStatement();
+        
+        con = "SELECT * FROM ajdrez.histclub WHERE gerente ='" + ger.getnCompleto()+"'";
+        resultados = s.executeQuery(con);
+        
+        while (resultados.next()) 
+        {
+            DatosGerente nuevoGerente = new DatosGerente();
+            dato = resultados.getString("club");
+            clubs.add(dato);
+        }
+        
+        conexionBD.close();
+        
+        return clubs;
+    }
+
+    public ArrayList<String> getHistNomina(DatosGerente ger) throws SQLException {
+        ArrayList<String> nomina = new ArrayList<String>();
+        
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        ResultSet resultados = null;
+        String con, dato;
+        Statement s = conexionBD.createStatement();
+        
+        con = "SELECT * FROM ajdrez.histnom WHERE gerente ='" + ger.getnCompleto()+"'";
+        resultados = s.executeQuery(con);
+        
+        while (resultados.next()) 
+        {
+            DatosGerente nuevoGerente = new DatosGerente();
+            dato = resultados.getString("nomina");
+            nomina.add(dato);
+        }
+        
+        conexionBD.close();
+        
+        return nomina;    }
+
+    public ArrayList<String> getHistIRPF(DatosGerente ger) throws SQLException {
+        ArrayList<String> IRPF = new ArrayList<String>();
+        
+        String bd = "jdbc:mysql://localhost/MySQL?serverTimezone=" + TimeZone.getDefault().getID();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de m ysql
+        // Conexión usando usuario y clave de administrador de la BD
+        conexionBD = DriverManager.getConnection(bd, "root", "Dddedo");
+        } catch (Exception e) { // Error en la conexión con la BD
+        System.out.println(e);
+        }
+        
+        ResultSet resultados = null;
+        String con, dato;
+        Statement s = conexionBD.createStatement();
+        
+        con = "SELECT * FROM ajdrez.histirpf WHERE gerente ='" + ger.getnCompleto()+"'";
+        resultados = s.executeQuery(con);
+        
+        while (resultados.next()) 
+        {
+            DatosGerente nuevoGerente = new DatosGerente();
+            dato = resultados.getString("IRPF");
+            IRPF.add(dato);
+        }
+        
+        conexionBD.close();
+        
+        return IRPF;    
+    }
+
         
 }
     

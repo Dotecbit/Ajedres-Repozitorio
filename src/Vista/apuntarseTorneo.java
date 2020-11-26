@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Facade.Administrador;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -17,9 +20,22 @@ public class apuntarseTorneo extends javax.swing.JFrame {
      * Creates new form apuntarseTorneo
      */
     private JFrame ventanaAnterior;
-    public apuntarseTorneo(JFrame ventanaAnterior) {
+    private ArrayList<String> torneos;
+    private Administrador administrador;
+    private DefaultListModel modeloLista;
+    public apuntarseTorneo(JFrame ventanaAnterior, Administrador administrador, String usuario) {
         this.ventanaAnterior = ventanaAnterior;
+        
+        torneos = new ArrayList<>();
+        torneos = administrador.getNombreTorneo(usuario);
+       
         initComponents();
+        
+        modeloLista = new DefaultListModel();
+        apuntarseTorneo.setModel(modeloLista);
+        
+        for (Object item : torneos) 
+          modeloLista.addElement(item);
     }
 
     /**
@@ -39,11 +55,6 @@ public class apuntarseTorneo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        apuntarseTorneo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Torneo 1", "Torneo 2" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(apuntarseTorneo);
 
         atras.setText("Atras");

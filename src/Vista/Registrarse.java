@@ -193,7 +193,7 @@ public class Registrarse extends javax.swing.JFrame {
                 jugador.añadirUsuario(nombre.getText(), apellido.getText(), usuario.getText(), correoElectrónico.getText()
                         , contraseña.getText(), fechaComoCadena, null, categoria, "1");
                 jugador.guardarDatosJugador(nombre.getText(), apellido.getText(), usuario.getText(), 
-                        correoElectrónico.getText(),fechaComoCadena, contraseña.getText(), null, categoria, "1", null);
+                        correoElectrónico.getText(),fechaComoCadena, contraseña.getText(), null, categoria, "1");
                 this.setVisible(false);
                 ventanaAnterior.setVisible(true);
                 JOptionPane.showMessageDialog(null,"Bienvenido a nuestra plataforma.");

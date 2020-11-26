@@ -5,18 +5,6 @@
  */
 package Vista;
 
-import Vista.VAdminDarDeBajaJugador;
-import Vista.VAdminInResUltPar;
-import Vista.VAsignarJugTor;
-import Vista.VAsignarRespInf;
-import Vista.VAsignarSedeTor;
-import Vista.VCamGerClub;
-import Vista.VCrearClub;
-import Vista.VCrearEntrenador;
-import Vista.VCrearGerente;
-import Vista.VCrearTorneo;
-import Vista.VDarBajaClub;
-import Vista.añadirJugadoresSedes;
 import Facade.Administrador;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,7 +39,6 @@ public class VAdministrador extends javax.swing.JFrame
         bDarDeBaja = new javax.swing.JButton();
         bCrearClub = new javax.swing.JButton();
         bBajaTorneo = new javax.swing.JButton();
-        bRespInf = new javax.swing.JButton();
         bResUlt = new javax.swing.JButton();
         bBajaJugador = new javax.swing.JButton();
         bAsigJugTor = new javax.swing.JButton();
@@ -60,6 +47,7 @@ public class VAdministrador extends javax.swing.JFrame
         bCambGerClub1 = new javax.swing.JButton();
         jBCrearEntrenador = new javax.swing.JButton();
         jBCerrarSesion = new javax.swing.JButton();
+        jBHistGer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -94,14 +82,6 @@ public class VAdministrador extends javax.swing.JFrame
         bBajaTorneo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bBajaTorneoActionPerformed(evt);
-            }
-        });
-
-        bRespInf.setText("Asignar responsables infantiles");
-        bRespInf.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        bRespInf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRespInfActionPerformed(evt);
             }
         });
 
@@ -168,10 +148,21 @@ public class VAdministrador extends javax.swing.JFrame
             }
         });
 
+        jBHistGer.setText("Histórico del gerente");
+        jBHistGer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHistGerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -179,24 +170,20 @@ public class VAdministrador extends javax.swing.JFrame
                     .addComponent(bDarDeBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bCrearClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bBajaTorneo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bRespInf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bResUlt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bBajaJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAsigJugTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAsigSedTor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bCambGerClub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bCambGerClub1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBHistGer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bCrearTorneo)
                 .addGap(18, 18, 18)
                 .addComponent(bDarDeBaja)
@@ -204,8 +191,6 @@ public class VAdministrador extends javax.swing.JFrame
                 .addComponent(bCrearClub)
                 .addGap(18, 18, 18)
                 .addComponent(bBajaTorneo)
-                .addGap(18, 18, 18)
-                .addComponent(bRespInf)
                 .addGap(18, 18, 18)
                 .addComponent(bResUlt)
                 .addGap(18, 18, 18)
@@ -220,9 +205,11 @@ public class VAdministrador extends javax.swing.JFrame
                 .addComponent(bCambGerClub)
                 .addGap(18, 18, 18)
                 .addComponent(jBCrearEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jBHistGer)
+                .addGap(18, 18, 18)
                 .addComponent(jBCerrarSesion)
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -247,12 +234,12 @@ public class VAdministrador extends javax.swing.JFrame
     }//GEN-LAST:event_bCrearTorneoActionPerformed
 
     private void bDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDarDeBajaActionPerformed
-    VDarBajaClub bajaCLub = new VDarBajaClub(this);
-    this.setVisible(false); 
-    bajaCLub.setVisible(true);
-    bajaCLub.setLocationRelativeTo(null);
-    bajaCLub.setResizable(false);
-    bajaCLub.setTitle("Baja club");
+        try {
+            this.setVisible(false);
+            VDarBajaClub bajaCLub = new VDarBajaClub(this,administrador);
+        } catch (SQLException ex) {
+            Logger.getLogger(VAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bDarDeBajaActionPerformed
 
     private void bCrearClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearClubActionPerformed
@@ -269,15 +256,6 @@ public class VAdministrador extends javax.swing.JFrame
     private void bBajaTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBajaTorneoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bBajaTorneoActionPerformed
-
-    private void bRespInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRespInfActionPerformed
-    VAsignarRespInf asignarInfantil = new VAsignarRespInf(this);
-    this.setVisible(false); 
-    asignarInfantil.setVisible(true);
-    asignarInfantil.setLocationRelativeTo(null);
-    asignarInfantil.setResizable(false);
-    asignarInfantil.setTitle("Introducir resultado"); 
-    }//GEN-LAST:event_bRespInfActionPerformed
 
     private void bResUltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bResUltActionPerformed
     VAdminInResUltPar introducirResultado = new VAdminInResUltPar(this);
@@ -301,6 +279,7 @@ public class VAdministrador extends javax.swing.JFrame
         try {
             VCamGerClub cambiarGerenteClub = new VCamGerClub(this,administrador);
             this.setVisible(false);
+            cambiarGerenteClub.setSize(400, 400);
             cambiarGerenteClub.setVisible(true);
             cambiarGerenteClub.setLocationRelativeTo(null);
             cambiarGerenteClub.setResizable(false);
@@ -352,6 +331,19 @@ public class VAdministrador extends javax.swing.JFrame
     this.dispose();
     }//GEN-LAST:event_jBCerrarSesionActionPerformed
 
+    private void jBHistGerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHistGerActionPerformed
+        try {
+            VAHistGer VAHistGer = new VAHistGer(this,administrador);
+            this.setVisible(false);
+            VAHistGer.setVisible(true);
+            VAHistGer.setLocationRelativeTo(null);
+            VAHistGer.setResizable(false);
+            VAHistGer.setTitle("Historial Gerente");
+        } catch (SQLException ex) {
+            Logger.getLogger(VAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBHistGerActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAsigJugTor;
     private javax.swing.JButton bAsigSedTor;
@@ -363,8 +355,8 @@ public class VAdministrador extends javax.swing.JFrame
     private javax.swing.JButton bCrearTorneo;
     private javax.swing.JButton bDarDeBaja;
     private javax.swing.JButton bResUlt;
-    private javax.swing.JButton bRespInf;
     private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jBCrearEntrenador;
+    private javax.swing.JButton jBHistGer;
     // End of variables declaration//GEN-END:variables
 }
